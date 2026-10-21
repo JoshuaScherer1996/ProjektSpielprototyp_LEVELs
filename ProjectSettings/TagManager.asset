@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags: []
   layers:
   - Default
@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - World
   - 
   - 
   - 
@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 856215162
+    locked: 0
+  - name: Props
+    uniqueID: 1530236020
+    locked: 0
+  - name: Foreground
+    uniqueID: 22351799
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  m_MigratedRenderPipelines: []
