@@ -355,7 +355,7 @@ namespace Levels.EditorTools
                     Require(ground.GetComponent<Collider2D>() == null, name + ": ground must not block movement.");
                     Transform bounds = transforms.Single(t => t.name == "WorldBounds");
                     Require(bounds.childCount == 4, name + ": expected four boundaries.");
-                    foreach (Collider2D collider in roots.SelectMany(r => r.GetComponentsInChildren<Collider2D>(true)))
+                    foreach (Collider2D collider in roots.Where(r => r.name == "Environment").SelectMany(r => r.GetComponentsInChildren<Collider2D>(true)))
                         Require(!collider.isTrigger && collider.gameObject.layer == LayerMask.NameToLayer("World"), name + ": invalid solid collider layer.");
                     foreach (Transform boundary in bounds)
                         Require(boundary.GetComponent<BoxCollider2D>() != null, name + ": boundary collider missing.");
@@ -377,8 +377,7 @@ namespace Levels.EditorTools
                     {
                         foreach (Transform t in root.GetComponentsInChildren<Transform>(true))
                             Require(GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject) == 0, name + ": missing script.");
-                        Require(root.GetComponentsInChildren<MonoBehaviour>(true).All(c => c is UniversalAdditionalCameraData), name + ": unexpected gameplay script.");
-                        Require(root.GetComponentsInChildren<Rigidbody2D>(true).Length == 0, name + ": unexpected actor body in M0.");
+                        // Future milestones may add actors and camera scripts; validate the world without forbidding them.
                         foreach (SpriteRenderer renderer in root.GetComponentsInChildren<SpriteRenderer>(true))
                             Require(renderer.sprite != null && renderer.sharedMaterial != null && !renderer.sharedMaterial.shader.name.Contains("InternalError"), name + ": missing render reference.");
                     }

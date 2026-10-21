@@ -14,7 +14,7 @@ TagManager:
   - 
   - 
   - World
-  - 
+  - Player
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: Props
     uniqueID: 1530236020
+    locked: 0
+  - name: Characters
+    uniqueID: 89349852
     locked: 0
   - name: Foreground
     uniqueID: 22351799
