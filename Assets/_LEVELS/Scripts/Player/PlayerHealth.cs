@@ -14,6 +14,7 @@ namespace Levels.Player
         public int MaxHealth => GameSession.Instance != null && GameSession.Instance.PlayerMaxHealth > 0
             ? GameSession.Instance.PlayerMaxHealth : maxHealth;
         public event Action<int, int> HealthChanged;
+        private GameSession session;
 
         private void Awake()
         {
@@ -27,6 +28,29 @@ namespace Levels.Player
 
             session.InitializePlayerHealth(maxHealth);
             CurrentHealth = session.PlayerHealth;
+        }
+
+        private void OnEnable()
+        {
+            session = GameSession.Instance;
+            if (session != null)
+            {
+                session.Changed += SyncSessionHealth;
+                SyncSessionHealth();
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (session != null) session.Changed -= SyncSessionHealth;
+            session = null;
+        }
+
+        private void SyncSessionHealth()
+        {
+            if (CurrentHealth == session.PlayerHealth) return;
+            CurrentHealth = session.PlayerHealth;
+            HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
 
         public bool TakeDamage(int amount)

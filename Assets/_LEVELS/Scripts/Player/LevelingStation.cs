@@ -25,7 +25,7 @@ namespace Levels.Player
         {
             bool inRange = player != null &&
                 (player.transform.position - transform.position).sqrMagnitude <= interactionRange * interactionRange;
-            if (interactionPrompt != null) interactionPrompt.SetActive(inRange && !menu.IsOpen);
+            if (interactionPrompt != null) interactionPrompt.SetActive(inRange && player.enabled && !menu.IsOpen);
             if (!inRange || interact == null || !interact.WasPerformedThisFrame()) return;
             if (menu.IsOpen) menu.Close();
             else menu.Open(player);

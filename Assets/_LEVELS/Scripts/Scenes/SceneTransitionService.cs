@@ -37,7 +37,7 @@ namespace Levels.Scenes
 
         public bool TryTransition(string destinationScene, string destinationSpawnPointId, PlayerMovement player)
         {
-            if (isTransitioning || Time.frameCount <= blockPortalUntilFrame)
+            if (isTransitioning || Time.frameCount <= blockPortalUntilFrame || player == null || !player.enabled)
                 return false;
 
             if (string.IsNullOrWhiteSpace(destinationScene) ||

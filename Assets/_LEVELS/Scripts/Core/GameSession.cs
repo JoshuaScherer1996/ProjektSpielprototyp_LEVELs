@@ -15,6 +15,7 @@ namespace Levels.Core
         public int PlayerMaxHealth { get; private set; }
         public int PlayerLevel { get; private set; } = 1;
         public int EnemyLevel { get; private set; } = 1;
+        public int ShopMaxHealthBonus { get; private set; }
         public ProgressionSettings Progression { get; private set; }
         public int NextPlayerLevelExperience => Progression.PlayerCost(PlayerLevel);
         public int NextEnemyLevelExperience => Progression.EnemyCost(EnemyLevel);
@@ -23,6 +24,7 @@ namespace Levels.Core
 
         private bool playerHealthInitialized;
         private bool purchasingLevel;
+        private bool purchasingShop;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStaticReference()
@@ -76,7 +78,9 @@ namespace Levels.Core
             PlayerMaxHealth = 0;
             PlayerLevel = 1;
             EnemyLevel = 1;
+            ShopMaxHealthBonus = 0;
             purchasingLevel = false;
+            purchasingShop = false;
             playerHealthInitialized = false;
             Changed = null;
         }
@@ -127,6 +131,41 @@ namespace Levels.Core
 
         public bool TryLevelUpPlayer() => TryBuyLevel(true);
         public bool TryLevelUpEnemies() => TryBuyLevel(false);
+
+        public int CalculatePlayerMaxHealth(int baseHealth) => (int)Math.Min(int.MaxValue,
+            (long)Progression.PlayerHealth(baseHealth, PlayerLevel) + ShopMaxHealthBonus);
+
+        internal bool TryBuyHealing(int price)
+        {
+            if (purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
+                PlayerHealth <= 0 || PlayerHealth >= PlayerMaxHealth) return false;
+            return CompleteShopPurchase(price, false);
+        }
+
+        internal bool TryBuyMaxHealth(int price)
+        {
+            if (purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
+                PlayerHealth <= 0 || PlayerMaxHealth == int.MaxValue || ShopMaxHealthBonus == int.MaxValue)
+                return false;
+            return CompleteShopPurchase(price, true);
+        }
+
+        private bool CompleteShopPurchase(int price, bool increaseMaximum)
+        {
+            // Debit and effect form one transaction before any observer can react.
+            purchasingShop = true;
+            CurrentGold -= price;
+            if (increaseMaximum)
+            {
+                ShopMaxHealthBonus++;
+                PlayerMaxHealth++;
+                // Match M5: increasing maximum HP keeps absolute current HP unchanged.
+            }
+            else PlayerHealth = PlayerMaxHealth;
+            try { Changed?.Invoke(); }
+            finally { purchasingShop = false; }
+            return true;
+        }
 
         private bool TryBuyLevel(bool player)
         {

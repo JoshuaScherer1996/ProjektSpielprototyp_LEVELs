@@ -28,7 +28,7 @@ namespace Levels.Player
         private void ApplyStats()
         {
             attack.SetProgressionDamage(session.Progression.PlayerDamage(attack.BaseDamage, session.PlayerLevel));
-            health.SetMaxHealth(session.Progression.PlayerHealth(health.BaseMaxHealth, session.PlayerLevel));
+            health.SetMaxHealth(session.CalculatePlayerMaxHealth(health.BaseMaxHealth));
         }
 
         public bool TryLevelUp() => GameSession.Instance.TryLevelUpPlayer();
