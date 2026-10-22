@@ -25,8 +25,12 @@ namespace Levels.Player
         private Vector2 facing = Vector2.down;
         private float nextAttackTime;
         private Coroutine slashRoutine;
+        private int progressionDamage;
 
         public Vector2 Facing => facing;
+        public int BaseDamage => damage;
+        public int Damage => progressionDamage > 0 ? progressionDamage : damage;
+        public void SetProgressionDamage(int value) => progressionDamage = Mathf.Max(1, value);
 
         private void Awake()
         {
@@ -115,7 +119,7 @@ namespace Levels.Player
                 if (enemy != null && hitThisAttack.Add(enemy))
                 {
                     Vector2 knockback = (Vector2)(enemy.transform.position - transform.position);
-                    enemy.TakeDamage(damage, knockback.sqrMagnitude > 0.001f ? knockback.normalized : facing);
+                    enemy.TakeDamage(Damage, knockback.sqrMagnitude > 0.001f ? knockback.normalized : facing);
                 }
             }
             return true;

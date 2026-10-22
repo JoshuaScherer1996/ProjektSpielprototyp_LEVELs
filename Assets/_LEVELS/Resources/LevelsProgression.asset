@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316e332a325acce4ca5f59fdba2bfdc2, type: 3}
+  m_Name: LevelsProgression
+  m_EditorClassIdentifier: Assembly-CSharp::Levels.Core.ProgressionSettings
+  playerFirstCost: 20
+  playerCostIncrement: 20
+  enemyFirstCost: 20
+  enemyCostIncrement: 20
+  playerHealthPerLevel: 2
+  playerDamageLevelStep: 2
+  playerDamagePerStep: 1
+  enemyHealthPerLevel: 1
+  enemyDamageLevelStep: 2
+  enemyDamagePerStep: 1
+  enemyExperiencePerLevel: 5
+  enemyGoldPerLevel: 2
+  enemyGoldBonusLevelStep: 2
+  enemyGoldBonusPerStep: 1

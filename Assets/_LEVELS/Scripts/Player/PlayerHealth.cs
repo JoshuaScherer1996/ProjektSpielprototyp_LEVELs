@@ -10,6 +10,7 @@ namespace Levels.Player
         [SerializeField, Min(1)] private int maxHealth = 5;
 
         public int CurrentHealth { get; private set; }
+        public int BaseMaxHealth => maxHealth;
         public int MaxHealth => GameSession.Instance != null && GameSession.Instance.PlayerMaxHealth > 0
             ? GameSession.Instance.PlayerMaxHealth : maxHealth;
         public event Action<int, int> HealthChanged;
@@ -37,6 +38,16 @@ namespace Levels.Player
             if (CurrentHealth == 0)
                 Destroy(gameObject);
             return true;
+        }
+
+        public void SetMaxHealth(int maximum)
+        {
+            maximum = Mathf.Max(1, maximum);
+            if (MaxHealth == maximum) return;
+            // Keep absolute current HP: buying maximum HP does not heal.
+            CurrentHealth = Mathf.Min(CurrentHealth, maximum);
+            GameSession.Instance.UpdatePlayerHealth(CurrentHealth, maximum);
+            HealthChanged?.Invoke(CurrentHealth, maximum);
         }
     }
 }

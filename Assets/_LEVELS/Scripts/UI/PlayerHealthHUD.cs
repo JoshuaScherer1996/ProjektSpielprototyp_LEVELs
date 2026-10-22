@@ -12,6 +12,7 @@ namespace Levels.UI
         [SerializeField] private UnityEngine.UI.Text healthText;
         [SerializeField] private UnityEngine.UI.Text experienceText;
         [SerializeField] private UnityEngine.UI.Text goldText;
+        [SerializeField] private UnityEngine.UI.Text levelText;
 
         private GameSession session;
 
@@ -40,6 +41,8 @@ namespace Levels.UI
             healthText.text = $"HP: {session.PlayerHealth}/{session.PlayerMaxHealth}";
             experienceText.text = $"EXP: {session.CurrentExperience}";
             goldText.text = $"Gold: {session.CurrentGold}";
+            if (levelText != null)
+                levelText.text = $"Player Lv {session.PlayerLevel}  |  Enemies Lv {session.EnemyLevel}";
         }
     }
 }

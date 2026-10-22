@@ -13,10 +13,16 @@ namespace Levels.Core
         public int CurrentGold { get; private set; }
         public int PlayerHealth { get; private set; }
         public int PlayerMaxHealth { get; private set; }
+        public int PlayerLevel { get; private set; } = 1;
+        public int EnemyLevel { get; private set; } = 1;
+        public ProgressionSettings Progression { get; private set; }
+        public int NextPlayerLevelExperience => Progression.PlayerCost(PlayerLevel);
+        public int NextEnemyLevelExperience => Progression.EnemyCost(EnemyLevel);
 
         public event Action Changed;
 
         private bool playerHealthInitialized;
+        private bool purchasingLevel;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStaticReference()
@@ -50,6 +56,9 @@ namespace Levels.Core
             }
 
             Instance = this;
+            Progression = Resources.Load<ProgressionSettings>("LevelsProgression");
+            if (Progression == null)
+                Debug.LogError("Missing Resources/LevelsProgression progression settings.", this);
             DontDestroyOnLoad(gameObject);
         }
 
@@ -65,6 +74,9 @@ namespace Levels.Core
             CurrentGold = 0;
             PlayerHealth = 0;
             PlayerMaxHealth = 0;
+            PlayerLevel = 1;
+            EnemyLevel = 1;
+            purchasingLevel = false;
             playerHealthInitialized = false;
             Changed = null;
         }
@@ -110,6 +122,26 @@ namespace Levels.Core
             if (amount == 0) return true;
             CurrentGold -= amount;
             Changed?.Invoke();
+            return true;
+        }
+
+        public bool TryLevelUpPlayer() => TryBuyLevel(true);
+        public bool TryLevelUpEnemies() => TryBuyLevel(false);
+
+        private bool TryBuyLevel(bool player)
+        {
+            if (purchasingLevel || Progression == null) return false;
+            int level = player ? PlayerLevel : EnemyLevel;
+            int cost = player ? NextPlayerLevelExperience : NextEnemyLevelExperience;
+            if (level == int.MaxValue || cost <= 0 || CurrentExperience < cost) return false;
+
+            // Debit and increment atomically before notifying listeners; reentrant purchases are rejected.
+            purchasingLevel = true;
+            CurrentExperience -= cost;
+            if (player) PlayerLevel++;
+            else EnemyLevel++;
+            try { Changed?.Invoke(); }
+            finally { purchasingLevel = false; }
             return true;
         }
 

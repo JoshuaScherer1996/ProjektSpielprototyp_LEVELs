@@ -11,12 +11,21 @@ namespace Levels.Enemies
         private EnemyAI enemyAI;
 
         public int CurrentHealth { get; private set; }
-        public int MaxHealth => maxHealth;
+        public int BaseMaxHealth => maxHealth;
+        public int MaxHealth { get; private set; }
 
         private void Awake()
         {
             CurrentHealth = maxHealth;
+            MaxHealth = maxHealth;
             enemyAI = GetComponent<EnemyAI>();
+        }
+
+        public void SetInitialMaxHealth(int maximum)
+        {
+            int lostHealth = MaxHealth - CurrentHealth;
+            MaxHealth = Mathf.Max(1, maximum);
+            if (CurrentHealth > 0) CurrentHealth = Mathf.Max(1, MaxHealth - lostHealth);
         }
 
         public bool TakeDamage(int amount)

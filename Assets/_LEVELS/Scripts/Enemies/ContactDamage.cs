@@ -11,6 +11,10 @@ namespace Levels.Enemies
         [SerializeField, Min(0f)] private float cooldownSeconds = 0.75f;
 
         private float nextDamageTime;
+        private int progressionDamage;
+        public int BaseDamage => damage;
+        public int Damage => progressionDamage > 0 ? progressionDamage : damage;
+        public void SetProgressionDamage(int value) => progressionDamage = Mathf.Max(1, value);
 
         private void OnCollisionEnter2D(Collision2D collision) => TryDamage(collision);
         private void OnCollisionStay2D(Collision2D collision) => TryDamage(collision);
@@ -19,7 +23,7 @@ namespace Levels.Enemies
         {
             if (Time.time < nextDamageTime) return;
             PlayerHealth player = collision.collider.GetComponentInParent<PlayerHealth>();
-            if (player == null || !player.TakeDamage(damage)) return;
+            if (player == null || !player.TakeDamage(Damage)) return;
             nextDamageTime = Time.time + cooldownSeconds;
         }
     }

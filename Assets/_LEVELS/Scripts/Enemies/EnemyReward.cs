@@ -12,8 +12,18 @@ namespace Levels.Enemies
 
         private bool granted;
 
-        public int Experience => experience;
-        public int Gold => gold;
+        private int? progressionExperience;
+        private int? progressionGold;
+        public int BaseExperience => experience;
+        public int BaseGold => gold;
+        public int Experience => progressionExperience ?? experience;
+        public int Gold => progressionGold ?? gold;
+
+        public void SetProgressionReward(int exp, int currency)
+        {
+            progressionExperience = Mathf.Max(0, exp);
+            progressionGold = Mathf.Max(0, currency);
+        }
 
         public void GrantOnce()
         {
@@ -26,8 +36,8 @@ namespace Levels.Enemies
             }
 
             granted = true;
-            session.AddExperience(experience);
-            session.AddGold(gold);
+            session.AddExperience(Experience);
+            session.AddGold(Gold);
         }
     }
 }
