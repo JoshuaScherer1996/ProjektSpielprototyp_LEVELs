@@ -1458,7 +1458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Scenes.SceneTransitionService
   loadingScreen: {fileID: 664528068}
-  minimumLoadingSeconds: 1.2
+  minimumLoadingSeconds: 2
 --- !u!1 &2048940678
 GameObject:
   m_ObjectHideFlags: 0

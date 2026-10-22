@@ -9,33 +9,31 @@ namespace Levels.Player
     {
         [SerializeField] private string moveActionPath = "Player/Move";
 
+        [SerializeField, Range(0f, 1f)] private float movementDeadzone = 0.1f;
+
         private InputAction moveAction;
 
-        public Vector2 MoveInput { get; private set; }
+        public Vector2 MoveInput
+        {
+            get
+            {
+                if (moveAction == null || !moveAction.enabled) return Vector2.zero;
+                Vector2 value = moveAction.ReadValue<Vector2>();
+                return value.sqrMagnitude <= movementDeadzone * movementDeadzone
+                    ? Vector2.zero
+                    : Vector2.ClampMagnitude(value, 1f);
+            }
+        }
 
         private void OnEnable()
         {
             // Resolve through PlayerInput so we use its device pairing and action instance.
             moveAction = GetComponent<PlayerInput>().actions.FindAction(moveActionPath, true);
-            moveAction.performed += ReadMovement;
-            moveAction.canceled += ReadMovement;
-            MoveInput = Vector2.ClampMagnitude(moveAction.ReadValue<Vector2>(), 1f);
         }
 
         private void OnDisable()
         {
-            if (moveAction != null)
-            {
-                moveAction.performed -= ReadMovement;
-                moveAction.canceled -= ReadMovement;
-                moveAction = null;
-            }
-            MoveInput = Vector2.zero;
-        }
-
-        private void ReadMovement(InputAction.CallbackContext context)
-        {
-            MoveInput = Vector2.ClampMagnitude(context.ReadValue<Vector2>(), 1f);
+            moveAction = null;
         }
     }
 }

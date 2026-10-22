@@ -10,11 +10,13 @@ namespace Levels.Scenes
     public sealed class SceneTransitionService : MonoBehaviour
     {
         [SerializeField] private LoadingScreen loadingScreen;
-        [SerializeField, Min(0f)] private float minimumLoadingSeconds = 1.2f;
+        [SerializeField, Min(0f)] private float minimumLoadingSeconds = 2f;
 
         private static bool isTransitioning;
         private static string pendingScene;
         private static string pendingSpawnPointId;
+        private static string pendingControlScheme;
+        private static InputDevice[] pendingInputDevices;
         private static double minimumEndTime;
         private static int blockPortalUntilFrame = -1;
 
@@ -27,6 +29,8 @@ namespace Levels.Scenes
             isTransitioning = false;
             pendingScene = null;
             pendingSpawnPointId = null;
+            pendingControlScheme = null;
+            pendingInputDevices = null;
             minimumEndTime = 0;
             blockPortalUntilFrame = -1;
         }
@@ -50,6 +54,11 @@ namespace Levels.Scenes
             isTransitioning = true;
             pendingScene = destinationScene;
             pendingSpawnPointId = destinationSpawnPointId;
+            PlayerInput sourceInput = player.GetComponent<PlayerInput>();
+            pendingControlScheme = sourceInput.currentControlScheme;
+            pendingInputDevices = new InputDevice[sourceInput.devices.Count];
+            for (int i = 0; i < pendingInputDevices.Length; i++)
+                pendingInputDevices[i] = sourceInput.devices[i];
             minimumEndTime = Time.realtimeSinceStartupAsDouble + minimumLoadingSeconds;
             SceneManager.sceneLoaded += OnSceneLoaded;
             SetPlayerControl(player, false);
@@ -131,6 +140,7 @@ namespace Levels.Scenes
                 return;
             }
 
+            RestoreInputPairing(player.GetComponent<PlayerInput>());
             SetPlayerControl(player, false);
             targetService.loadingScreen.Show();
             Rigidbody2D body = player.GetComponent<Rigidbody2D>();
@@ -159,18 +169,30 @@ namespace Levels.Scenes
 
         private static void SetPlayerControl(PlayerMovement player, bool enabled)
         {
+            PlayerAttack attack = player.GetComponent<PlayerAttack>();
             if (enabled)
             {
-                player.GetComponent<PlayerInput>().enabled = true;
-                player.GetComponent<PlayerInputReader>().enabled = true;
                 player.enabled = true;
+                if (attack != null) attack.enabled = true;
             }
             else
             {
+                if (attack != null) attack.enabled = false;
                 player.enabled = false;
-                player.GetComponent<PlayerInputReader>().enabled = false;
-                player.GetComponent<PlayerInput>().enabled = false;
             }
+        }
+
+        private static void RestoreInputPairing(PlayerInput input)
+        {
+            if (string.IsNullOrEmpty(pendingControlScheme) || pendingInputDevices == null ||
+                pendingInputDevices.Length == 0)
+                return;
+
+            foreach (InputDevice device in pendingInputDevices)
+                if (device == null || !device.added)
+                    return;
+
+            input.SwitchCurrentControlScheme(pendingControlScheme, pendingInputDevices);
         }
 
         private static void ResetPendingTransition()
@@ -179,6 +201,8 @@ namespace Levels.Scenes
             isTransitioning = false;
             pendingScene = null;
             pendingSpawnPointId = null;
+            pendingControlScheme = null;
+            pendingInputDevices = null;
             minimumEndTime = 0;
         }
     }
