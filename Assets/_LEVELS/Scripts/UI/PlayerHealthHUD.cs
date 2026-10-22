@@ -1,3 +1,4 @@
+using Levels.Core;
 using Levels.Player;
 using UnityEngine;
 
@@ -9,34 +10,36 @@ namespace Levels.UI
     {
         [SerializeField] private PlayerHealth playerHealth;
         [SerializeField] private UnityEngine.UI.Text healthText;
+        [SerializeField] private UnityEngine.UI.Text experienceText;
+        [SerializeField] private UnityEngine.UI.Text goldText;
+
+        private GameSession session;
 
         private void OnEnable()
         {
-            if (playerHealth == null || healthText == null)
+            session = GameSession.Instance;
+            if (session == null || playerHealth == null || healthText == null ||
+                experienceText == null || goldText == null)
             {
-                Debug.LogError("PlayerHealthHUD requires a PlayerHealth and a Text reference.", this);
+                Debug.LogError("PlayerHealthHUD requires a GameSession, PlayerHealth and three Text references.", this);
                 return;
             }
 
-            playerHealth.HealthChanged += UpdateText;
-            UpdateText(playerHealth.CurrentHealth, playerHealth.MaxHealth);
+            session.Changed += UpdateText;
+            UpdateText();
         }
 
         private void OnDisable()
         {
-            if (playerHealth != null)
-                playerHealth.HealthChanged -= UpdateText;
+            if (session != null) session.Changed -= UpdateText;
+            session = null;
         }
 
-        private void Start()
+        private void UpdateText()
         {
-            if (playerHealth != null && healthText != null)
-                UpdateText(playerHealth.CurrentHealth, playerHealth.MaxHealth);
-        }
-
-        private void UpdateText(int current, int maximum)
-        {
-            healthText.text = $"HP: {current}/{maximum}";
+            healthText.text = $"HP: {session.PlayerHealth}/{session.PlayerMaxHealth}";
+            experienceText.text = $"EXP: {session.CurrentExperience}";
+            goldText.text = $"Gold: {session.CurrentGold}";
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using Levels.Core;
 using UnityEngine;
 
 namespace Levels.Player
@@ -9,19 +10,30 @@ namespace Levels.Player
         [SerializeField, Min(1)] private int maxHealth = 5;
 
         public int CurrentHealth { get; private set; }
-        public int MaxHealth => maxHealth;
+        public int MaxHealth => GameSession.Instance != null && GameSession.Instance.PlayerMaxHealth > 0
+            ? GameSession.Instance.PlayerMaxHealth : maxHealth;
         public event Action<int, int> HealthChanged;
 
         private void Awake()
         {
-            CurrentHealth = maxHealth;
+            GameSession session = GameSession.Instance;
+            if (session == null)
+            {
+                Debug.LogError("PlayerHealth requires an active GameSession.", this);
+                CurrentHealth = maxHealth;
+                return;
+            }
+
+            session.InitializePlayerHealth(maxHealth);
+            CurrentHealth = session.PlayerHealth;
         }
 
         public bool TakeDamage(int amount)
         {
             if (amount <= 0 || CurrentHealth == 0) return false;
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
-            HealthChanged?.Invoke(CurrentHealth, maxHealth);
+            GameSession.Instance?.UpdatePlayerHealth(CurrentHealth, MaxHealth);
+            HealthChanged?.Invoke(CurrentHealth, MaxHealth);
             if (CurrentHealth == 0)
                 Destroy(gameObject);
             return true;

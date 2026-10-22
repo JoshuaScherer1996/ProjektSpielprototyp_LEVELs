@@ -2353,6 +2353,7 @@ GameObject:
   - component: {fileID: 7096862570273302927}
   - component: {fileID: 2932273615632684780}
   - component: {fileID: 5046718633677793540}
+  - component: {fileID: 5374345760110872117}
   m_Layer: 10
   m_Name: Enemy_Basic
   m_TagString: Untagged
@@ -2554,3 +2555,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Enemies.ContactDamage
   damage: 1
   cooldownSeconds: 0.75
+--- !u!114 &5374345760110872117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8114255207134326312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f9fe65bfd0427e45abed8ee236978bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Levels.Enemies.EnemyReward
+  experience: 10
+  gold: 5

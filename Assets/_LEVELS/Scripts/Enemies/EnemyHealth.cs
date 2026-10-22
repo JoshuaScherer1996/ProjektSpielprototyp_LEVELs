@@ -30,6 +30,7 @@ namespace Levels.Enemies
             CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
             if (CurrentHealth == 0)
             {
+                GetComponent<EnemyReward>()?.GrantOnce();
                 if (deathSmoke != null)
                 {
                     deathSmoke.transform.SetParent(null, true);
