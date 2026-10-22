@@ -20,6 +20,11 @@ namespace Levels.Scenes
 
         private void LateUpdate()
         {
+            SnapToTarget();
+        }
+
+        public void SnapToTarget()
+        {
             if (target == null) return;
             Vector3 position = target.position;
             transform.position = new Vector3(position.x + offset.x, position.y + offset.y, cameraZ);
