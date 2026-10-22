@@ -1,5 +1,7 @@
+using System.Collections;
 using Levels.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace Levels.Scenes
@@ -7,10 +9,16 @@ namespace Levels.Scenes
     [DisallowMultipleComponent]
     public sealed class SceneTransitionService : MonoBehaviour
     {
+        [SerializeField] private LoadingScreen loadingScreen;
+        [SerializeField, Min(0f)] private float minimumLoadingSeconds = 1.2f;
+
         private static bool isTransitioning;
         private static string pendingScene;
         private static string pendingSpawnPointId;
+        private static double minimumEndTime;
         private static int blockPortalUntilFrame = -1;
+
+        public LoadingScreen Screen => loadingScreen;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStaticState()
@@ -19,10 +27,11 @@ namespace Levels.Scenes
             isTransitioning = false;
             pendingScene = null;
             pendingSpawnPointId = null;
+            minimumEndTime = 0;
             blockPortalUntilFrame = -1;
         }
 
-        public bool TryTransition(string destinationScene, string destinationSpawnPointId)
+        public bool TryTransition(string destinationScene, string destinationSpawnPointId, PlayerMovement player)
         {
             if (isTransitioning || Time.frameCount <= blockPortalUntilFrame)
                 return false;
@@ -30,7 +39,9 @@ namespace Levels.Scenes
             if (string.IsNullOrWhiteSpace(destinationScene) ||
                 string.IsNullOrWhiteSpace(destinationSpawnPointId) ||
                 destinationScene == gameObject.scene.name ||
-                !Application.CanStreamedLevelBeLoaded(destinationScene))
+                !Application.CanStreamedLevelBeLoaded(destinationScene) ||
+                player == null || player.gameObject.scene != gameObject.scene ||
+                loadingScreen == null)
             {
                 Debug.LogError($"Invalid transition from {gameObject.scene.name} to {destinationScene}/{destinationSpawnPointId}.", this);
                 return false;
@@ -39,20 +50,34 @@ namespace Levels.Scenes
             isTransitioning = true;
             pendingScene = destinationScene;
             pendingSpawnPointId = destinationSpawnPointId;
+            minimumEndTime = Time.realtimeSinceStartupAsDouble + minimumLoadingSeconds;
             SceneManager.sceneLoaded += OnSceneLoaded;
+            SetPlayerControl(player, false);
+            loadingScreen.Show();
+            StartCoroutine(BeginLoad(player));
+            return true;
+        }
 
+        private IEnumerator BeginLoad(PlayerMovement sourcePlayer)
+        {
+            // Render the source scene's black overlay before beginning the async load.
+            yield return null;
+            if (!isTransitioning) yield break;
+            AsyncOperation operation = null;
             try
             {
-                if (SceneManager.LoadSceneAsync(destinationScene, LoadSceneMode.Single) != null)
-                    return true;
+                operation = SceneManager.LoadSceneAsync(pendingScene, LoadSceneMode.Single);
             }
             catch (System.Exception exception)
             {
                 Debug.LogException(exception, this);
             }
+            if (operation != null) yield break;
 
             ResetPendingTransition();
-            return false;
+            loadingScreen.Hide();
+            SetPlayerControl(sourcePlayer, true);
+            Debug.LogError("The destination scene could not be loaded.", this);
         }
 
         private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -61,16 +86,15 @@ namespace Levels.Scenes
                 return;
 
             string spawnId = pendingSpawnPointId;
-            ResetPendingTransition();
-            // A newly loaded scene must not immediately send its player back if a
-            // spawn point was accidentally placed inside a portal trigger.
-            blockPortalUntilFrame = Time.frameCount + 2;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
 
             SpawnPoint destination = null;
             PlayerMovement player = null;
             CameraFollow cameraFollow = null;
+            SceneTransitionService targetService = null;
             int matchingSpawns = 0;
             int players = 0;
+            int services = 0;
 
             foreach (GameObject root in scene.GetRootGameObjects())
             {
@@ -89,16 +113,26 @@ namespace Levels.Scenes
 
                 foreach (CameraFollow follow in root.GetComponentsInChildren<CameraFollow>(true))
                     cameraFollow = follow;
+
+                foreach (SceneTransitionService service in root.GetComponentsInChildren<SceneTransitionService>(true))
+                {
+                    targetService = service;
+                    services++;
+                }
             }
 
             if (matchingSpawns != 1 || players != 1 || player == null ||
-                cameraFollow == null || cameraFollow.Target != player.transform)
+                cameraFollow == null || cameraFollow.Target != player.transform ||
+                services != 1 || targetService.loadingScreen == null)
             {
                 Debug.LogError($"Scene {scene.name} needs exactly one spawn '{spawnId}', one Player and a camera following it. " +
-                               $"Found {matchingSpawns} spawns and {players} players.");
+                               $"Found {matchingSpawns} spawns, {players} players and {services} services.");
+                ResetPendingTransition();
                 return;
             }
 
+            SetPlayerControl(player, false);
+            targetService.loadingScreen.Show();
             Rigidbody2D body = player.GetComponent<Rigidbody2D>();
             Vector3 position = destination.transform.position;
             body.linearVelocity = Vector2.zero;
@@ -106,6 +140,37 @@ namespace Levels.Scenes
             body.position = new Vector2(position.x, position.y);
             Physics2D.SyncTransforms();
             cameraFollow.SnapToTarget();
+            targetService.StartCoroutine(targetService.CompleteAfterMinimum(player));
+        }
+
+        private IEnumerator CompleteAfterMinimum(PlayerMovement player)
+        {
+            // The target overlay remains for at least one rendered frame even
+            // when an unusually slow load has already exceeded the minimum.
+            yield return null;
+            while (Time.realtimeSinceStartupAsDouble < minimumEndTime)
+                yield return null;
+
+            loadingScreen.Hide();
+            SetPlayerControl(player, true);
+            ResetPendingTransition();
+            blockPortalUntilFrame = Time.frameCount + 2;
+        }
+
+        private static void SetPlayerControl(PlayerMovement player, bool enabled)
+        {
+            if (enabled)
+            {
+                player.GetComponent<PlayerInput>().enabled = true;
+                player.GetComponent<PlayerInputReader>().enabled = true;
+                player.enabled = true;
+            }
+            else
+            {
+                player.enabled = false;
+                player.GetComponent<PlayerInputReader>().enabled = false;
+                player.GetComponent<PlayerInput>().enabled = false;
+            }
         }
 
         private static void ResetPendingTransition()
@@ -114,6 +179,7 @@ namespace Levels.Scenes
             isTransitioning = false;
             pendingScene = null;
             pendingSpawnPointId = null;
+            minimumEndTime = 0;
         }
     }
 }

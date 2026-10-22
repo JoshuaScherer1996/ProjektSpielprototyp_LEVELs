@@ -22,7 +22,8 @@ namespace Levels.Scenes
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.CompareTag("Player") || other.GetComponent<PlayerMovement>() == null)
+            if (!other.CompareTag("Player") ||
+                !other.TryGetComponent(out PlayerMovement player))
                 return;
 
             if (transitionService == null)
@@ -31,7 +32,7 @@ namespace Levels.Scenes
                 return;
             }
 
-            transitionService.TryTransition(destinationScene, destinationSpawnPointId);
+            transitionService.TryTransition(destinationScene, destinationSpawnPointId, player);
         }
     }
 }
