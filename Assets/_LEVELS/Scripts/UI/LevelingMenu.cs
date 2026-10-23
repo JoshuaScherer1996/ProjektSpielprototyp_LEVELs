@@ -15,15 +15,18 @@ namespace Levels.UI
         [SerializeField] private UnityEngine.UI.Text feedback;
         [SerializeField] private UnityEngine.UI.Button playerButton;
         [SerializeField] private UnityEngine.UI.Button enemyButton;
+        [SerializeField] private UnityEngine.UI.Button cyclopsButton;
         [SerializeField] private UnityEngine.UI.Button closeButton;
         [SerializeField] private InputSystemUIInputModule inputModule;
 
         private GameSession session;
         private PlayerMovement movement;
         private PlayerAttack attack;
+        private PlayerHealth health;
         private bool restoreMovement;
         private bool restoreAttack;
         private int openedFrame;
+        private int lastPurchaseFrame = -1;
         private InputAction cancelAction;
         private InputAction moveAction;
         private bool cancelRequested;
@@ -41,6 +44,7 @@ namespace Levels.UI
             session.Changed += Refresh;
             playerButton.onClick.AddListener(BuyPlayerLevel);
             enemyButton.onClick.AddListener(BuyEnemyLevel);
+            if (cyclopsButton != null) cyclopsButton.onClick.AddListener(BuyCyclopsLevel);
             closeButton.onClick.AddListener(Close);
         }
 
@@ -50,13 +54,14 @@ namespace Levels.UI
             if (session != null) session.Changed -= Refresh;
             playerButton.onClick.RemoveListener(BuyPlayerLevel);
             enemyButton.onClick.RemoveListener(BuyEnemyLevel);
+            if (cyclopsButton != null) cyclopsButton.onClick.RemoveListener(BuyCyclopsLevel);
             closeButton.onClick.RemoveListener(Close);
         }
 
         private void Update()
         {
             if (!IsOpen || Time.frameCount <= openedFrame) return;
-            if (movement == null || cancelRequested)
+            if (movement == null || health == null || health.CurrentHealth <= 0 || cancelRequested)
             {
                 cancelRequested = false;
                 Close();
@@ -69,6 +74,8 @@ namespace Levels.UI
         public bool Open(PlayerMovement player)
         {
             if (IsOpen || player == null || !player.enabled) return false;
+            health = player.GetComponent<PlayerHealth>();
+            if (health == null || health.CurrentHealth <= 0) return false;
             movement = player;
             attack = player.GetComponent<PlayerAttack>();
             restoreMovement = movement.enabled;
@@ -106,6 +113,7 @@ namespace Levels.UI
             if (attack != null) attack.enabled = restoreAttack;
             movement = null;
             attack = null;
+            health = null;
         }
 
         private void OnCancel(InputAction.CallbackContext context) => cancelRequested = true;
@@ -125,24 +133,40 @@ namespace Levels.UI
 
         public void BuyPlayerLevel()
         {
-            if (!IsOpen || Time.frameCount <= openedFrame) return;
+            if (!CanPurchase()) return;
             bool bought = movement.GetComponent<PlayerProgression>().TryLevelUp();
             feedback.text = bought ? "Player upgraded. Current HP unchanged." : "Not enough EXP for a Player level.";
         }
 
         public void BuyEnemyLevel()
         {
-            if (!IsOpen || Time.frameCount <= openedFrame) return;
-            bool bought = session.TryLevelUpEnemies();
-            feedback.text = bought ? "Enemies upgraded. Applies when entering the Plateau." : "Not enough EXP for an Enemy level.";
+            if (!CanPurchase()) return;
+            bool bought = session.TryLevelUpGoblin();
+            feedback.text = bought ? "Goblin upgraded. Applies to new spawns." : "Not enough EXP for a Goblin level.";
+        }
+
+        public void BuyCyclopsLevel()
+        {
+            if (!CanPurchase()) return;
+            bool bought = session.TryLevelUpCyclops();
+            feedback.text = bought ? "Cyclops upgraded. Applies to new spawns." : "Not enough EXP for a Cyclops level.";
+        }
+
+        private bool CanPurchase()
+        {
+            if (!IsOpen || Time.frameCount <= openedFrame || lastPurchaseFrame == Time.frameCount ||
+                movement == null || health == null || health.CurrentHealth <= 0) return false;
+            lastPurchaseFrame = Time.frameCount;
+            return true;
         }
 
         private void Refresh()
         {
-            details.text = $"Player Level: {session.PlayerLevel}     Enemy Level: {session.EnemyLevel}\n" +
-                $"Available EXP: {session.CurrentExperience}     Total earned: {session.TotalExperience}\n\n" +
+            details.text = $"Player Lv {session.PlayerLevel}   Goblin Lv {session.GoblinLevel}   Cyclops Lv {session.CyclopsLevel}\n" +
+                $"Available EXP: {session.CurrentExperience}\n\n" +
                 $"Player upgrade: {session.NextPlayerLevelExperience} EXP\n" +
-                $"Enemy upgrade: {session.NextEnemyLevelExperience} EXP";
+                $"Goblin upgrade: {session.NextGoblinLevelExperience} EXP\n" +
+                $"Cyclops upgrade: {session.NextCyclopsLevelExperience} EXP";
         }
     }
 }

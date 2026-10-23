@@ -118,7 +118,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 16, y: -16}
-  m_SizeDelta: {x: 400, y: 146}
+  m_SizeDelta: {x: 600, y: 146}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4470028252068905128
 CanvasRenderer:
@@ -506,13 +506,13 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 20
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 12
+    m_MaxSize: 20
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player Lv 1  |  Enemies Lv 1
+  m_Text: Player Lv 1  |  Goblin Lv 1  |  Cyclops Lv 1

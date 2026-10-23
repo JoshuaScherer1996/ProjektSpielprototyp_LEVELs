@@ -136,6 +136,7 @@ namespace Levels.Editor
             ValidateSavedWorld();
             SessionState.SetBool(Pending,true);
             EditorSceneManager.OpenScene(M9WorldDesignSetup.Root+"Scenes/Village.unity");
+            LevelsPlayModeSetup.UseValidationScene(LevelsPlayModeSetup.VillagePath);
             EditorApplication.isPlaying=true;
         }
         private static void OnPlayMode(PlayModeStateChange state)

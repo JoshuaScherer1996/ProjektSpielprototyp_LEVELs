@@ -51,6 +51,7 @@ namespace Levels.Editor
                 if (SceneManager.GetSceneAt(i).isDirty) throw new InvalidOperationException("Save open scenes before validation.");
             SessionState.SetBool(Pending, true);
             EditorSceneManager.OpenScene(M8SpawnSetup.PlateauPath);
+            LevelsPlayModeSetup.UseValidationScene(M8SpawnSetup.PlateauPath);
             EditorApplication.isPlaying = true;
         }
 

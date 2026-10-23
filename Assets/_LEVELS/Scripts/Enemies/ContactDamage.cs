@@ -21,7 +21,7 @@ namespace Levels.Enemies
 
         private void TryDamage(Collision2D collision)
         {
-            if (Time.time < nextDamageTime) return;
+            if (!isActiveAndEnabled || !GetComponent<EnemyHealth>().IsAlive || Time.time < nextDamageTime) return;
             PlayerHealth player = collision.collider.GetComponentInParent<PlayerHealth>();
             if (player == null || !player.TakeDamage(Damage)) return;
             nextDamageTime = Time.time + cooldownSeconds;

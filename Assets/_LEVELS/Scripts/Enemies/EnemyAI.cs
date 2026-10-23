@@ -1,4 +1,5 @@
 using UnityEngine;
+using Levels.Player;
 
 namespace Levels.Enemies
 {
@@ -8,16 +9,26 @@ namespace Levels.Enemies
     {
         [SerializeField, Min(0f)] private float detectionRange = 4f;
         [SerializeField, Min(0f)] private float moveSpeed = 2.5f;
+        [SerializeField] private bool persistentAggro;
+        [SerializeField] private bool usePlayerSpeed;
+        [SerializeField, Range(0f, 1f)] private float playerSpeedRatio = .65f;
         [SerializeField, Min(0f)] private float knockbackSpeed = 4f;
         [SerializeField, Min(0f)] private float knockbackDuration = 0.16f;
         [SerializeField] private Rigidbody2D body;
 
         private Transform player;
+        private PlayerHealth playerHealth;
+        private PlayerMovement playerMovement;
+        private EnemyHealth health;
+        private bool hasAggro;
         private bool touchingPlayer;
         private Vector2 knockbackDirection;
         private float knockbackEnd;
 
         public float DetectionRange => detectionRange;
+        public bool HasAggro => hasAggro;
+        public float MoveSpeed => usePlayerSpeed && playerMovement != null
+            ? playerMovement.MoveSpeed * Mathf.Clamp01(playerSpeedRatio) : moveSpeed;
 
         private void Reset()
         {
@@ -27,10 +38,27 @@ namespace Levels.Enemies
         private void Awake()
         {
             if (body == null) body = GetComponent<Rigidbody2D>();
+            health = GetComponent<EnemyHealth>();
         }
 
         private void FixedUpdate()
         {
+            if (player == null)
+            {
+                GameObject target = GameObject.FindGameObjectWithTag("Player");
+                if (target != null && target.scene == gameObject.scene)
+                {
+                    player = target.transform;
+                    playerHealth = target.GetComponent<PlayerHealth>();
+                    playerMovement = target.GetComponent<PlayerMovement>();
+                }
+            }
+            if (health == null || !health.IsAlive || player == null || playerHealth == null || playerHealth.CurrentHealth <= 0)
+            {
+                hasAggro = false;
+                body.linearVelocity = Vector2.zero;
+                return;
+            }
             if (Time.time < knockbackEnd)
             {
                 float remaining = (knockbackEnd - Time.time) / Mathf.Max(0.001f, knockbackDuration);
@@ -38,17 +66,12 @@ namespace Levels.Enemies
                 return;
             }
 
-            if (player == null)
-            {
-                GameObject target = GameObject.FindGameObjectWithTag("Player");
-                if (target != null) player = target.transform;
-            }
-
             Vector2 direction = player == null ? Vector2.zero :
                 (Vector2)(player.position - transform.position);
-            body.linearVelocity = !touchingPlayer && player != null &&
-                direction.sqrMagnitude <= detectionRange * detectionRange
-                ? direction.normalized * moveSpeed
+            bool detected = direction.sqrMagnitude <= detectionRange * detectionRange;
+            hasAggro = detected || (persistentAggro && hasAggro);
+            body.linearVelocity = !touchingPlayer && hasAggro
+                ? direction.normalized * MoveSpeed
                 : Vector2.zero;
         }
 
@@ -73,6 +96,7 @@ namespace Levels.Enemies
         private void OnDisable()
         {
             touchingPlayer = false;
+            hasAggro = false;
             if (body != null) body.linearVelocity = Vector2.zero;
         }
 

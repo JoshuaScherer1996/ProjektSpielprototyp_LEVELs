@@ -46,6 +46,7 @@ namespace Levels.Editor
                 if (SceneManager.GetSceneAt(i).isDirty) throw new InvalidOperationException("Save scenes first.");
             SessionState.SetBool(Pending, true);
             EditorSceneManager.OpenScene(M8SpawnSetup.PlateauPath);
+            LevelsPlayModeSetup.UseValidationScene(M8SpawnSetup.PlateauPath);
             EditorApplication.isPlaying = true;
         }
 
@@ -118,6 +119,10 @@ namespace Levels.Editor
             var playerHealth = player.GetComponent<PlayerHealth>();
             var attack = player.GetComponent<PlayerAttack>();
             var spawner = Object.FindAnyObjectByType<EnemySpawner>();
+            // This regression suite exercises the original Goblin feedback population.
+            // M11EnemyValidation covers both types together with the real saved category limits.
+            foreach (var category in spawner.Enemies)
+                if (category.category != "Goblin") category.maxAlive = 0;
             spawner.Spawned += Freeze;
             yield return new WaitForSeconds(12.2f);
             var enemies = Object.FindObjectsByType<EnemyHealth>();

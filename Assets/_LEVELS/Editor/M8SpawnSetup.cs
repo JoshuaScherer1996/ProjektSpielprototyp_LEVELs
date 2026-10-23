@@ -11,7 +11,7 @@ namespace Levels.Editor
     public static class M8SpawnSetup
     {
         public const string PlateauPath = "Assets/_LEVELS/Scenes/Plateau.unity";
-        public const string EnemyPath = "Assets/_LEVELS/Prefabs/Characters/Enemy_Basic.prefab";
+        public const string EnemyPath = "Assets/_LEVELS/Prefabs/Characters/Enemy_Goblin.prefab";
 
         [MenuItem("LEVEL's/M8/Configure Plateau Spawner")]
         public static void Configure()

@@ -2358,7 +2358,7 @@ GameObject:
   - component: {fileID: 8606448357944900459}
   - component: {fileID: 2358821658128431898}
   m_Layer: 10
-  m_Name: Enemy_Basic
+  m_Name: Enemy_Goblin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2542,6 +2542,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Enemies.EnemyAI
   detectionRange: 4
   moveSpeed: 2.5
+  persistentAggro: 0
+  usePlayerSpeed: 0
+  playerSpeedRatio: 0.65
   knockbackSpeed: 4
   knockbackDuration: 0.16
   body: {fileID: 5654768509039218851}
@@ -2585,6 +2588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5e4c10898c3e6438692db24129262e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Enemies.EnemyProgression
+  enemyType: 0
 --- !u!114 &8606448357944900459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2608,7 +2612,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79f83aa619867ec4fa7a6c7e6c116eaf, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Levels.UI.DamageFeedback
   numberPrefab: {fileID: 1325149764459924020, guid: 8e2c6f8bbb53eae41ae0029fc2ed0082, type: 3}
   offset: {x: 0, y: 0.95, z: 0}

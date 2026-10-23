@@ -15,10 +15,15 @@ namespace Levels.Core
         public int PlayerMaxHealth { get; private set; }
         public int PlayerLevel { get; private set; } = 1;
         public int EnemyLevel { get; private set; } = 1;
+        // Retain the original storage and API: existing session state and callers become Goblin progression.
+        public int GoblinLevel => EnemyLevel;
+        public int CyclopsLevel { get; private set; } = 1;
         public int ShopMaxHealthBonus { get; private set; }
         public ProgressionSettings Progression { get; private set; }
         public int NextPlayerLevelExperience => Progression.PlayerCost(PlayerLevel);
         public int NextEnemyLevelExperience => Progression.EnemyCost(EnemyLevel);
+        public int NextGoblinLevelExperience => NextEnemyLevelExperience;
+        public int NextCyclopsLevelExperience => Progression.EnemyCost(CyclopsLevel, EnemyType.Cyclops);
 
         public event Action Changed;
 
@@ -78,6 +83,7 @@ namespace Levels.Core
             PlayerMaxHealth = 0;
             PlayerLevel = 1;
             EnemyLevel = 1;
+            CyclopsLevel = 1;
             ShopMaxHealthBonus = 0;
             purchasingLevel = false;
             purchasingShop = false;
@@ -129,8 +135,11 @@ namespace Levels.Core
             return true;
         }
 
-        public bool TryLevelUpPlayer() => TryBuyLevel(true);
-        public bool TryLevelUpEnemies() => TryBuyLevel(false);
+        public bool TryLevelUpPlayer() => TryBuyLevel(null);
+        public bool TryLevelUpEnemies() => TryLevelUpGoblin();
+        public bool TryLevelUpGoblin() => TryBuyLevel(EnemyType.Goblin);
+        public bool TryLevelUpCyclops() => TryBuyLevel(EnemyType.Cyclops);
+        public int GetEnemyLevel(EnemyType type) => type == EnemyType.Cyclops ? CyclopsLevel : GoblinLevel;
 
         public int CalculatePlayerMaxHealth(int baseHealth) => (int)Math.Min(int.MaxValue,
             (long)Progression.PlayerHealth(baseHealth, PlayerLevel) + ShopMaxHealthBonus);
@@ -167,17 +176,18 @@ namespace Levels.Core
             return true;
         }
 
-        private bool TryBuyLevel(bool player)
+        private bool TryBuyLevel(EnemyType? type)
         {
             if (purchasingLevel || Progression == null) return false;
-            int level = player ? PlayerLevel : EnemyLevel;
-            int cost = player ? NextPlayerLevelExperience : NextEnemyLevelExperience;
+            int level = type.HasValue ? GetEnemyLevel(type.Value) : PlayerLevel;
+            int cost = type.HasValue ? Progression.EnemyCost(level, type.Value) : NextPlayerLevelExperience;
             if (level == int.MaxValue || cost <= 0 || CurrentExperience < cost) return false;
 
             // Debit and increment atomically before notifying listeners; reentrant purchases are rejected.
             purchasingLevel = true;
             CurrentExperience -= cost;
-            if (player) PlayerLevel++;
+            if (!type.HasValue) PlayerLevel++;
+            else if (type.Value == EnemyType.Cyclops) CyclopsLevel++;
             else EnemyLevel++;
             try { Changed?.Invoke(); }
             finally { purchasingLevel = false; }

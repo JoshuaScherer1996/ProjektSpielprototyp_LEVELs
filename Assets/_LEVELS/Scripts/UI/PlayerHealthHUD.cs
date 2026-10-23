@@ -42,7 +42,7 @@ namespace Levels.UI
             experienceText.text = $"EXP: {session.CurrentExperience}";
             goldText.text = $"Gold: {session.CurrentGold}";
             if (levelText != null)
-                levelText.text = $"Player Lv {session.PlayerLevel}  |  Enemies Lv {session.EnemyLevel}";
+                levelText.text = $"Player Lv {session.PlayerLevel}  |  Goblin Lv {session.GoblinLevel}  |  Cyclops Lv {session.CyclopsLevel}";
         }
     }
 }

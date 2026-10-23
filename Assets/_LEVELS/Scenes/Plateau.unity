@@ -1621,6 +1621,10 @@ MonoBehaviour:
     prefab: {fileID: 8606448357944900459, guid: ab0967e253465da43a841bc0b15404c2, type: 3}
     maxAlive: 5
     spawnInterval: 2
+  - category: Cyclops
+    prefab: {fileID: 8606448357944900459, guid: 833a2ef048accd242ac8574281544bc0, type: 3}
+    maxAlive: 2
+    spawnInterval: 3
   safeDistance: 3
   entranceClearance: 2
   colliderPadding: 0.1

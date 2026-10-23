@@ -26,3 +26,12 @@ MonoBehaviour:
   enemyGoldPerLevel: 2
   enemyGoldBonusLevelStep: 2
   enemyGoldBonusPerStep: 1
+  cyclopsFirstCost: 20
+  cyclopsCostIncrement: 20
+  cyclopsHealthPerLevel: 2
+  cyclopsDamageLevelStep: 2
+  cyclopsDamagePerStep: 1
+  cyclopsExperiencePerLevel: 10
+  cyclopsGoldPerLevel: 5
+  cyclopsGoldBonusLevelStep: 2
+  cyclopsGoldBonusPerStep: 1

@@ -33,7 +33,7 @@ namespace Levels.Editor
                     Root + "Resources/LevelsProgression.asset");
 
             EditPrefab("Characters/Player", root => Ensure<PlayerProgression>(root));
-            EditPrefab("Characters/Enemy_Basic", root => Ensure<EnemyProgression>(root));
+            EditPrefab("Characters/Enemy_Goblin", root => Ensure<EnemyProgression>(root));
             EditPrefab("UI/PlayerHUD", root =>
             {
                 Transform healthPanel = root.transform.Find("HealthPanel");
