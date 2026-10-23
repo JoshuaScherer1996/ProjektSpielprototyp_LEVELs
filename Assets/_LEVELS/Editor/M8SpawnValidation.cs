@@ -163,7 +163,8 @@ namespace Levels.Editor
             Check(spawner.Enemies.Count == 1 && spawner.Enemies[0].maxAlive == 5 &&
                   spawner.Enemies[0].spawnInterval == 2f && spawner.SafeDistance == 3f,
                 "Goblin configuration: 2 seconds / 5 alive / 3 units, no Cyclops entry");
-            Check(spawner.SpawnArea.Size == new Vector2(22f, 12f), "Editable area is 22 x 12 units");
+            Vector2 savedAreaSize = spawner.SpawnArea.Size;
+            Check(savedAreaSize == new Vector2(22f, 9f), "M9 editable interior area is 22 x 9 units");
             var player = Object.FindAnyObjectByType<PlayerMovement>();
             player.enabled = false;
             FreezeEnemies();
@@ -240,7 +241,7 @@ namespace Levels.Editor
             areaSettings.ApplyModifiedPropertiesWithoutUndo();
             Check(!Valid(new Vector2(-11.7f, 0f)) && Valid(new Vector2(-11f, 0f)),
                 "World boundary rejects collider-edge overlap even inside an enlarged spawn area");
-            areaSettings.FindProperty("size").vector2Value = new Vector2(22f, 12f);
+            areaSettings.FindProperty("size").vector2Value = savedAreaSize;
             areaSettings.ApplyModifiedPropertiesWithoutUndo();
             Check(!Valid(new Vector2(0f, 3.7f)) && !Valid(new Vector2(0f, -3.7f)), "Portal and entrance approach clearances reject nearby spawns");
 

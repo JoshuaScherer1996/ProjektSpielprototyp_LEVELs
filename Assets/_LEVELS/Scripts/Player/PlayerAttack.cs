@@ -89,6 +89,8 @@ namespace Levels.Player
 
         private void OnAttack(InputAction.CallbackContext context)
         {
+            if (context.control == Mouse.current?.leftButton &&
+                LockedBossDoorInteraction.TryHandlePointer(GetComponent<PlayerMovement>())) return;
             TryAttack();
         }
 
