@@ -78,7 +78,8 @@ namespace Levels.Editor
                     Check(Object.FindObjectsByType<GameFlow>().Length == 1 && Object.FindObjectsByType<SceneTransitionService>().Length == 1 &&
                           Object.FindObjectsByType<EventSystem>().Length == 1, name + ": exactly one flow, transition service and EventSystem");
                     Check(Object.FindObjectsByType<PlayerMovement>().Length == (name == "MainMenu" ? 0 : 1), name + ": correct saved Player count");
-                    var focus = Object.FindObjectsByType<MenuFocus>(FindObjectsInactive.Include).Single();
+                    var focus = Object.FindObjectsByType<MenuFocus>(FindObjectsInactive.Include)
+                        .Single(f => f.GetComponentInParent<PauseMenuUI>() == null);
                     var so = new SerializedObject(focus);
                     Check(so.FindProperty("inputModule").objectReferenceValue != null && so.FindProperty("firstButton").objectReferenceValue != null,
                         name + ": UI selection and shared Input System module are assigned");

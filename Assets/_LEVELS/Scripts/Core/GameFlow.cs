@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Levels.Core
 {
-    public enum RunState { MainMenu, Playing, GameOver, Loading }
+    public enum RunState { MainMenu, Playing, GameOver, Loading, Paused }
 
     /// <summary>Scene-owned flow; only GameSession persists. All UI/world objects are saved assets.</summary>
     [DefaultExecutionOrder(-900), DisallowMultipleComponent]
@@ -23,9 +23,10 @@ namespace Levels.Core
         public static RunState State { get; private set; } = RunState.Playing;
         public static bool IsGameplayActive => State == RunState.Playing && !SceneTransitionService.IsTransitioning;
         private RunState beforeLoad;
+        private readonly System.Collections.Generic.List<Behaviour> pausedControls = new();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        private static void ResetStatics() { Instance = null; State = RunState.Playing; }
+        private static void ResetStatics() { Instance = null; State = RunState.Playing; Time.timeScale = 1f; }
 
         private void Awake()
         {
@@ -44,7 +45,51 @@ namespace Levels.Core
             }
         }
 
-        private void OnDestroy() { if (Instance == this) Instance = null; }
+        private void OnDestroy()
+        {
+            if (Instance != this) return;
+            if (State == RunState.Paused) { State = RunState.Playing; Time.timeScale = 1f; }
+            Instance = null;
+        }
+
+        public bool TryPause()
+        {
+            if (!IsGameplayActive) return false;
+            foreach (var menu in FindObjectsByType<ShopMenu>()) if (menu.IsOpen) return false;
+            foreach (var menu in FindObjectsByType<LevelingMenu>()) if (menu.IsOpen) return false;
+            State = RunState.Paused; // Damage/input gates close synchronously, before any observers.
+            pausedControls.Clear();
+            foreach (var movement in FindObjectsByType<PlayerMovement>())
+            {
+                PauseControl(movement);
+                PauseControl(movement.GetComponent<PlayerAttack>());
+            }
+            // Keep AI enabled: aggro, contact and knockback state survive the frozen physics clock.
+            foreach (var ai in FindObjectsByType<EnemyAI>())
+                ai.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+            PlayerInputReader.ConsumeInteractForCurrentFrame();
+            Time.timeScale = 0f;
+            return true;
+        }
+
+        private void PauseControl(Behaviour control)
+        {
+            if (control == null || !control.enabled) return;
+            pausedControls.Add(control);
+            control.enabled = false;
+        }
+
+        public bool Resume()
+        {
+            if (State != RunState.Paused || SceneTransitionService.IsTransitioning) return false;
+            State = RunState.Playing;
+            Time.timeScale = 1f;
+            // PlayerInput remains enabled throughout. MoveInput reads the still-held stick directly.
+            foreach (var control in pausedControls) if (control != null) control.enabled = true;
+            pausedControls.Clear();
+            PlayerInputReader.ConsumeInteractForCurrentFrame();
+            return true;
+        }
 
         public bool StartNewRun()
         {
@@ -54,7 +99,7 @@ namespace Levels.Core
 
         public bool BackToMainMenu()
         {
-            if (State != RunState.GameOver) return false;
+            if (State != RunState.GameOver && State != RunState.Paused) return false;
             return LoadRunScene(mainMenuScene, null, false);
         }
 
@@ -66,6 +111,7 @@ namespace Levels.Core
             State = RunState.Loading; // Set the gate before closing any UI can restore movement.
             Time.timeScale = 1f;
             StopGameplay();
+            pausedControls.Clear();
             if (newRun) GameSession.Instance.ResetForNewRun();
             else GameSession.Instance.EndRun();
             return true;
@@ -90,6 +136,8 @@ namespace Levels.Core
                 player.enabled = false;
                 var attack = player.GetComponent<PlayerAttack>();
                 if (attack != null) attack.enabled = false;
+                var input = player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+                if (input != null) input.DeactivateInput();
             }
             foreach (var spawner in FindObjectsByType<EnemySpawner>()) spawner.enabled = false;
             foreach (var ai in FindObjectsByType<EnemyAI>()) ai.enabled = false;

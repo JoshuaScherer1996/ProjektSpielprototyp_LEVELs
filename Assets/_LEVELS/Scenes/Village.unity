@@ -331,6 +331,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4e0c12f909b2814db5042a4b7e33890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Player.PlayerHealth
+--- !u!1001 &301682431
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 82403359229408629, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 688367205}
+    - target: {fileID: 2121417253082627928, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_Name
+      value: PauseMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3786509713599479543, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875172199445168429, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+      propertyPath: inputModule
+      value: 
+      objectReference: {fileID: 951796934}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+--- !u!114 &301682432 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 82403359229408629, guid: 74fd0b578d05fcc4d90e04f7d0e47c99, type: 3}
+  m_PrefabInstance: {fileID: 301682431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ade915a3785874eb57629057316a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Levels.UI.PauseMenuUI
 --- !u!1 &324812382
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +784,7 @@ GameObject:
   m_Component:
   - component: {fileID: 688367204}
   - component: {fileID: 688367203}
+  - component: {fileID: 688367205}
   m_Layer: 0
   m_Name: GameFlow
   m_TagString: Untagged
@@ -692,6 +809,7 @@ MonoBehaviour:
   mainMenuScene: MainMenu
   firstScene: Village
   firstSpawnPoint: NewRun
+  playLoadingSeconds: 1
 --- !u!4 &688367204
 Transform:
   m_ObjectHideFlags: 0
@@ -707,6 +825,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &688367205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 688367202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8adeddcb481fc43acec652e2c758b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Levels.Core.PauseController
+  flow: {fileID: 688367203}
+  menu: {fileID: 301682432}
+  pauseAction: {fileID: -5990402904686609862, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &689719606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2827,3 +2960,4 @@ SceneRoots:
   - {fileID: 831247888}
   - {fileID: 875296141}
   - {fileID: 688367204}
+  - {fileID: 301682431}
