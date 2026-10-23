@@ -361,7 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f2d1cb65505ba428c7e775505fb272, type: 3}
   m_Name:
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Player.LevelingStation
-  interactionRange: 2
+  interactionRange: 0.1
+  blockingCollider: {fileID: 6048106182196319318}
   menu: {fileID: 0}
   interactionPrompt: {fileID: 700000000004}
 --- !u!1 &700000000004
