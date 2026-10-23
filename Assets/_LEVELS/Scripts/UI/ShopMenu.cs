@@ -67,7 +67,7 @@ namespace Levels.UI
         public bool Open(PlayerMovement player, ShopTransactions shop)
         {
             // The disabled movement component is the same exclusive control lock used by leveling/loading.
-            if (IsOpen || player == null || !player.enabled || shop == null || inputModule == null) return false;
+            if (!GameFlow.IsGameplayActive || IsOpen || player == null || !player.enabled || shop == null || inputModule == null) return false;
             health = player.GetComponent<PlayerHealth>();
             if (health == null || health.CurrentHealth <= 0) return false;
             movement = player;
@@ -104,8 +104,8 @@ namespace Levels.UI
             if (inputModule != null) inputModule.enabled = false;
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
             // Keep PlayerInput and device pairing alive: held stick input works immediately after closing.
-            if (movement != null) movement.enabled = true;
-            if (attack != null) attack.enabled = restoreAttack;
+            if (movement != null) movement.enabled = GameFlow.IsGameplayActive;
+            if (attack != null) attack.enabled = restoreAttack && GameFlow.IsGameplayActive;
             movement = null;
             attack = null;
             health = null;
@@ -132,7 +132,7 @@ namespace Levels.UI
 
         private void Buy(ShopOffer offer)
         {
-            if (!IsOpen || Time.frameCount <= openedFrame || Time.frameCount == lastPurchaseFrame) return;
+            if (!GameFlow.IsGameplayActive || !IsOpen || Time.frameCount <= openedFrame || Time.frameCount == lastPurchaseFrame) return;
             lastPurchaseFrame = Time.frameCount;
             ShopPurchaseResult result = transactions.TryPurchase(offer, health);
             switch (result)

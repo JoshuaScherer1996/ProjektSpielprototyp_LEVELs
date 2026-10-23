@@ -27,7 +27,7 @@ namespace Levels.Enemies
 
         public void GrantOnce()
         {
-            if (granted) return;
+            if (!GameFlow.IsGameplayActive || granted) return;
             GameSession session = GameSession.Instance;
             if (session == null)
             {

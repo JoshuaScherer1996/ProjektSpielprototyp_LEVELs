@@ -43,6 +43,12 @@ namespace Levels.Enemies
 
         private void FixedUpdate()
         {
+            if (!Levels.Core.GameFlow.IsGameplayActive)
+            {
+                hasAggro = false;
+                body.linearVelocity = Vector2.zero;
+                return;
+            }
             if (player == null)
             {
                 GameObject target = GameObject.FindGameObjectWithTag("Player");
@@ -77,7 +83,7 @@ namespace Levels.Enemies
 
         public void ApplyKnockback(Vector2 direction)
         {
-            if (direction.sqrMagnitude < 0.001f || knockbackDuration <= 0f) return;
+            if (!Levels.Core.GameFlow.IsGameplayActive || direction.sqrMagnitude < 0.001f || knockbackDuration <= 0f) return;
             knockbackDirection = direction.normalized;
             knockbackEnd = Time.time + knockbackDuration;
             body.linearVelocity = knockbackDirection * knockbackSpeed;

@@ -56,9 +56,10 @@ namespace Levels.Player
 
         public bool TakeDamage(int amount)
         {
-            if (amount <= 0 || CurrentHealth == 0) return false;
+            if (!GameFlow.IsGameplayActive || amount <= 0 || CurrentHealth == 0) return false;
             int appliedDamage = Mathf.Min(amount, CurrentHealth);
             CurrentHealth -= appliedDamage;
+            if (CurrentHealth == 0) GameFlow.Instance?.PlayerDied();
             GameSession.Instance?.UpdatePlayerHealth(CurrentHealth, MaxHealth);
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
             DamageApplied?.Invoke(appliedDamage);

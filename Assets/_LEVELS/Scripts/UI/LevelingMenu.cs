@@ -73,7 +73,7 @@ namespace Levels.UI
 
         public bool Open(PlayerMovement player)
         {
-            if (IsOpen || player == null || !player.enabled) return false;
+            if (!GameFlow.IsGameplayActive || IsOpen || player == null || !player.enabled) return false;
             health = player.GetComponent<PlayerHealth>();
             if (health == null || health.CurrentHealth <= 0) return false;
             movement = player;
@@ -109,8 +109,8 @@ namespace Levels.UI
             inputModule.enabled = false;
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
             // Keep the PlayerInput map/device pairing alive, as in the M3.5 transition fix.
-            if (movement != null) movement.enabled = restoreMovement;
-            if (attack != null) attack.enabled = restoreAttack;
+            if (movement != null) movement.enabled = restoreMovement && GameFlow.IsGameplayActive;
+            if (attack != null) attack.enabled = restoreAttack && GameFlow.IsGameplayActive;
             movement = null;
             attack = null;
             health = null;
@@ -154,7 +154,7 @@ namespace Levels.UI
 
         private bool CanPurchase()
         {
-            if (!IsOpen || Time.frameCount <= openedFrame || lastPurchaseFrame == Time.frameCount ||
+            if (!GameFlow.IsGameplayActive || !IsOpen || Time.frameCount <= openedFrame || lastPurchaseFrame == Time.frameCount ||
                 movement == null || health == null || health.CurrentHealth <= 0) return false;
             lastPurchaseFrame = Time.frameCount;
             return true;

@@ -68,13 +68,14 @@ namespace Levels.Enemies
         private void OnDisable()
         {
             elapsed = null;
+            LastAttemptCount = 0;
             player = null;
             overlaps.Clear();
         }
 
         private void Update()
         {
-            if (Time.timeScale <= 0f || SceneTransitionService.IsTransitioning) return;
+            if (!Levels.Core.GameFlow.IsGameplayActive || Time.timeScale <= 0f || SceneTransitionService.IsTransitioning) return;
             // Inspector changes during Play mode also restart the clocks, with no catch-up burst.
             if (elapsed == null || elapsed.Length != enemies.Length) elapsed = new float[enemies.Length];
             for (int i = 0; i < enemies.Length; i++)
@@ -102,6 +103,7 @@ namespace Levels.Enemies
         private void TrySpawn(EnemySpawnConfig entry)
         {
             LastAttemptCount = 0;
+            if (!Levels.Core.GameFlow.IsGameplayActive || !isActiveAndEnabled) return;
             if (entry.prefab == null || entry.prefab.Category != entry.category ||
                 CountAlive(entry.category) >= Mathf.Max(0, entry.maxAlive) || spawnArea == null ||
                 spawnArea.gameObject.scene != gameObject.scene || !TryGetFootprint(entry.prefab, out Bounds shape)) return;

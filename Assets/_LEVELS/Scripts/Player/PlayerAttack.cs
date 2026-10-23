@@ -96,7 +96,7 @@ namespace Levels.Player
 
         public bool TryAttack()
         {
-            if (!isActiveAndEnabled || !playerInput.enabled || hitbox == null || Time.time < nextAttackTime)
+            if (!Levels.Core.GameFlow.IsGameplayActive || !isActiveAndEnabled || !playerInput.enabled || hitbox == null || Time.time < nextAttackTime)
                 return false;
 
             UpdateFacing();

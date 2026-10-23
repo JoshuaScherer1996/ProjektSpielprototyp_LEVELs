@@ -61,10 +61,10 @@ namespace Levels.Editor
             var previous = EditorSceneManager.GetSceneManagerSetup();
             try
             {
-                Check(EditorBuildSettings.scenes.First(s => s.enabled).path == LevelsPlayModeSetup.VillagePath,
-                    "Build starts in Village");
-                Check(AssetDatabase.GetAssetPath(EditorSceneManager.playModeStartScene) == LevelsPlayModeSetup.VillagePath,
-                    "Normal Editor Play starts in Village regardless of the open scene");
+                Check(EditorBuildSettings.scenes.First(s => s.enabled).path == LevelsPlayModeSetup.MainMenuPath,
+                    "Build starts in MainMenu (M12)");
+                Check(AssetDatabase.GetAssetPath(EditorSceneManager.playModeStartScene) == LevelsPlayModeSetup.MainMenuPath,
+                    "Normal Editor Play starts in MainMenu regardless of the open scene (M12)");
                 Check(AssetDatabase.AssetPathToGUID(M11EnemySetup.GoblinPath) == M11EnemySetup.GoblinGuid,
                     "Goblin rename preserves original Unity GUID");
                 var goblin = AssetDatabase.LoadAssetAtPath<GameObject>(M11EnemySetup.GoblinPath);

@@ -42,7 +42,7 @@ namespace Levels.Enemies
 
         public bool TakeDamage(int amount, Vector2 knockbackDirection)
         {
-            if (amount <= 0 || CurrentHealth == 0) return false;
+            if (!Levels.Core.GameFlow.IsGameplayActive || amount <= 0 || CurrentHealth == 0) return false;
             int appliedDamage = Mathf.Min(amount, CurrentHealth);
             CurrentHealth -= appliedDamage;
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);

@@ -88,8 +88,12 @@ namespace Levels.Core
             purchasingLevel = false;
             purchasingShop = false;
             playerHealthInitialized = false;
-            Changed = null;
+            // Existing scene observers unsubscribe on unload. Never erase their subscriptions
+            // during a run reset, or the destination could silently lose UI/stat notifications.
         }
+
+        public void ResetForNewRun() => ResetData();
+        public void EndRun() => ResetData();
 
         public void InitializePlayerHealth(int defaultMaxHealth)
         {
@@ -99,7 +103,7 @@ namespace Levels.Core
 
         public void AddExperience(int amount)
         {
-            if (amount <= 0) return;
+            if (!GameFlow.IsGameplayActive || amount <= 0) return;
             int experience = (int)Math.Min(int.MaxValue, (long)CurrentExperience + amount);
             int total = (int)Math.Min(int.MaxValue, (long)TotalExperience + amount);
             if (experience == CurrentExperience && total == TotalExperience) return;
@@ -110,7 +114,7 @@ namespace Levels.Core
 
         public void AddGold(int amount)
         {
-            if (amount <= 0) return;
+            if (!GameFlow.IsGameplayActive || amount <= 0) return;
             int gold = (int)Math.Min(int.MaxValue, (long)CurrentGold + amount);
             if (gold == CurrentGold) return;
             CurrentGold = gold;
@@ -119,7 +123,7 @@ namespace Levels.Core
 
         public bool TrySpendExperience(int amount)
         {
-            if (amount < 0 || amount > CurrentExperience) return false;
+            if (!GameFlow.IsGameplayActive || amount < 0 || amount > CurrentExperience) return false;
             if (amount == 0) return true;
             CurrentExperience -= amount;
             Changed?.Invoke();
@@ -128,7 +132,7 @@ namespace Levels.Core
 
         public bool TrySpendGold(int amount)
         {
-            if (amount < 0 || amount > CurrentGold) return false;
+            if (!GameFlow.IsGameplayActive || amount < 0 || amount > CurrentGold) return false;
             if (amount == 0) return true;
             CurrentGold -= amount;
             Changed?.Invoke();
@@ -146,14 +150,14 @@ namespace Levels.Core
 
         internal bool TryBuyHealing(int price)
         {
-            if (purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
+            if (!GameFlow.IsGameplayActive || purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
                 PlayerHealth <= 0 || PlayerHealth >= PlayerMaxHealth) return false;
             return CompleteShopPurchase(price, false);
         }
 
         internal bool TryBuyMaxHealth(int price)
         {
-            if (purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
+            if (!GameFlow.IsGameplayActive || purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
                 PlayerHealth <= 0 || PlayerMaxHealth == int.MaxValue || ShopMaxHealthBonus == int.MaxValue)
                 return false;
             return CompleteShopPurchase(price, true);
@@ -178,7 +182,7 @@ namespace Levels.Core
 
         private bool TryBuyLevel(EnemyType? type)
         {
-            if (purchasingLevel || Progression == null) return false;
+            if (!GameFlow.IsGameplayActive || purchasingLevel || Progression == null) return false;
             int level = type.HasValue ? GetEnemyLevel(type.Value) : PlayerLevel;
             int cost = type.HasValue ? Progression.EnemyCost(level, type.Value) : NextPlayerLevelExperience;
             if (level == int.MaxValue || cost <= 0 || CurrentExperience < cost) return false;

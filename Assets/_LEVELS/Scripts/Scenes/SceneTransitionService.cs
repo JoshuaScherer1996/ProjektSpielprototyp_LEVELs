@@ -1,4 +1,5 @@
 using System.Collections;
+using Levels.Core;
 using Levels.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,6 +20,8 @@ namespace Levels.Scenes
         private static InputDevice[] pendingInputDevices;
         private static double minimumEndTime;
         private static int blockPortalUntilFrame = -1;
+        private static bool runTransition;
+        private static bool displayLoadingScreen = true;
 
         public LoadingScreen Screen => loadingScreen;
         public static bool IsTransitioning => isTransitioning;
@@ -34,11 +37,13 @@ namespace Levels.Scenes
             pendingInputDevices = null;
             minimumEndTime = 0;
             blockPortalUntilFrame = -1;
+            runTransition = false;
+            displayLoadingScreen = true;
         }
 
         public bool TryTransition(string destinationScene, string destinationSpawnPointId, PlayerMovement player)
         {
-            if (isTransitioning || Time.frameCount <= blockPortalUntilFrame || player == null || !player.enabled)
+            if (!GameFlow.IsGameplayActive || isTransitioning || Time.frameCount <= blockPortalUntilFrame || player == null || !player.enabled)
                 return false;
 
             if (string.IsNullOrWhiteSpace(destinationScene) ||
@@ -68,6 +73,28 @@ namespace Levels.Scenes
             return true;
         }
 
+        // PLAY/RETRY/menu return share the existing black overlay, async loader and destination placement.
+        // Unlike a portal, a run boundary can start after the source Player has been destroyed.
+        public bool TryLoadRunScene(string destinationScene, string spawnPointId,
+            bool showLoadingScreen = true, float? loadingSeconds = null)
+        {
+            if (isTransitioning || loadingScreen == null || string.IsNullOrWhiteSpace(destinationScene) ||
+                !Application.CanStreamedLevelBeLoaded(destinationScene)) return false;
+            isTransitioning = true;
+            runTransition = true;
+            displayLoadingScreen = showLoadingScreen;
+            pendingScene = destinationScene;
+            pendingSpawnPointId = spawnPointId;
+            pendingControlScheme = null;
+            pendingInputDevices = null;
+            minimumEndTime = Time.realtimeSinceStartupAsDouble +
+                (showLoadingScreen ? Mathf.Max(0f, loadingSeconds ?? minimumLoadingSeconds) : 0f);
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            if (displayLoadingScreen) loadingScreen.Show();
+            StartCoroutine(BeginLoad(null));
+            return true;
+        }
+
         private IEnumerator BeginLoad(PlayerMovement sourcePlayer)
         {
             // Render the source scene's black overlay before beginning the async load.
@@ -84,9 +111,11 @@ namespace Levels.Scenes
             }
             if (operation != null) yield break;
 
+            bool failedRunTransition = runTransition;
             ResetPendingTransition();
             loadingScreen.Hide();
             SetPlayerControl(sourcePlayer, true);
+            if (failedRunTransition) GameFlow.Instance?.RecoverLoadFailure();
             Debug.LogError("The destination scene could not be loaded.", this);
         }
 
@@ -97,6 +126,24 @@ namespace Levels.Scenes
 
             string spawnId = pendingSpawnPointId;
             SceneManager.sceneLoaded -= OnSceneLoaded;
+
+            if (runTransition && string.IsNullOrEmpty(spawnId))
+            {
+                var menuService = FindAnyObjectByType<SceneTransitionService>();
+                if (menuService == null || menuService.loadingScreen == null)
+                {
+                    Debug.LogError("MainMenu needs its saved SceneTransitionService and LoadingScreen.");
+                    ResetPendingTransition();
+                    return;
+                }
+                if (displayLoadingScreen)
+                {
+                    menuService.loadingScreen.Show();
+                    menuService.StartCoroutine(menuService.CompleteAfterMinimum(null));
+                }
+                else menuService.CompleteLoad(null);
+                return;
+            }
 
             SpawnPoint destination = null;
             PlayerMovement player = null;
@@ -143,7 +190,7 @@ namespace Levels.Scenes
 
             RestoreInputPairing(player.GetComponent<PlayerInput>());
             SetPlayerControl(player, false);
-            targetService.loadingScreen.Show();
+            if (displayLoadingScreen) targetService.loadingScreen.Show();
             Rigidbody2D body = player.GetComponent<Rigidbody2D>();
             Vector3 position = destination.transform.position;
             body.linearVelocity = Vector2.zero;
@@ -162,14 +209,23 @@ namespace Levels.Scenes
             while (Time.realtimeSinceStartupAsDouble < minimumEndTime)
                 yield return null;
 
+            CompleteLoad(player);
+        }
+
+        private void CompleteLoad(PlayerMovement player)
+        {
             loadingScreen.Hide();
-            SetPlayerControl(player, true);
+            bool completedRunTransition = runTransition;
             ResetPendingTransition();
+            if (completedRunTransition) GameFlow.Instance?.CompleteSceneLoad();
+            SetPlayerControl(player, true);
             blockPortalUntilFrame = Time.frameCount + 2;
         }
 
         private static void SetPlayerControl(PlayerMovement player, bool enabled)
         {
+            if (player == null) return;
+            enabled = enabled && GameFlow.IsGameplayActive;
             PlayerAttack attack = player.GetComponent<PlayerAttack>();
             if (enabled)
             {
@@ -205,6 +261,8 @@ namespace Levels.Scenes
             pendingControlScheme = null;
             pendingInputDevices = null;
             minimumEndTime = 0;
+            runTransition = false;
+            displayLoadingScreen = true;
         }
     }
 }

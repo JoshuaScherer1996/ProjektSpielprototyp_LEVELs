@@ -18,7 +18,7 @@ namespace Levels.Player
         {
             get
             {
-                if (moveAction == null || !moveAction.enabled) return Vector2.zero;
+                if (!Levels.Core.GameFlow.IsGameplayActive || moveAction == null || !moveAction.enabled) return Vector2.zero;
                 Vector2 value = moveAction.ReadValue<Vector2>();
                 return value.sqrMagnitude <= movementDeadzone * movementDeadzone
                     ? Vector2.zero
@@ -28,7 +28,7 @@ namespace Levels.Player
 
         public static bool TryConsumeInteractPress(InputAction action)
         {
-            if (action == null || !action.WasPressedThisFrame() || lastConsumedInteractFrame == Time.frameCount)
+            if (!Levels.Core.GameFlow.IsGameplayActive || action == null || !action.WasPressedThisFrame() || lastConsumedInteractFrame == Time.frameCount)
                 return false;
 
             lastConsumedInteractFrame = Time.frameCount;
