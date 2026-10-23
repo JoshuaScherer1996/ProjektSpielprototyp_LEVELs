@@ -14,6 +14,7 @@ namespace Levels.Player
         public int MaxHealth => GameSession.Instance != null && GameSession.Instance.PlayerMaxHealth > 0
             ? GameSession.Instance.PlayerMaxHealth : maxHealth;
         public event Action<int, int> HealthChanged;
+        public event Action<int> DamageApplied;
         private GameSession session;
 
         private void Awake()
@@ -56,9 +57,11 @@ namespace Levels.Player
         public bool TakeDamage(int amount)
         {
             if (amount <= 0 || CurrentHealth == 0) return false;
-            CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+            int appliedDamage = Mathf.Min(amount, CurrentHealth);
+            CurrentHealth -= appliedDamage;
             GameSession.Instance?.UpdatePlayerHealth(CurrentHealth, MaxHealth);
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+            DamageApplied?.Invoke(appliedDamage);
             if (CurrentHealth == 0)
                 Destroy(gameObject);
             return true;

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Levels.Enemies
@@ -13,6 +14,8 @@ namespace Levels.Enemies
         public int CurrentHealth { get; private set; }
         public int BaseMaxHealth => maxHealth;
         public int MaxHealth { get; private set; }
+        public event Action<int, int> HealthChanged;
+        public event Action<int> DamageApplied;
         // MaxHealth is zero only before Awake, e.g. a disabled placed prefab instance.
         public bool IsAlive => MaxHealth == 0 || CurrentHealth > 0;
 
@@ -21,6 +24,7 @@ namespace Levels.Enemies
             CurrentHealth = maxHealth;
             MaxHealth = maxHealth;
             enemyAI = GetComponent<EnemyAI>();
+            HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
 
         public void SetInitialMaxHealth(int maximum)
@@ -28,6 +32,7 @@ namespace Levels.Enemies
             int lostHealth = MaxHealth - CurrentHealth;
             MaxHealth = Mathf.Max(1, maximum);
             if (CurrentHealth > 0) CurrentHealth = Mathf.Max(1, MaxHealth - lostHealth);
+            HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
 
         public bool TakeDamage(int amount)
@@ -38,7 +43,10 @@ namespace Levels.Enemies
         public bool TakeDamage(int amount, Vector2 knockbackDirection)
         {
             if (amount <= 0 || CurrentHealth == 0) return false;
-            CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+            int appliedDamage = Mathf.Min(amount, CurrentHealth);
+            CurrentHealth -= appliedDamage;
+            HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+            DamageApplied?.Invoke(appliedDamage);
             if (CurrentHealth == 0)
             {
                 GetComponent<EnemyReward>()?.GrantOnce();

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4819140181183449644}
   - component: {fileID: 4080771582762008539}
   - component: {fileID: 7733363293302517588}
+  - component: {fileID: 1757448311177498064}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -277,6 +278,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c63fbec5e8c644981f59dd28764654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Levels.Player.PlayerProgression
+--- !u!114 &1757448311177498064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3905491233473680282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79f83aa619867ec4fa7a6c7e6c116eaf, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Levels.UI.DamageFeedback
+  numberPrefab: {fileID: 1325149764459924020, guid: 8e2c6f8bbb53eae41ae0029fc2ed0082, type: 3}
+  offset: {x: 0, y: 0.95, z: 0}
+  enemyDamageColor: {r: 1, g: 0.79, b: 0.16, a: 1}
+  playerDamageColor: {r: 1, g: 0.28, b: 0.12, a: 1}
+  horizontalSpread: 0.28
 --- !u!1 &4405069363409289626
 GameObject:
   m_ObjectHideFlags: 0
