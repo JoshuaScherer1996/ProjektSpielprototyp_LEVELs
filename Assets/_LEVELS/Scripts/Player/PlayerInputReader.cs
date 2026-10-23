@@ -7,6 +7,7 @@ namespace Levels.Player
     [RequireComponent(typeof(PlayerInput))]
     public sealed class PlayerInputReader : MonoBehaviour
     {
+        private static int lastConsumedInteractFrame = -1;
         [SerializeField] private string moveActionPath = "Player/Move";
 
         [SerializeField, Range(0f, 1f)] private float movementDeadzone = 0.1f;
@@ -23,6 +24,20 @@ namespace Levels.Player
                     ? Vector2.zero
                     : Vector2.ClampMagnitude(value, 1f);
             }
+        }
+
+        public static bool TryConsumeInteractPress(InputAction action)
+        {
+            if (action == null || !action.WasPressedThisFrame() || lastConsumedInteractFrame == Time.frameCount)
+                return false;
+
+            lastConsumedInteractFrame = Time.frameCount;
+            return true;
+        }
+
+        public static void ConsumeInteractForCurrentFrame()
+        {
+            lastConsumedInteractFrame = Time.frameCount;
         }
 
         private void OnEnable()

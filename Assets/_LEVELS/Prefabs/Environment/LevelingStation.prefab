@@ -234,7 +234,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hold E / Y / Triangle
+  m_Text: E / A  Interact
 --- !u!1 &6515712643160564251
 GameObject:
   m_ObjectHideFlags: 0

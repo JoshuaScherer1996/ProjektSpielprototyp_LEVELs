@@ -31,9 +31,8 @@ namespace Levels.Player
                 (player.transform.position - transform.position).sqrMagnitude <= interactionRange * interactionRange;
             if (interactionPrompt != null)
                 interactionPrompt.SetActive(inRange && player.enabled && !menu.IsOpen);
-            if (!inRange || interact == null || !interact.WasPerformedThisFrame()) return;
-            if (menu.IsOpen) menu.Close();
-            else menu.Open(player, transactions);
+            if (!inRange || menu.IsOpen || !PlayerInputReader.TryConsumeInteractPress(interact)) return;
+            menu.Open(player, transactions);
         }
 
         private void OnDrawGizmosSelected()

@@ -2,6 +2,7 @@ using Levels.Core;
 using Levels.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
 namespace Levels.UI
@@ -23,6 +24,9 @@ namespace Levels.UI
         private bool restoreMovement;
         private bool restoreAttack;
         private int openedFrame;
+        private InputAction cancelAction;
+        private InputAction moveAction;
+        private bool cancelRequested;
         public bool IsOpen => panel != null && panel.activeSelf;
 
         private void Awake()
@@ -52,7 +56,14 @@ namespace Levels.UI
         private void Update()
         {
             if (!IsOpen || Time.frameCount <= openedFrame) return;
-            if (movement == null || inputModule.cancel.action.WasPerformedThisFrame()) Close();
+            if (movement == null || cancelRequested)
+            {
+                cancelRequested = false;
+                Close();
+                return;
+            }
+
+            ClearSelectionOnMouseMove();
         }
 
         public bool Open(PlayerMovement player)
@@ -67,6 +78,11 @@ namespace Levels.UI
             openedFrame = Time.frameCount;
             panel.SetActive(true);
             inputModule.enabled = true;
+            cancelAction = inputModule.cancel.action;
+            if (cancelAction != null) cancelAction.performed += OnCancel;
+            moveAction = inputModule.move.action;
+            if (moveAction != null) moveAction.performed += OnMove;
+            cancelRequested = false;
             feedback.text = "Choose one upgrade. Closing does not spend EXP.";
             Refresh();
             EventSystem.current.SetSelectedGameObject(playerButton.gameObject);
@@ -76,6 +92,12 @@ namespace Levels.UI
         public void Close()
         {
             if (!IsOpen) return;
+            // A/ Cross is both UI Submit and Interact: do not reopen the station with the closing press.
+            PlayerInputReader.ConsumeInteractForCurrentFrame();
+            if (cancelAction != null) cancelAction.performed -= OnCancel;
+            if (moveAction != null) moveAction.performed -= OnMove;
+            cancelAction = null;
+            moveAction = null;
             panel.SetActive(false);
             inputModule.enabled = false;
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
@@ -86,16 +108,31 @@ namespace Levels.UI
             attack = null;
         }
 
+        private void OnCancel(InputAction.CallbackContext context) => cancelRequested = true;
+
+        private void OnMove(InputAction.CallbackContext context)
+        {
+            if (context.ReadValue<Vector2>().sqrMagnitude > 0.01f && EventSystem.current != null &&
+                EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(playerButton.gameObject);
+        }
+
+        private void ClearSelectionOnMouseMove()
+        {
+            if (Mouse.current == null || Mouse.current.delta.ReadValue().sqrMagnitude < 0.01f) return;
+            if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
+        }
+
         public void BuyPlayerLevel()
         {
-            if (!IsOpen) return;
+            if (!IsOpen || Time.frameCount <= openedFrame) return;
             bool bought = movement.GetComponent<PlayerProgression>().TryLevelUp();
             feedback.text = bought ? "Player upgraded. Current HP unchanged." : "Not enough EXP for a Player level.";
         }
 
         public void BuyEnemyLevel()
         {
-            if (!IsOpen) return;
+            if (!IsOpen || Time.frameCount <= openedFrame) return;
             bool bought = session.TryLevelUpEnemies();
             feedback.text = bought ? "Enemies upgraded. Applies when entering the Plateau." : "Not enough EXP for an Enemy level.";
         }

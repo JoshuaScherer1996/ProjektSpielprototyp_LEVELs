@@ -2,6 +2,7 @@ using Levels.Core;
 using Levels.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
 namespace Levels.UI
@@ -25,6 +26,9 @@ namespace Levels.UI
         private bool restoreAttack;
         private int openedFrame;
         private int lastPurchaseFrame = -1;
+        private InputAction cancelAction;
+        private InputAction moveAction;
+        private bool cancelRequested;
         public bool IsOpen => panel != null && panel.activeSelf;
 
         private void Awake() => panel.SetActive(false);
@@ -50,8 +54,14 @@ namespace Levels.UI
         private void Update()
         {
             if (!IsOpen || Time.frameCount <= openedFrame) return;
-            if (movement == null || health == null || health.CurrentHealth <= 0 ||
-                inputModule.cancel.action.WasPerformedThisFrame()) Close();
+            if (movement == null || health == null || health.CurrentHealth <= 0 || cancelRequested)
+            {
+                cancelRequested = false;
+                Close();
+                return;
+            }
+
+            ClearSelectionOnMouseMove();
         }
 
         public bool Open(PlayerMovement player, ShopTransactions shop)
@@ -69,6 +79,11 @@ namespace Levels.UI
             openedFrame = Time.frameCount;
             panel.SetActive(true);
             inputModule.enabled = true;
+            cancelAction = inputModule.cancel.action;
+            if (cancelAction != null) cancelAction.performed += OnCancel;
+            moveAction = inputModule.move.action;
+            if (moveAction != null) moveAction.performed += OnMove;
+            cancelRequested = false;
             feedback.text = "Choose an offer. Nothing is spent until you buy.";
             Refresh();
             EventSystem.current.SetSelectedGameObject(healingButton.gameObject);
@@ -78,6 +93,12 @@ namespace Levels.UI
         public void Close()
         {
             if (!IsOpen) return;
+            // A/ Cross is both UI Submit and Interact: do not reopen the station with the closing press.
+            PlayerInputReader.ConsumeInteractForCurrentFrame();
+            if (cancelAction != null) cancelAction.performed -= OnCancel;
+            if (moveAction != null) moveAction.performed -= OnMove;
+            cancelAction = null;
+            moveAction = null;
             panel.SetActive(false);
             // Unity may destroy the shared EventSystem before this menu during Play-mode teardown.
             if (inputModule != null) inputModule.enabled = false;
@@ -89,6 +110,21 @@ namespace Levels.UI
             attack = null;
             health = null;
             transactions = null;
+        }
+
+        private void OnCancel(InputAction.CallbackContext context) => cancelRequested = true;
+
+        private void OnMove(InputAction.CallbackContext context)
+        {
+            if (context.ReadValue<Vector2>().sqrMagnitude > 0.01f && EventSystem.current != null &&
+                EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(healingButton.gameObject);
+        }
+
+        private void ClearSelectionOnMouseMove()
+        {
+            if (Mouse.current == null || Mouse.current.delta.ReadValue().sqrMagnitude < 0.01f) return;
+            if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
         }
 
         public void BuyHealing() => Buy(ShopOffer.Healing);
