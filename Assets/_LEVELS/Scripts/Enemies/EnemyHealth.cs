@@ -13,6 +13,8 @@ namespace Levels.Enemies
         public int CurrentHealth { get; private set; }
         public int BaseMaxHealth => maxHealth;
         public int MaxHealth { get; private set; }
+        // MaxHealth is zero only before Awake, e.g. a disabled placed prefab instance.
+        public bool IsAlive => MaxHealth == 0 || CurrentHealth > 0;
 
         private void Awake()
         {

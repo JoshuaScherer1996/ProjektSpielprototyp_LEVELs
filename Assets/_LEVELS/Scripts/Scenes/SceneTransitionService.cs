@@ -21,6 +21,7 @@ namespace Levels.Scenes
         private static int blockPortalUntilFrame = -1;
 
         public LoadingScreen Screen => loadingScreen;
+        public static bool IsTransitioning => isTransitioning;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void ResetStaticState()
