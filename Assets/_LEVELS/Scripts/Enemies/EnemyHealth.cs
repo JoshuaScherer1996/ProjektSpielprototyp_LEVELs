@@ -16,6 +16,8 @@ namespace Levels.Enemies
         public int MaxHealth { get; private set; }
         public event Action<int, int> HealthChanged;
         public event Action<int> DamageApplied;
+        public event Action Defeated;
+        public Func<int, int> DamageLimit { private get; set; }
         // MaxHealth is zero only before Awake, e.g. a disabled placed prefab instance.
         public bool IsAlive => MaxHealth == 0 || CurrentHealth > 0;
 
@@ -43,7 +45,8 @@ namespace Levels.Enemies
         public bool TakeDamage(int amount, Vector2 knockbackDirection)
         {
             if (!Levels.Core.GameFlow.IsGameplayActive || amount <= 0 || CurrentHealth == 0) return false;
-            int appliedDamage = Mathf.Min(amount, CurrentHealth);
+            int appliedDamage = Mathf.Min(DamageLimit?.Invoke(amount) ?? amount, CurrentHealth);
+            if (appliedDamage <= 0) return false;
             CurrentHealth -= appliedDamage;
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
             DamageApplied?.Invoke(appliedDamage);
@@ -55,6 +58,7 @@ namespace Levels.Enemies
                     deathSmoke.transform.SetParent(null, true);
                     deathSmoke.Play();
                 }
+                Defeated?.Invoke();
                 Destroy(gameObject);
             }
             else if (enemyAI != null)

@@ -16,6 +16,7 @@ namespace Levels.Player
         public event Action<int, int> HealthChanged;
         public event Action<int> DamageApplied;
         private GameSession session;
+        private float invulnerableUntil;
 
         private void Awake()
         {
@@ -54,9 +55,13 @@ namespace Levels.Player
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
 
-        public bool TakeDamage(int amount)
+        public bool TakeDamage(int amount) => TakeDamage(amount, 0f);
+
+        public bool TakeDamage(int amount, float invulnerabilitySeconds)
         {
-            if (!GameFlow.IsGameplayActive || amount <= 0 || CurrentHealth == 0) return false;
+            if (!GameFlow.IsGameplayActive || amount <= 0 || CurrentHealth == 0 || Time.time < invulnerableUntil)
+                return false;
+            invulnerableUntil = Time.time + Mathf.Max(0f, invulnerabilitySeconds);
             int appliedDamage = Mathf.Min(amount, CurrentHealth);
             CurrentHealth -= appliedDamage;
             if (CurrentHealth == 0) GameFlow.Instance?.PlayerDied();

@@ -105,11 +105,12 @@ namespace Levels.Editor
                     if (name=="Tower")
                     {
                         var door=all.Select(t=>t.GetComponent<LockedBossDoorInteraction>()).Single(d=>d!=null);
+                        var doorSettings = new SerializedObject(door);
                         Check(door.GetComponent<Collider2D>().enabled && !door.GetComponent<Collider2D>().isTrigger &&
-                            door.GetComponentsInChildren<ScenePortal>(true).Length==0,"Boss door remains solid with no transition component");
-                        var text=door.GetComponentsInChildren<UnityEngine.UI.Text>(true).Single(t=>t.name=="BossMessage");
-                        Check(text.text=="Der Boss schläft noch.\nKomm in Phase 3 wieder!" && text.font!=null && text.fontSize>=28,
-                            "Exact German boss message, readable font and saved UI references");
+                            doorSettings.FindProperty("transitionService").objectReferenceValue is SceneTransitionService service &&
+                            service.Screen != null && doorSettings.FindProperty("destinationScene").stringValue == "SpiderArena" &&
+                            doorSettings.FindProperty("destinationSpawn").stringValue == "FromTower",
+                            "Boss door is solid and uses the tower loading service for the saved arena spawn");
                     }
                 }
                 Check(portalCount==4,"Exactly four directed scene transitions");
@@ -272,63 +273,48 @@ namespace Levels.Editor
             Object.Destroy(enemyTest.gameObject);
             yield return Through("Tower",new Vector2(0,5),Vector2.up,new Vector2(0,-5));
             yield return Snapshot("Tower");
-            yield return BossDoorTests();
             yield return Through("Plateau",new Vector2(0,-5),Vector2.down,new Vector2(0,5));
             Check(GameSession.Instance==session && session.CurrentGold==37 && session.TotalExperience==73,
                 "Same GameSession and exact gold/EXP survive all four transitions");
+            yield return Through("Tower",new Vector2(0,5),Vector2.up,new Vector2(0,-5));
+            yield return BossDoorTests();
             Check(Time.frameCount>report.firstFrame+100,"Real player loop advanced across the integration tests");
         }
         private static void CheckSample(bool value,string error) { if(!value) throw new InvalidOperationException(error); }
         private static IEnumerator BossDoorTests()
         {
             var door=Object.FindAnyObjectByType<LockedBossDoorInteraction>();
-            MoveTo(new Vector2(0,2.7f));
             var input=Player().GetComponent<PlayerInput>(); input.SwitchCurrentControlScheme("Keyboard&Mouse",keyboard,mouse);
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.E)); yield return new WaitForSeconds(.08f);
-            Check(door.IsMessageVisible,"E in range shows boss message");
-            yield return Snapshot("BossMessage");
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState()); yield return null;
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.E)); yield return new WaitForSeconds(.08f);
-            Check(!door.IsMessageVisible,"Second E closes boss message without reopening it");
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState()); yield return null;
             MoveTo(new Vector2(0,0)); InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.E)); yield return new WaitForSeconds(.08f);
-            Check(!door.IsMessageVisible,"E outside range cannot interact with boss door");
+            Check(!SceneTransitionService.IsTransitioning,"E outside range cannot open the boss arena");
             InputSystem.QueueStateEvent(keyboard,new KeyboardState()); yield return null;
-            // Pointer click through the actual Attack action must not set its cooldown or start a slash.
             var attack=Player().GetComponent<PlayerAttack>();
             float cooldown=(float)typeof(PlayerAttack).GetField("nextAttackTime",Private).GetValue(attack);
-            Vector2 screen=Camera.main.WorldToScreenPoint(door.transform.position);
-            InputSystem.QueueStateEvent(mouse,new MouseState {position=screen}.WithButton(MouseButton.Left)); yield return new WaitForSeconds(.08f);
-            Check(door.IsMessageVisible && (float)typeof(PlayerAttack).GetField("nextAttackTime",Private).GetValue(attack)==cooldown,
-                "Clicking door shows message without triggering attack or cooldown");
-            InputSystem.QueueStateEvent(mouse,new MouseState {position=screen}); yield return null;
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState(Key.Escape)); yield return new WaitForSeconds(.08f);
-            Check(!door.IsMessageVisible,"Escape closes boss message");
-            InputSystem.QueueStateEvent(keyboard,new KeyboardState()); yield return null;
-            InputSystem.QueueStateEvent(mouse,new MouseState {position=screen}.WithButton(MouseButton.Left)); yield return new WaitForSeconds(.08f);
-            Check(door.IsMessageVisible,"Repeated door click reopens the message");
-            InputSystem.QueueStateEvent(mouse,new MouseState {position=screen}); yield return null;
-            yield return new WaitForSecondsRealtime(4.1f);
-            Check(!door.IsMessageVisible,"Boss message automatically closes after four seconds");
             Vector2 empty=Camera.main.WorldToScreenPoint(new Vector3(5,0,0));
             InputSystem.QueueStateEvent(mouse,new MouseState {position=empty}.WithButton(MouseButton.Left)); yield return new WaitForSeconds(.08f);
-            Check((float)typeof(PlayerAttack).GetField("nextAttackTime",Private).GetValue(attack)>cooldown && !door.IsMessageVisible,
+            Check((float)typeof(PlayerAttack).GetField("nextAttackTime",Private).GetValue(attack)>cooldown,
                 "Left-click away from door retains normal Attack action");
             InputSystem.QueueStateEvent(mouse,new MouseState {position=empty}); yield return new WaitForSeconds(.4f);
             MoveTo(new Vector2(0,2.7f)); input.SwitchCurrentControlScheme("Gamepad",pad);
-            Stick(Vector2.zero,GamepadButton.South); yield return new WaitForSeconds(.08f);
-            Check(door.IsMessageVisible,"Gamepad A in range shows message");
-            Stick(Vector2.zero); yield return null;
-            Stick(Vector2.zero,GamepadButton.South); yield return new WaitForSeconds(.08f);
-            Check(!door.IsMessageVisible,"Gamepad A closes message");
-            Stick(Vector2.zero); yield return null;
             cooldown=(float)typeof(PlayerAttack).GetField("nextAttackTime",Private).GetValue(attack);
             Stick(Vector2.zero,GamepadButton.RightShoulder); yield return new WaitForSeconds(.08f);
             Check((float)typeof(PlayerAttack).GetField("nextAttackTime",Private).GetValue(attack)>cooldown,"RB/R1 still triggers a normal attack near the boss door");
             Stick(Vector2.up); yield return new WaitForSeconds(.5f);
             Check(Player().transform.position.y<3.2f && door.GetComponent<Collider2D>().enabled && !SceneTransitionService.IsTransitioning,
-                "Boss door stays closed and blocks movement; no fight or scene transition");
+                "Boss door blocks movement until the player interacts");
+            Check(GameSession.Instance.PlayerLevel == 1, "Arena access is exercised at player level one");
+            Stick(Vector2.zero,GamepadButton.South);
+            yield return WaitUntil(() => SceneTransitionService.IsTransitioning, 3, "Gamepad A did not open the boss arena");
             Stick(Vector2.zero);
+            Check(!attack.enabled && Object.FindAnyObjectByType<LoadingScreen>().IsVisible,
+                "Entering the boss arena suppresses attacks and shows the existing loading screen");
+            yield return WaitUntil(() => SceneManager.GetActiveScene().name == "SpiderArena" &&
+                !SceneTransitionService.IsTransitioning, 12, "Boss arena did not load");
+            var encounter = Object.FindAnyObjectByType<SpiderBoss>();
+            yield return WaitUntil(() => encounter != null && encounter.State == SpiderBoss.EncounterState.Phase1,
+                5, "Boss intro did not reach phase one");
+            Check(Player().enabled && Player().GetComponent<PlayerAttack>().enabled && Player().transform.position.y > -3f,
+                "Arena intro walks the player forward and restores movement and attacks");
         }
     }
 }

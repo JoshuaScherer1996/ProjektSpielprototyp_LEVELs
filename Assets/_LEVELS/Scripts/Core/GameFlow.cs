@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Levels.Core
 {
-    public enum RunState { MainMenu, Playing, GameOver, Loading, Paused }
+    public enum RunState { MainMenu, Playing, GameOver, Loading, Paused, Victory }
 
     /// <summary>Scene-owned flow; only GameSession persists. All UI/world objects are saved assets.</summary>
     [DefaultExecutionOrder(-900), DisallowMultipleComponent]
@@ -17,6 +17,7 @@ namespace Levels.Core
         [SerializeField] private string mainMenuScene = "MainMenu";
         [SerializeField] private string firstScene = "Village";
         [SerializeField] private string firstSpawnPoint = "NewRun";
+        [SerializeField] private string victoryScene = "Win";
         [SerializeField, Min(0f)] private float playLoadingSeconds = 1f;
 
         public static GameFlow Instance { get; private set; }
@@ -43,6 +44,8 @@ namespace Levels.Core
                 if (State != RunState.Loading) State = RunState.MainMenu;
                 GameSession.Instance.EndRun();
             }
+            else if (gameObject.scene.name == victoryScene && State != RunState.Loading)
+                State = RunState.Victory;
         }
 
         private void OnDestroy()
@@ -99,8 +102,26 @@ namespace Levels.Core
 
         public bool BackToMainMenu()
         {
-            if (State != RunState.GameOver && State != RunState.Paused) return false;
+            if (State != RunState.GameOver && State != RunState.Paused && State != RunState.Victory) return false;
             return LoadRunScene(mainMenuScene, null, false);
+        }
+
+        public bool TryFinishVictory()
+        {
+            if (State != RunState.Victory || gameObject.scene.name == victoryScene ||
+                transitions == null || !transitions.TryLoadRunScene(victoryScene, null, false))
+                return false;
+            beforeLoad = State;
+            State = RunState.Loading;
+            return true;
+        }
+
+        public void BossDefeated()
+        {
+            if (!IsGameplayActive) return;
+            GameSession.Instance.RecordVictory();
+            State = RunState.Victory;
+            StopGameplay();
         }
 
         private bool LoadRunScene(string scene, string spawn, bool newRun)
@@ -147,7 +168,9 @@ namespace Levels.Core
 
         public void CompleteSceneLoad()
         {
-            State = gameObject.scene.name == mainMenuScene ? RunState.MainMenu : RunState.Playing;
+            string scene = gameObject.scene.name;
+            State = scene == mainMenuScene ? RunState.MainMenu :
+                scene == victoryScene ? RunState.Victory : RunState.Playing;
             Time.timeScale = 1f;
             PlayerInputReader.ConsumeInteractForCurrentFrame();
         }

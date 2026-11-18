@@ -230,7 +230,7 @@ namespace Levels.Scenes
             if (enabled)
             {
                 player.enabled = true;
-                if (attack != null) attack.enabled = true;
+                if (attack != null) attack.enabled = !player.HasScriptedInput;
             }
             else
             {

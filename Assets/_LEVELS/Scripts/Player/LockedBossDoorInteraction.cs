@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 namespace Levels.Player
 {
-    /// <summary>Message-only interaction. Never opens the solid door or starts a transition.</summary>
     [DisallowMultipleComponent, RequireComponent(typeof(BoxCollider2D))]
     public sealed class LockedBossDoorInteraction : MonoBehaviour, IStationInteractionTarget
     {
@@ -14,6 +13,9 @@ namespace Levels.Player
         [SerializeField] private Collider2D blockingCollider;
         [SerializeField] private GameObject interactionPrompt;
         [SerializeField] private GameObject messagePanel;
+        [SerializeField] private SceneTransitionService transitionService;
+        [SerializeField] private string destinationScene = "SpiderArena";
+        [SerializeField] private string destinationSpawn = "FromTower";
         private PlayerMovement player;
         private Collider2D playerCollider;
         private InputAction interact;
@@ -63,7 +65,15 @@ namespace Levels.Player
         float IStationInteractionTarget.SelectionDistanceFrom(Vector2 position) => Vector2.Distance(position, transform.position);
         void IStationInteractionTarget.TryOpen()
         {
-            if (PlayerInputReader.TryConsumeInteractPress(interact)) ShowMessage();
+            if (PlayerInputReader.TryConsumeInteractPress(interact)) Activate();
+        }
+
+        private bool Activate()
+        {
+            if (transitionService != null)
+                return transitionService.TryTransition(destinationScene, destinationSpawn, player);
+            ShowMessage();
+            return true;
         }
 
         private void ShowMessage()
@@ -80,7 +90,6 @@ namespace Levels.Player
         }
 
         // Called synchronously from the mouse Attack callback, before a slash/cooldown is created.
-        // Mouse clicks can inspect the door from anywhere on screen; keyboard/gamepad use range.
         public static bool TryHandlePointer(PlayerMovement source)
         {
             if (source == null || !source.enabled || SceneTransitionService.IsTransitioning ||
@@ -98,8 +107,10 @@ namespace Levels.Player
                 if (door.gameObject.scene == source.gameObject.scene && door.blockingCollider != null &&
                     door.blockingCollider.OverlapPoint(world))
                 {
-                    door.ShowMessage();
-                    return true;
+                    if (door.transitionService != null &&
+                        ((IStationInteractionTarget)door).DistanceFrom(source.transform.position) > door.interactionRange)
+                        continue;
+                    return door.Activate();
                 }
             return false;
         }

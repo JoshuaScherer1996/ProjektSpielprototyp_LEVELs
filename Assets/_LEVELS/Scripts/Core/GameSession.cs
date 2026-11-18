@@ -3,6 +3,20 @@ using UnityEngine;
 
 namespace Levels.Core
 {
+    public readonly struct VictoryLevels
+    {
+        public readonly int Player;
+        public readonly int Goblin;
+        public readonly int Cyclops;
+
+        public VictoryLevels(int player, int goblin, int cyclops)
+        {
+            Player = player;
+            Goblin = goblin;
+            Cyclops = cyclops;
+        }
+    }
+
     [DisallowMultipleComponent]
     public sealed class GameSession : MonoBehaviour
     {
@@ -18,6 +32,7 @@ namespace Levels.Core
         // Retain the original storage and API: existing session state and callers become Goblin progression.
         public int GoblinLevel => EnemyLevel;
         public int CyclopsLevel { get; private set; } = 1;
+        public VictoryLevels? Victory { get; private set; }
         public int ShopMaxHealthBonus { get; private set; }
         public ProgressionSettings Progression { get; private set; }
         public int NextPlayerLevelExperience => Progression.PlayerCost(PlayerLevel);
@@ -84,6 +99,7 @@ namespace Levels.Core
             PlayerLevel = 1;
             EnemyLevel = 1;
             CyclopsLevel = 1;
+            Victory = null;
             ShopMaxHealthBonus = 0;
             purchasingLevel = false;
             purchasingShop = false;
@@ -94,6 +110,7 @@ namespace Levels.Core
 
         public void ResetForNewRun() => ResetData();
         public void EndRun() => ResetData();
+        public void RecordVictory() => Victory = new VictoryLevels(PlayerLevel, GoblinLevel, CyclopsLevel);
 
         public void InitializePlayerHealth(int defaultMaxHealth)
         {
