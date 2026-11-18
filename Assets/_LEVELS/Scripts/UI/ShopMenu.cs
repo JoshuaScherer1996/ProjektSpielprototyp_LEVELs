@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 namespace Levels.UI
 {
@@ -15,6 +16,9 @@ namespace Levels.UI
         [SerializeField] private UnityEngine.UI.Text feedback;
         [SerializeField] private UnityEngine.UI.Button healingButton;
         [SerializeField] private UnityEngine.UI.Button maxHealthButton;
+        [SerializeField] private Button shieldButton;
+        [SerializeField] private Button ringButton;
+        [SerializeField] private Button potionButton;
         [SerializeField] private UnityEngine.UI.Button closeButton;
         [SerializeField] private InputSystemUIInputModule inputModule;
 
@@ -29,9 +33,21 @@ namespace Levels.UI
         private InputAction cancelAction;
         private InputAction moveAction;
         private bool cancelRequested;
+        private (ShopOffer Offer, Button Button, Text Label, string Name, string Effect)[] offers;
         public bool IsOpen => panel != null && panel.activeSelf;
 
-        private void Awake() => panel.SetActive(false);
+        private void Awake()
+        {
+            panel.SetActive(false);
+            offers = new[]
+            {
+                (ShopOffer.Healing, healingButton, healingButton.GetComponentInChildren<Text>(true), "Heilung", "Stellt LP vollständig wieder her."),
+                (ShopOffer.MaxHealth, maxHealthButton, maxHealthButton.GetComponentInChildren<Text>(true), "Health+", "+1 Max. LP für diesen Durchlauf."),
+                (ShopOffer.Shield, shieldButton, shieldButton.GetComponentInChildren<Text>(true), "Magisches Schild", "Blockiert die nächsten 3 gültigen Treffer."),
+                (ShopOffer.PowerRing, ringButton, ringButton.GetComponentInChildren<Text>(true), "Ring der Macht", "×10 Angriffsschaden, dauerhaft 1/1 LP."),
+                (ShopOffer.Potion, potionButton, potionButton.GetComponentInChildren<Text>(true), "Health Potion", "Heilt bei Benutzung 20 % der max. LP.")
+            };
+        }
 
         private void OnEnable()
         {
@@ -39,6 +55,9 @@ namespace Levels.UI
             session.Changed += Refresh;
             healingButton.onClick.AddListener(BuyHealing);
             maxHealthButton.onClick.AddListener(BuyMaxHealth);
+            shieldButton.onClick.AddListener(BuyShield);
+            ringButton.onClick.AddListener(BuyRing);
+            potionButton.onClick.AddListener(BuyPotion);
             closeButton.onClick.AddListener(Close);
         }
 
@@ -48,6 +67,9 @@ namespace Levels.UI
             if (session != null) session.Changed -= Refresh;
             healingButton.onClick.RemoveListener(BuyHealing);
             maxHealthButton.onClick.RemoveListener(BuyMaxHealth);
+            shieldButton.onClick.RemoveListener(BuyShield);
+            ringButton.onClick.RemoveListener(BuyRing);
+            potionButton.onClick.RemoveListener(BuyPotion);
             closeButton.onClick.RemoveListener(Close);
         }
 
@@ -84,9 +106,9 @@ namespace Levels.UI
             moveAction = inputModule.move.action;
             if (moveAction != null) moveAction.performed += OnMove;
             cancelRequested = false;
-            feedback.text = "Choose an offer. Nothing is spent until you buy.";
+            feedback.text = "";
             Refresh();
-            EventSystem.current.SetSelectedGameObject(healingButton.gameObject);
+            SelectFirstAvailable();
             return true;
         }
 
@@ -118,7 +140,19 @@ namespace Levels.UI
         {
             if (context.ReadValue<Vector2>().sqrMagnitude > 0.01f && EventSystem.current != null &&
                 EventSystem.current.currentSelectedGameObject == null)
-                EventSystem.current.SetSelectedGameObject(healingButton.gameObject);
+                SelectFirstAvailable();
+        }
+
+        private void SelectFirstAvailable()
+        {
+            if (EventSystem.current == null) return;
+            foreach (var offer in offers)
+            {
+                if (!offer.Button.interactable) continue;
+                EventSystem.current.SetSelectedGameObject(offer.Button.gameObject);
+                return;
+            }
+            EventSystem.current.SetSelectedGameObject(closeButton.gameObject);
         }
 
         private void ClearSelectionOnMouseMove()
@@ -129,30 +163,53 @@ namespace Levels.UI
 
         public void BuyHealing() => Buy(ShopOffer.Healing);
         public void BuyMaxHealth() => Buy(ShopOffer.MaxHealth);
+        public void BuyShield() => Buy(ShopOffer.Shield);
+        public void BuyRing() => Buy(ShopOffer.PowerRing);
+        public void BuyPotion() => Buy(ShopOffer.Potion);
 
         private void Buy(ShopOffer offer)
         {
             if (!GameFlow.IsGameplayActive || !IsOpen || Time.frameCount <= openedFrame || Time.frameCount == lastPurchaseFrame) return;
             lastPurchaseFrame = Time.frameCount;
             ShopPurchaseResult result = transactions.TryPurchase(offer, health);
-            switch (result)
+            feedback.text = result == ShopPurchaseResult.Success ? offer switch
             {
-                case ShopPurchaseResult.Success:
-                    feedback.text = offer == ShopOffer.Healing ? "HP fully restored." : "+1 maximum HP. Current HP unchanged.";
-                    break;
-                case ShopPurchaseResult.FullHealth: feedback.text = "HP are already full. No gold spent."; break;
-                case ShopPurchaseResult.NotEnoughGold: feedback.text = "Not enough gold. No purchase made."; break;
-                case ShopPurchaseResult.LimitReached: feedback.text = "Maximum HP limit reached. No gold spent."; break;
-                default: feedback.text = "Purchase unavailable. No gold spent."; break;
-            }
+                ShopOffer.Healing => "LP vollständig wiederhergestellt.",
+                ShopOffer.MaxHealth => "+1 Max. LP gekauft.",
+                ShopOffer.Shield => "Magisches Schild aktiviert.",
+                ShopOffer.PowerRing => "Ring der Macht aktiviert.",
+                ShopOffer.Potion => $"Health Potion gekauft. Bestand: {session.PotionCount}",
+                _ => ""
+            } : StatusText(result);
+            if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null &&
+                EventSystem.current.currentSelectedGameObject.TryGetComponent(out Button selected) && !selected.interactable)
+                SelectFirstAvailable();
         }
 
         private void Refresh()
         {
             if (!IsOpen || transactions == null) return;
-            details.text = $"Gold: {session.CurrentGold}     HP: {session.PlayerHealth}/{session.PlayerMaxHealth}\n\n" +
-                $"Healing - {transactions.HealingPrice} gold\nRestore HP to maximum (no overheal).\n\n" +
-                $"Max HP +1 - {transactions.MaxHealthPrice} gold\nLasts this session; current HP unchanged.";
+            details.text = $"Gold: {session.CurrentGold}     HP: {session.PlayerHealth}/{session.PlayerMaxHealth}";
+            foreach (var entry in offers)
+            {
+                long price = transactions.GetPrice(entry.Offer, session);
+                ShopPurchaseResult status = session.GetOfferStatus(entry.Offer, price);
+                entry.Button.interactable = status == ShopPurchaseResult.Success;
+                string availability = entry.Offer == ShopOffer.Shield && status == ShopPurchaseResult.AlreadyActive
+                    ? $"Aktiv ({session.ShieldCharges}/{GameSession.MaxShieldCharges})" : StatusText(status);
+                entry.Label.text = $"{entry.Name} · {price} Gold · {availability}\n{entry.Effect}";
+            }
         }
+
+        private static string StatusText(ShopPurchaseResult status) => status switch
+        {
+            ShopPurchaseResult.Success => "Kaufbar",
+            ShopPurchaseResult.FullHealth => "LP voll",
+            ShopPurchaseResult.NotEnoughGold => "Zu wenig Gold",
+            ShopPurchaseResult.LimitReached => "Limit erreicht",
+            ShopPurchaseResult.AlreadyActive => "Bereits aktiv",
+            ShopPurchaseResult.BlockedByRing => "Durch Ring gesperrt",
+            _ => "Nicht verfügbar"
+        };
     }
 }

@@ -34,6 +34,10 @@ namespace Levels.Core
         public int CyclopsLevel { get; private set; } = 1;
         public VictoryLevels? Victory { get; private set; }
         public int ShopMaxHealthBonus { get; private set; }
+        public const int MaxShieldCharges = 3;
+        public int ShieldCharges { get; private set; }
+        public bool HasPowerRing { get; private set; }
+        public int PotionCount { get; private set; }
         public ProgressionSettings Progression { get; private set; }
         public int NextPlayerLevelExperience => Progression.PlayerCost(PlayerLevel);
         public int NextEnemyLevelExperience => Progression.EnemyCost(EnemyLevel);
@@ -101,6 +105,9 @@ namespace Levels.Core
             CyclopsLevel = 1;
             Victory = null;
             ShopMaxHealthBonus = 0;
+            ShieldCharges = 0;
+            HasPowerRing = false;
+            PotionCount = 0;
             purchasingLevel = false;
             purchasingShop = false;
             playerHealthInitialized = false;
@@ -162,38 +169,79 @@ namespace Levels.Core
         public bool TryLevelUpCyclops() => TryBuyLevel(EnemyType.Cyclops);
         public int GetEnemyLevel(EnemyType type) => type == EnemyType.Cyclops ? CyclopsLevel : GoblinLevel;
 
-        public int CalculatePlayerMaxHealth(int baseHealth) => (int)Math.Min(int.MaxValue,
+        public int CalculatePlayerMaxHealth(int baseHealth) => HasPowerRing ? 1 : (int)Math.Min(int.MaxValue,
             (long)Progression.PlayerHealth(baseHealth, PlayerLevel) + ShopMaxHealthBonus);
 
-        internal bool TryBuyHealing(int price)
+        internal ShopPurchaseResult GetOfferStatus(ShopOffer offer, long price)
         {
-            if (!GameFlow.IsGameplayActive || purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
-                PlayerHealth <= 0 || PlayerHealth >= PlayerMaxHealth) return false;
-            return CompleteShopPurchase(price, false);
-        }
-
-        internal bool TryBuyMaxHealth(int price)
-        {
-            if (!GameFlow.IsGameplayActive || purchasingShop || price < 0 || CurrentGold < price || !playerHealthInitialized ||
-                PlayerHealth <= 0 || PlayerMaxHealth == int.MaxValue || ShopMaxHealthBonus == int.MaxValue)
-                return false;
-            return CompleteShopPurchase(price, true);
-        }
-
-        private bool CompleteShopPurchase(int price, bool increaseMaximum)
-        {
-            // Debit and effect form one transaction before any observer can react.
-            purchasingShop = true;
-            CurrentGold -= price;
-            if (increaseMaximum)
+            if (!GameFlow.IsGameplayActive || price < 0 || !playerHealthInitialized || PlayerHealth <= 0)
+                return ShopPurchaseResult.Unavailable;
+            switch (offer)
             {
-                ShopMaxHealthBonus++;
-                PlayerMaxHealth++;
-                // Match M5: increasing maximum HP keeps absolute current HP unchanged.
+                case ShopOffer.Healing when PlayerHealth >= PlayerMaxHealth:
+                    return ShopPurchaseResult.FullHealth;
+                case ShopOffer.MaxHealth when HasPowerRing:
+                case ShopOffer.Potion when HasPowerRing:
+                    return ShopPurchaseResult.BlockedByRing;
+                case ShopOffer.MaxHealth when PlayerMaxHealth == int.MaxValue || ShopMaxHealthBonus == int.MaxValue:
+                case ShopOffer.Potion when PotionCount == int.MaxValue:
+                    return ShopPurchaseResult.LimitReached;
+                case ShopOffer.Shield when ShieldCharges > 0:
+                case ShopOffer.PowerRing when HasPowerRing:
+                    return ShopPurchaseResult.AlreadyActive;
             }
-            else PlayerHealth = PlayerMaxHealth;
+            return CurrentGold < price ? ShopPurchaseResult.NotEnoughGold : ShopPurchaseResult.Success;
+        }
+
+        internal ShopPurchaseResult TryBuyOffer(ShopOffer offer, long price)
+        {
+            if (purchasingShop) return ShopPurchaseResult.Busy;
+            ShopPurchaseResult status = GetOfferStatus(offer, price);
+            if (status != ShopPurchaseResult.Success) return status;
+
+            purchasingShop = true;
+            CurrentGold -= (int)price;
+            switch (offer)
+            {
+                case ShopOffer.Healing:
+                    PlayerHealth = PlayerMaxHealth;
+                    break;
+                case ShopOffer.MaxHealth:
+                    ShopMaxHealthBonus++;
+                    PlayerMaxHealth++;
+                    break;
+                case ShopOffer.Shield:
+                    ShieldCharges = MaxShieldCharges;
+                    break;
+                case ShopOffer.PowerRing:
+                    HasPowerRing = true;
+                    PlayerMaxHealth = PlayerHealth = 1;
+                    break;
+                case ShopOffer.Potion:
+                    PotionCount++;
+                    break;
+            }
             try { Changed?.Invoke(); }
             finally { purchasingShop = false; }
+            return ShopPurchaseResult.Success;
+        }
+
+        internal void ConsumeShieldCharge()
+        {
+            if (ShieldCharges == 0) return;
+            ShieldCharges--;
+            Changed?.Invoke();
+        }
+
+        internal bool TryUsePotion()
+        {
+            if (!GameFlow.IsGameplayActive || HasPowerRing || PotionCount <= 0 ||
+                PlayerHealth <= 0 || PlayerHealth >= PlayerMaxHealth) return false;
+
+            int healing = (int)((PlayerMaxHealth + 4L) / 5);
+            PotionCount--;
+            PlayerHealth += Mathf.Min(healing, PlayerMaxHealth - PlayerHealth);
+            Changed?.Invoke();
             return true;
         }
 
@@ -217,7 +265,7 @@ namespace Levels.Core
 
         public void UpdatePlayerHealth(int currentHealth, int maxHealth)
         {
-            int maximum = Mathf.Max(1, maxHealth);
+            int maximum = HasPowerRing ? 1 : Mathf.Max(1, maxHealth);
             int current = Mathf.Clamp(currentHealth, 0, maximum);
             if (playerHealthInitialized && PlayerHealth == current && PlayerMaxHealth == maximum)
                 return;

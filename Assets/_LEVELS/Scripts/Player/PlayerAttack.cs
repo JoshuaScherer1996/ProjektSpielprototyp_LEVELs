@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Levels.Core;
 using Levels.Enemies;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,7 +30,16 @@ namespace Levels.Player
 
         public Vector2 Facing => facing;
         public int BaseDamage => damage;
-        public int Damage => progressionDamage > 0 ? progressionDamage : damage;
+        public int Damage
+        {
+            get
+            {
+                int regularDamage = progressionDamage > 0 ? progressionDamage : damage;
+                return GameSession.Instance != null && GameSession.Instance.HasPowerRing
+                    ? (int)System.Math.Min(int.MaxValue, regularDamage * 10L)
+                    : regularDamage;
+            }
+        }
         public void SetProgressionDamage(int value) => progressionDamage = Mathf.Max(1, value);
 
         private void Awake()

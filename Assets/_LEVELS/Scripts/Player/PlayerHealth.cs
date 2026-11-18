@@ -8,6 +8,9 @@ namespace Levels.Player
     public sealed class PlayerHealth : MonoBehaviour
     {
         [SerializeField, Min(1)] private int maxHealth = 5;
+        [SerializeField, Min(0.02f)] private float shieldHitProtection = 0.2f;
+        [SerializeField] private SpriteRenderer shieldSource;
+        [SerializeField] private SpriteRenderer[] shieldOutline = Array.Empty<SpriteRenderer>();
 
         public int CurrentHealth { get; private set; }
         public int BaseMaxHealth => maxHealth;
@@ -17,6 +20,7 @@ namespace Levels.Player
         public event Action<int> DamageApplied;
         private GameSession session;
         private float invulnerableUntil;
+        private int lastNotifiedMaxHealth;
 
         private void Awake()
         {
@@ -48,11 +52,30 @@ namespace Levels.Player
             session = null;
         }
 
+        private void LateUpdate()
+        {
+            if (shieldSource == null) return;
+            bool visible = session != null && session.ShieldCharges > 0 && shieldSource.enabled;
+            foreach (SpriteRenderer outline in shieldOutline)
+            {
+                if (outline == null) continue;
+                outline.enabled = visible;
+                if (!visible) continue;
+                outline.sprite = shieldSource.sprite;
+                outline.flipX = shieldSource.flipX;
+                outline.flipY = shieldSource.flipY;
+                outline.sortingLayerID = shieldSource.sortingLayerID;
+                outline.sortingOrder = shieldSource.sortingOrder - 1;
+            }
+        }
+
         private void SyncSessionHealth()
         {
-            if (CurrentHealth == session.PlayerHealth) return;
+            int maximum = MaxHealth;
+            if (CurrentHealth == session.PlayerHealth && lastNotifiedMaxHealth == maximum) return;
             CurrentHealth = session.PlayerHealth;
-            HealthChanged?.Invoke(CurrentHealth, MaxHealth);
+            lastNotifiedMaxHealth = maximum;
+            HealthChanged?.Invoke(CurrentHealth, maximum);
         }
 
         public bool TakeDamage(int amount) => TakeDamage(amount, 0f);
@@ -61,6 +84,12 @@ namespace Levels.Player
         {
             if (!GameFlow.IsGameplayActive || amount <= 0 || CurrentHealth == 0 || Time.time < invulnerableUntil)
                 return false;
+            if (session != null && session.ShieldCharges > 0)
+            {
+                invulnerableUntil = Time.time + Mathf.Max(shieldHitProtection, invulnerabilitySeconds);
+                session.ConsumeShieldCharge();
+                return true;
+            }
             invulnerableUntil = Time.time + Mathf.Max(0f, invulnerabilitySeconds);
             int appliedDamage = Mathf.Min(amount, CurrentHealth);
             CurrentHealth -= appliedDamage;
@@ -75,12 +104,11 @@ namespace Levels.Player
 
         public void SetMaxHealth(int maximum)
         {
-            maximum = Mathf.Max(1, maximum);
+            maximum = session != null && session.HasPowerRing ? 1 : Mathf.Max(1, maximum);
             if (MaxHealth == maximum) return;
             // Keep absolute current HP: buying maximum HP does not heal.
             CurrentHealth = Mathf.Min(CurrentHealth, maximum);
             GameSession.Instance.UpdatePlayerHealth(CurrentHealth, maximum);
-            HealthChanged?.Invoke(CurrentHealth, maximum);
         }
     }
 }
