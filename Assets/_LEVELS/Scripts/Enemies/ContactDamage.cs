@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Player;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ namespace Levels.Enemies
             PlayerHealth player = collision.collider.GetComponentInParent<PlayerHealth>();
             if (player == null || !player.TakeDamage(Damage)) return;
             nextDamageTime = Time.time + cooldownSeconds;
+            if (TryGetComponent(out EnemyProgression progression))
+                GameAudio.PlayAt(progression.Type == Levels.Core.EnemyType.Cyclops ? Cue.CyclopsClub : Cue.GoblinClaw, transform.position);
         }
     }
 }

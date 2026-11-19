@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Core;
 using Levels.Player;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace Levels.UI
             playerButton.onClick.AddListener(BuyPlayerLevel);
             enemyButton.onClick.AddListener(BuyEnemyLevel);
             if (cyclopsButton != null) cyclopsButton.onClick.AddListener(BuyCyclopsLevel);
-            closeButton.onClick.AddListener(Close);
+            closeButton.onClick.AddListener(ConfirmClose);
         }
 
         private void OnDisable()
@@ -55,7 +56,7 @@ namespace Levels.UI
             playerButton.onClick.RemoveListener(BuyPlayerLevel);
             enemyButton.onClick.RemoveListener(BuyEnemyLevel);
             if (cyclopsButton != null) cyclopsButton.onClick.RemoveListener(BuyCyclopsLevel);
-            closeButton.onClick.RemoveListener(Close);
+            closeButton.onClick.RemoveListener(ConfirmClose);
         }
 
         private void Update()
@@ -93,7 +94,14 @@ namespace Levels.UI
             feedback.text = "Choose one upgrade. Closing does not spend EXP.";
             Refresh();
             EventSystem.current.SetSelectedGameObject(playerButton.gameObject);
+            GameAudio.Play(Cue.Well);
             return true;
+        }
+
+        private void ConfirmClose()
+        {
+            if (IsOpen) GameAudio.Play(Cue.Confirm);
+            Close();
         }
 
         public void Close()
@@ -135,6 +143,7 @@ namespace Levels.UI
         {
             if (!CanPurchase()) return;
             bool bought = movement.GetComponent<PlayerProgression>().TryLevelUp();
+            if (!bought) GameAudio.Play(Cue.Rejected);
             feedback.text = bought ? "Player upgraded. Current HP unchanged." : "Not enough EXP for a Player level.";
         }
 
@@ -142,6 +151,7 @@ namespace Levels.UI
         {
             if (!CanPurchase()) return;
             bool bought = session.TryLevelUpGoblin();
+            if (!bought) GameAudio.Play(Cue.Rejected);
             feedback.text = bought ? "Goblin upgraded. Applies to new spawns." : "Not enough EXP for a Goblin level.";
         }
 
@@ -149,6 +159,7 @@ namespace Levels.UI
         {
             if (!CanPurchase()) return;
             bool bought = session.TryLevelUpCyclops();
+            if (!bought) GameAudio.Play(Cue.Rejected);
             feedback.text = bought ? "Cyclops upgraded. Applies to new spawns." : "Not enough EXP for a Cyclops level.";
         }
 

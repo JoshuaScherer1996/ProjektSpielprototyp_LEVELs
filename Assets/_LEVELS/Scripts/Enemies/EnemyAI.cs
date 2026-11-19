@@ -1,3 +1,4 @@
+using Levels.Audio;
 using UnityEngine;
 using Levels.Player;
 
@@ -24,6 +25,10 @@ namespace Levels.Enemies
         private bool touchingPlayer;
         private Vector2 knockbackDirection;
         private float knockbackEnd;
+        private EnemyProgression progression;
+        private Vector2 stepPosition;
+        private Vector2 previousStepDirection;
+        private float stepDistance;
 
         public float DetectionRange => detectionRange;
         public bool HasAggro => hasAggro;
@@ -39,10 +44,15 @@ namespace Levels.Enemies
         {
             if (body == null) body = GetComponent<Rigidbody2D>();
             health = GetComponent<EnemyHealth>();
+            progression = GetComponent<EnemyProgression>();
         }
 
         private void FixedUpdate()
         {
+            Vector2 traveled = body.position - stepPosition;
+            Vector2 lastDirection = previousStepDirection;
+            stepPosition = body.position;
+            previousStepDirection = Vector2.zero;
             if (!Levels.Core.GameFlow.IsGameplayActive)
             {
                 hasAggro = false;
@@ -79,11 +89,19 @@ namespace Levels.Enemies
             body.linearVelocity = !touchingPlayer && hasAggro
                 ? direction.normalized * MoveSpeed
                 : Vector2.zero;
+            if (progression != null && body.linearVelocity.sqrMagnitude > .01f)
+            {
+                previousStepDirection = direction.normalized;
+                GameAudio.EnemyStride(ref stepDistance, Vector2.Dot(traveled, lastDirection), progression.Type, body.position);
+            }
+            else stepDistance = 0f;
         }
 
         public void ApplyKnockback(Vector2 direction)
         {
             if (!Levels.Core.GameFlow.IsGameplayActive || direction.sqrMagnitude < 0.001f || knockbackDuration <= 0f) return;
+            previousStepDirection = Vector2.zero;
+            stepDistance = 0f;
             knockbackDirection = direction.normalized;
             knockbackEnd = Time.time + knockbackDuration;
             body.linearVelocity = knockbackDirection * knockbackSpeed;
@@ -103,6 +121,8 @@ namespace Levels.Enemies
         {
             touchingPlayer = false;
             hasAggro = false;
+            previousStepDirection = Vector2.zero;
+            stepDistance = 0f;
             if (body != null) body.linearVelocity = Vector2.zero;
         }
 

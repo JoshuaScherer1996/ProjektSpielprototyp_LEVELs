@@ -1,0 +1,1011 @@
+LEVEL's – Audio-Credits und Lizenzen
+Prüf- und Importdatum: 2026-11-19
+
+Original-Downloads der SFX: 2026-11-19
+Die Musik stammt aus den vorliegenden lokalen Originalpaketen. Ihr früheres
+Download-Datum ist unbekannt. Die mitgelieferten Lizenztexte liegen in diesem
+Ordner. Zugehörige Original-Quelllinks und Lizenztexte sind je Datei angegeben.
+
+Spiel-Credits
+Music by Erik Tyrson
+Music by cattus
+Some of the sounds in this project were created by David Mckee (ViRiX) soundcloud.com/virix
+Grass Foot Step Sounds (Yo Frankie!) by Blender Foundation, published by Lamoot. CC BY 3.0.
+11 male human pain/death sounds by Michel Baradari. CC BY 3.0.
+Spider Chattering by spookymodem. CC BY 3.0.
+
+Die CC-BY-Angaben gelten zusammen mit den Quell- und Lizenz-URLs
+sowie den Bearbeitungen in den folgenden Dateieinträgen.
+
+MUSIK
+=====
+
+Main Menu.ogg
+Titel: Main Menu
+Verwendung: Main Menu
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe als Schleife, Szenenwechsel mit Pegelblenden.
+
+Town.ogg
+Titel: Town
+Verwendung: Village
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe als Schleife, Szenenwechsel mit Pegelblenden.
+
+Battle.ogg
+Titel: Battle
+Verwendung: Plateau
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe als Schleife, Szenenwechsel mit Pegelblenden.
+
+Ancient Dungeon.ogg
+Titel: Ancient Dungeon
+Verwendung: Tower
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe als Schleife, Szenenwechsel mit Pegelblenden.
+
+Monstrosity.ogg
+Titel: Monstrosity
+Verwendung: SpiderArena ab sichtbarer Boss-Lebensleiste
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe als Schleife, Szenenwechsel mit Pegelblenden.
+
+7. Emotional Theme (Sentimental Wishes).wav
+Titel: Sentimental Wishes
+Verwendung: Game-Over-Overlay
+Urheber: cattus
+Originalquelle: https://cattusvn.itch.io/a-heroic-journey-free-orchestra-rpg-music-pack
+Lizenz: A Heroic Journey Royalty-Free License Agreement (keine Versionsnummer angegeben)
+Lizenztext: https://cattusvn.itch.io/a-heroic-journey-free-orchestra-rpg-music-pack und cattus_A_Heroic_Journey_License.txt (mitgelieferter vollständiger Lizenztext)
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Music by cattus
+Herkunft / Bedingungen: A Heroic Journey. Kostenlos für kommerzielle und nichtkommerzielle Projekte. Bearbeitung fürs Projekt erlaubt. Kein eigenständiger Weitervertrieb als Musikasset, keine falsche Urheberschaft, keine Registrierung bei Content ID oder Verwertungsgesellschaften.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für Rohdateien in einem öffentlichen GitHub-Repository. Die Erlaubnis zur Verwendung im Spiel ist ausdrücklich erteilt. Der Urheber untersagt gesonderten Weitervertrieb als Musikasset.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Der Track wird einmal bis zum natürlichen Ende gespielt.
+
+Victory (Intro).ogg
+Titel: Victory Intro
+Verwendung: Win, vollständiges Intro
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe samplebasiert per DSP geplant.
+
+Victory (Loop).ogg
+Titel: Victory Loop
+Verwendung: Win, anschließende Schleife
+Urheber: Erik Tyrson / Vanir Software
+Originalquelle: https://vanir-software.itch.io/rpg-music-pack-volume-1
+Lizenz: Creative Commons Attribution 4.0 International (CC BY 4.0) laut Urheber, mit zusätzlichem Hinweis zur eigenständigen Weiterverbreitung
+Lizenztext: https://creativecommons.org/licenses/by/4.0/legalcode
+Prüfdatum: 2026-11-19
+Download: Datum der vorhandenen lokalen Kopie unbekannt
+Pflicht-Credit: Music by Erik Tyrson. Die Urheberangabe in Spielcredits und/oder auf der Store-Seite vorsehen.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: RPG Music Pack Volume 1. Die mitgelieferten Bedingungen erlauben kostenlose und kommerzielle Verwendung in Spielen, Bearbeitung und Loops. Sie untersagen gesonderten Weitervertrieb als Pack, Soundtrack oder auf Streamingplattformen.
+Öffentliches GitHub-Repository (Rohdatei): Ungeklärt für die rohen Tracks in einem öffentlichen GitHub-Repository. Das mitgelieferte README untersagt die eigenständige Weiterverbreitung als Pack, Soundtrack oder über Streamingplattformen. Für das Spiel darf die Musik eingebunden werden. Die Rohdateien werden bis zur Klärung nicht zur Veröffentlichung im Repository freigegeben.
+Bearbeitung: Originaldatei unverändert. Unity-Plattformkompression und Wiedergabepegel. Wiedergabe samplebasiert per DSP geplant.
+
+SOUNDEFFEKTE
+============
+
+impactsplat01.wav
+Dateipfad: SFX/Boss/impactsplat01.wav
+Originaldatei: impactsplat01.mp3.flac
+Titel/Sound: Wet squish/slurp, Impact 01
+Verwendung: Spinne – Splat bei jedem Netzprojektil-Einschlag
+Urheber: Independent.nu (Ljudbank), veröffentlicht auf OpenGameArt als Independent.nu
+Originalquelle: https://opengameart.org/content/8-wet-squish-slurp-impacts
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 8 wet squish, slurp impacts. Archiv der Originalquelle: https://web.archive.org/web/20100307021017/http://www.johannespinter.com/inu/ljudbank.htm.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: FLAC verlustfrei in PCM-WAV dekodiert, Ausschnitt 0,025 bis 0,68 s mit kurzen Fades. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: WebImpact: Gain 0.33, Pitch 1.00 ± 0.095.
+
+impactsplat03.wav
+Dateipfad: SFX/Boss/impactsplat03.wav
+Originaldatei: impactsplat03.mp3.flac
+Titel/Sound: Wet squish/slurp, Impact 03
+Verwendung: Spinne – Betreten einer zusammenhängenden klebrigen Netzfläche
+Urheber: Independent.nu (Ljudbank), veröffentlicht auf OpenGameArt als Independent.nu
+Originalquelle: https://opengameart.org/content/8-wet-squish-slurp-impacts
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 8 wet squish, slurp impacts. Archiv der Originalquelle: https://web.archive.org/web/20100307021017/http://www.johannespinter.com/inu/ljudbank.htm.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: FLAC verlustfrei in PCM-WAV dekodiert, Ausschnitt 0,07 bis 0,59 s mit kurzen Fades. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: WebStep: Gain 0.30, Pitch 0.95 ± 0.040.
+
+quiver-leather-squeeze-06.wav
+Dateipfad: SFX/Boss/quiver-leather-squeeze-06.wav
+Originaldatei: quiver-leather-squeeze-06.wav
+Titel/Sound: Knarren eines gespannten Lederköchers
+Verwendung: Spinne – gespannte Netzwelle Richtung Phase 2
+Urheber: Jan Schupke (TinySFX)
+Originalquelle: https://opengameart.org/content/fantasy-weapons-and-apparel-sfx-library
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Fantasy Weapons and Apparel SFX Library. Organische Aufnahmen, laut Urheber mit Ausnahme der Normalisierung unbearbeitet.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: WebWave: Gain 0.66, Pitch 0.75.
+
+rumble-intro.wav
+Dateipfad: SFX/Boss/rumble-intro.wav
+Originaldatei: rumble.wav
+Titel/Sound: rumble fx, kurzer Höhlenimpuls
+Verwendung: Spinne – kurzes Beben bei Intro-Landung
+Urheber: cinameng
+Originalquelle: https://opengameart.org/content/rumble-fx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: rumble fx. Vom Urheber veröffentlichtes 19-Sekunden-Rumpeln mit Fades.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Ausschnitt 8,29 bis 9,08 s mit Fades und erhöhtem Pegel. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderIntroRumble: Gain 0.46, Pitch 1.00.
+
+rumble-phase.wav
+Dateipfad: SFX/Boss/rumble-phase.wav
+Originaldatei: rumble.wav
+Titel/Sound: rumble fx, Phasenwechsel
+Verwendung: Spinne – Kamerabeben bei beiden Phasenwechseln
+Urheber: cinameng
+Originalquelle: https://opengameart.org/content/rumble-fx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: rumble fx. Vom Urheber veröffentlichtes 19-Sekunden-Rumpeln mit Fades.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Ausschnitt 7,55 bis 10,55 s mit Fades und erhöhtem Pegel. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderRumble: Gain 0.43, Pitch 1.00.
+
+spell_fire_02.ogg
+Dateipfad: SFX/Boss/spell_fire_02.ogg
+Originaldatei: spell_fire_02.ogg
+Titel/Sound: Spell Fire 02, leises Luftgeräusch
+Verwendung: Spinne – leiser Luftlaut, solange ein Netzprojektil fliegt
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: WebFlight: Gain 0.19, Pitch 1.11.
+
+Spider Chattering - ceiling.wav
+Dateipfad: SFX/Boss/Spider Chattering - ceiling.wav
+Originaldatei: Spider Chattering.wav
+Titel/Sound: Spider Chattering
+Verwendung: Spinne – Krabbeln während der Schattenverfolgung
+Urheber: spookymodem
+Originalquelle: https://opengameart.org/content/spider-chattering
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Spider Chattering by spookymodem. CC BY 3.0.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Spider Chattering, publizierte Krabbel- und Chattergeräusche.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: Ausschnitt 0,35 bis 2,28 s, kurze Fades und Pegel angepasst. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderCeiling: Gain 0.54, Pitch 1.05.
+
+blade_02.ogg
+Dateipfad: SFX/Combat/blade_02.ogg
+Originaldatei: blade_02.ogg
+Titel/Sound: Blade 02, kurzer scharfer Kratzer
+Verwendung: Goblin – erfolgreicher Klauentreffer
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: GoblinClaw: Gain 0.34, Pitch 1.08 ± 0.065.
+
+die1.wav
+Dateipfad: SFX/Combat/die1.wav
+Originaldatei: die1.wav
+Titel/Sound: Male human death, die1
+Verwendung: Spieler – Tod vor Game-Over-Musik
+Urheber: Michel Baradari, eingereicht von qubodup
+Originalquelle: https://opengameart.org/content/11-male-human-paindeath-sounds
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: 11 male human pain/death sounds by Michel Baradari. CC BY 3.0.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 11 male human pain/death sounds, männliche Stimmaufnahmen.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: PlayerDeath: Gain 0.70, Pitch 1.00.
+
+metal_03.ogg
+Dateipfad: SFX/Combat/metal_03.ogg
+Originaldatei: metal_03.ogg
+Titel/Sound: Metal 03, scharfer Schildbruch
+Verwendung: Spieler – letzte Schildladung verbraucht
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: ShieldBreak: Gain 0.60, Pitch 0.90.
+
+paino.wav
+Dateipfad: SFX/Combat/paino.wav
+Originaldatei: paino.wav
+Titel/Sound: Male human pain, paino
+Verwendung: Spieler – nicht tödlicher LP-Schaden
+Urheber: Michel Baradari, eingereicht von qubodup
+Originalquelle: https://opengameart.org/content/11-male-human-paindeath-sounds
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: 11 male human pain/death sounds by Michel Baradari. CC BY 3.0.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 11 male human pain/death sounds, männliche Stimmaufnahmen.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: PlayerPain: Gain 0.64, Pitch 1.00 ± 0.050.
+
+spell_01.ogg
+Dateipfad: SFX/Combat/spell_01.ogg
+Originaldatei: spell_01.ogg
+Titel/Sound: Spell 01, Magieimpuls
+Verwendung: Spieler – geblockter Treffer
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Shield: Gain 0.50, Pitch 1.00 ± 0.035.
+
+swish-11.wav
+Dateipfad: SFX/Combat/swish-11.wav
+Originaldatei: swish-11.wav
+Titel/Sound: Swish 11, schneller Nahkampf-Whoosh
+Verwendung: Spinne – Nahkampfschwung
+Urheber: artisticdude
+Originalquelle: https://opengameart.org/content/swishes-sound-pack
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Swishes Sound Pack, vom Urheber für Summoning Wars erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderMelee: Gain 0.38, Pitch 1.12.
+
+swish-3.wav
+Dateipfad: SFX/Combat/swish-3.wav
+Originaldatei: swish-3.wav
+Titel/Sound: Swish 3, Fall-Whoosh
+Verwendung: Spinne – Rückkehr von der Decke
+Urheber: artisticdude
+Originalquelle: https://opengameart.org/content/swishes-sound-pack
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Swishes Sound Pack, vom Urheber für Summoning Wars erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderFall: Gain 0.46, Pitch 0.77.
+
+swish-4.wav
+Dateipfad: SFX/Combat/swish-4.wav
+Originaldatei: swish-4.wav
+Titel/Sound: Swish 4, kräftiger Absprung-Whoosh
+Verwendung: Spinne – Absprung in Phase 2
+Urheber: artisticdude
+Originalquelle: https://opengameart.org/content/swishes-sound-pack
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Swishes Sound Pack, vom Urheber für Summoning Wars erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderRise: Gain 0.45, Pitch 1.12.
+
+swish-6.wav
+Dateipfad: SFX/Combat/swish-6.wav
+Originaldatei: swish-6.wav
+Titel/Sound: Swish 6, kurzer Sprung-Whoosh
+Verwendung: Spinne – schneller Sprung in Phase 3
+Urheber: artisticdude
+Originalquelle: https://opengameart.org/content/swishes-sound-pack
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Swishes Sound Pack, vom Urheber für Summoning Wars erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderQuickLeap: Gain 0.41, Pitch 1.25 ± 0.070.
+
+swish-7.wav
+Dateipfad: SFX/Combat/swish-7.wav
+Originaldatei: swish-7.wav
+Titel/Sound: Swish 7, rotierender Luftstoß
+Verwendung: Spinne – rotierender Whoosh für Dauer des Spins
+Urheber: artisticdude
+Originalquelle: https://opengameart.org/content/swishes-sound-pack
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Swishes Sound Pack, vom Urheber für Summoning Wars erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderSpin: Gain 0.32, Pitch 0.87.
+
+swish-9.wav
+Dateipfad: SFX/Combat/swish-9.wav
+Originaldatei: swish-9.wav
+Titel/Sound: Swish 9, Schwertschwung
+Verwendung: Spieler – Schwertschwung
+Urheber: artisticdude
+Originalquelle: https://opengameart.org/content/swishes-sound-pack
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Swishes Sound Pack, vom Urheber für Summoning Wars erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Sword: Gain 0.39, Pitch 1.00 ± 0.045.
+
+thwack-02.wav
+Dateipfad: SFX/Combat/thwack-02.wav
+Originaldatei: thwack-02.wav
+Titel/Sound: Thwack 02, kurzer tiefer Aufprall
+Verwendung: Spinne – leichtere Landung in Phase 3
+Urheber: Jordan Irwin (AntumDeluge)
+Originalquelle: https://opengameart.org/content/thwack-sounds
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Created by Jordan Irwin (AntumDeluge)
+Herkunft / Bedingungen: Thwack Sounds v1.0. Eigene Aufnahmen von Schlägen auf Gegenstände.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderQuickLand: Gain 0.42, Pitch 1.00 ± 0.055.
+
+thwack-08.wav
+Dateipfad: SFX/Combat/thwack-08.wav
+Originaldatei: thwack-08.wav
+Titel/Sound: Thwack 08, schwerer Aufprall
+Verwendung: Spinne – Intro- und Phase-2-Landung
+Urheber: Jordan Irwin (AntumDeluge)
+Originalquelle: https://opengameart.org/content/thwack-sounds
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Created by Jordan Irwin (AntumDeluge)
+Herkunft / Bedingungen: Thwack Sounds v1.0. Eigene Aufnahmen von Schlägen auf Gegenstände.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderLand: Gain 0.58, Pitch 0.81.
+
+wood_03.ogg
+Dateipfad: SFX/Combat/wood_03.ogg
+Originaldatei: wood_03.ogg
+Titel/Sound: Wood 03, dumpfer Holzaufprall
+Verwendung: Cyclops – erfolgreicher Holzkäulentreffer
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: CyclopsClub: Gain 0.60, Pitch 0.83 ± 0.045.
+
+bug_02.ogg
+Dateipfad: SFX/Creatures/bug_02.ogg
+Originaldatei: bug_02.ogg
+Titel/Sound: Creature Bug 02, krabbelndes Insekt
+Verwendung: Spinne – Krabbeln bei Bewegung am Boden
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderScuttle: Gain 0.21, Pitch 1.06 ± 0.070.
+
+bug_04.ogg
+Dateipfad: SFX/Creatures/bug_04.ogg
+Originaldatei: bug_04.ogg
+Titel/Sound: Creature Bug 04, kratziger Spinnen-Pain
+Verwendung: Spinne – LP-Schaden
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderPain: Gain 0.46, Pitch 0.93 ± 0.075.
+
+creature_die_01.ogg
+Dateipfad: SFX/Creatures/creature_die_01.ogg
+Originaldatei: creature_die_01.ogg
+Titel/Sound: Creature Die 01, tiefer Todeslaut
+Verwendung: Cyclops – schwerer Todeslaut
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: CyclopsDeath: Gain 0.62, Pitch 0.88 ± 0.045.
+
+hurt_02.ogg
+Dateipfad: SFX/Creatures/hurt_02.ogg
+Originaldatei: hurt_02.ogg
+Titel/Sound: Creature Hurt 02, heller Monster-Pain
+Verwendung: Goblin – LP-Schaden
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: GoblinPain: Gain 0.39, Pitch 1.08 ± 0.090.
+
+hurt_04.ogg
+Dateipfad: SFX/Creatures/hurt_04.ogg
+Originaldatei: hurt_04.ogg
+Titel/Sound: Creature Hurt 04, tiefer Monster-Pain
+Verwendung: Cyclops – LP-Schaden
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: CyclopsPain: Gain 0.39, Pitch 0.90 ± 0.055.
+
+monster_03.ogg
+Dateipfad: SFX/Creatures/monster_03.ogg
+Originaldatei: monster_03.ogg
+Titel/Sound: Creature Monster 03, kurzer rauer Todeslaut
+Verwendung: Goblin – Todeslaut
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: GoblinDeath: Gain 0.50, Pitch 1.32 ± 0.060.
+
+roar_03.ogg
+Dateipfad: SFX/Creatures/roar_03.ogg
+Originaldatei: roar_03.ogg
+Titel/Sound: Creature Roar 03, kurzer Spinnenschrei
+Verwendung: Spinne – Schrei am Ende der Intro-Cutscene
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderIntro: Gain 0.47, Pitch 0.94.
+
+scream_01.ogg
+Dateipfad: SFX/Creatures/scream_01.ogg
+Originaldatei: scream_01.ogg
+Titel/Sound: Creature Scream 01, Phasenschrei
+Verwendung: Spinne – Schrei bei beiden Phasenwechseln
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderPhase: Gain 0.56, Pitch 1.27.
+
+scream_02.ogg
+Dateipfad: SFX/Creatures/scream_02.ogg
+Originaldatei: scream_02.ogg
+Titel/Sound: Creature Scream 02, finaler längerer Schrei
+Verwendung: Spinne – finaler Schrei nach Boss-Tod
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: SpiderDeath: Gain 0.68, Pitch 0.92.
+
+spit_02.ogg
+Dateipfad: SFX/Creatures/spit_02.ogg
+Originaldatei: spit_02.ogg
+Titel/Sound: Creature Spit 02, kräftigerer Spucklaut
+Verwendung: Spinne – gemeinsamer Abschuss der Dreier-Salve
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: WebVolley: Gain 0.52, Pitch 1.15.
+
+spit_03.ogg
+Dateipfad: SFX/Creatures/spit_03.ogg
+Originaldatei: spit_03.ogg
+Titel/Sound: Creature Spit 03, einzelner kurzer Spucklaut
+Verwendung: Spinne – Abschuss eines einzelnen Netzes
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-creature-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 creature SFX, vom Urheber erstellte Kreaturen-Effekte.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: WebSpit: Gain 0.43, Pitch 1.00 ± 0.045.
+
+Fantozzi-SandR2.ogg
+Dateipfad: SFX/Footsteps/Fantozzi-SandR2.ogg
+Originaldatei: Fantozzi-SandR2.ogg
+Titel/Sound: Sandschritt R2
+Verwendung: Village – Spieler Schritte auf Kies und Sand
+Urheber: Fantozzi (Aufnahmen), qubodup (Schnitt und Veröffentlichung auf OpenGameArt)
+Originalquelle: https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Fantozzi's Footsteps (Grass/Sand & Stone). Ursprüngliche Aufnahmen: https://freesound.org/people/Fantozzi/packs/10338/.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Gravel: Gain 0.35, Pitch 1.00 ± 0.060.
+
+Fantozzi-StoneL1.ogg
+Dateipfad: SFX/Footsteps/Fantozzi-StoneL1.ogg
+Originaldatei: Fantozzi-StoneL1.ogg
+Titel/Sound: Steinschritt L1
+Verwendung: Tower und Arena – Spieler Steinschritte
+Urheber: Fantozzi (Aufnahmen), qubodup (Schnitt und Veröffentlichung auf OpenGameArt)
+Originalquelle: https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Fantozzi's Footsteps (Grass/Sand & Stone). Ursprüngliche Aufnahmen: https://freesound.org/people/Fantozzi/packs/10338/.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Stone: Gain 0.27, Pitch 1.00 ± 0.060.
+
+Fantozzi-StoneR2.ogg
+Dateipfad: SFX/Footsteps/Fantozzi-StoneR2.ogg
+Originaldatei: Fantozzi-StoneR2.ogg
+Titel/Sound: Steinschritt R2
+Verwendung: Tower und Arena – Spieler Steinschritte
+Urheber: Fantozzi (Aufnahmen), qubodup (Schnitt und Veröffentlichung auf OpenGameArt)
+Originalquelle: https://opengameart.org/content/fantozzis-footsteps-grasssand-stone
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Fantozzi's Footsteps (Grass/Sand & Stone). Ursprüngliche Aufnahmen: https://freesound.org/people/Fantozzi/packs/10338/.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Stone: Gain 0.27, Pitch 1.00 ± 0.060.
+
+gravel-short.wav
+Dateipfad: SFX/Footsteps/gravel-short.wav
+Originaldatei: gravel.ogg
+Titel/Sound: Different Steps – Kies
+Verwendung: Village – Spieler Schritte auf Kies und Sand
+Urheber: TinyWorlds (Bearbeitung), PD Sounds (Originalaufnahmen, einzelner Aufnahmeurheber nicht angegeben)
+Originalquelle: https://opengameart.org/content/different-steps-on-wood-stone-leaves-gravel-and-mud
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Different steps on wood, stone, leaves, gravel and mud. TinyWorlds nennt PD Sounds als Quelle der für Minetest bearbeiteten Aufnahmen. Der konkrete Aufnahmeurheber ist auf der Quellseite nicht aufgeschlüsselt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: OGG in PCM-WAV dekodiert, erster Tritt auf 0,33 s gekürzt, Ausblendung und Pegel angepasst. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Gravel: Gain 0.35, Pitch 1.00 ± 0.060.
+
+sfx_step_grass_l.wav
+Dateipfad: SFX/Footsteps/sfx_step_grass_l.wav
+Originaldatei: sfx_step_grass_l.flac
+Titel/Sound: Grass Foot Step Left
+Verwendung: Plateau – Spieler Grasschritte | Plateau – leichte, schnelle Goblin-Grasschritte | Plateau – schwere, langsame Cyclops-Grasschritte
+Urheber: Blender Foundation, eingereicht von Lamoot
+Originalquelle: https://opengameart.org/content/grass-foot-step-sounds-yo-frankie
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Grass Foot Step Sounds (Yo Frankie!) by Blender Foundation, published by Lamoot. CC BY 3.0.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Grass Foot Step Sounds (Yo Frankie!), echte Aufnahmen vom linken und rechten Fuß auf Gras.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: FLAC verlustfrei in PCM-WAV dekodiert, Pegel angepasst. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Grass: Gain 0.43, Pitch 1.00 ± 0.055 | GoblinStep: Gain 0.24, Pitch 1.24 ± 0.075 | CyclopsStep: Gain 0.37, Pitch 0.60 ± 0.045.
+
+sfx_step_grass_r.wav
+Dateipfad: SFX/Footsteps/sfx_step_grass_r.wav
+Originaldatei: sfx_step_grass_r.flac
+Titel/Sound: Grass Foot Step Right
+Verwendung: Plateau – Spieler Grasschritte | Plateau – leichte, schnelle Goblin-Grasschritte | Plateau – schwere, langsame Cyclops-Grasschritte
+Urheber: Blender Foundation, eingereicht von Lamoot
+Originalquelle: https://opengameart.org/content/grass-foot-step-sounds-yo-frankie
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Grass Foot Step Sounds (Yo Frankie!) by Blender Foundation, published by Lamoot. CC BY 3.0.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Grass Foot Step Sounds (Yo Frankie!), echte Aufnahmen vom linken und rechten Fuß auf Gras.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: FLAC verlustfrei in PCM-WAV dekodiert, Pegel angepasst. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Grass: Gain 0.43, Pitch 1.00 ± 0.055 | GoblinStep: Gain 0.24, Pitch 1.24 ± 0.075 | CyclopsStep: Gain 0.37, Pitch 0.60 ± 0.045.
+
+Accept.mp3
+Dateipfad: SFX/UI/Accept.mp3
+Originaldatei: Accept.mp3
+Titel/Sound: UI-Accept or Forward
+Verwendung: Pause öffnen
+Urheber: David Mckee (ViRiX)
+Originalquelle: https://opengameart.org/content/ui-accept-or-forward
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Some of the sounds in this project were created by David Mckee (ViRiX) soundcloud.com/virix
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI-Accept or Forward, vom Urheber in FL Studio erstellt.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Pause: Gain 0.38, Pitch 1.00.
+
+chimes.ogg
+Dateipfad: SFX/UI/chimes.ogg
+Originaldatei: chimes.ogg
+Titel/Sound: Chimes, heller Belohnungseffekt
+Verwendung: Spieler-Levelaufstieg
+Urheber: Robin Lamb (Auswahl/Bearbeitung), Versilian Studios VCSL und VSCO 2 CE (Aufnahmen)
+Originalquelle: https://opengameart.org/content/ui-sound-effects-button-clicks-user-feedback-notifications
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI Sound Effects. Der Herausgeber nennt als Ursprung die öffentlichen Instrumentenaufnahmen https://github.com/sgossner/VCSL und https://vis.versilstudios.com/vsco-community.html und stellt die Auswahl unter CC0.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: PlayerLevel: Gain 0.68, Pitch 1.00.
+
+click_2.ogg
+Dateipfad: SFX/UI/click_2.ogg
+Originaldatei: click_2.ogg
+Titel/Sound: Click 2
+Verwendung: UI-Auswahlwechsel
+Urheber: Robin Lamb (Auswahl/Bearbeitung), Versilian Studios VCSL und VSCO 2 CE (Aufnahmen)
+Originalquelle: https://opengameart.org/content/ui-sound-effects-button-clicks-user-feedback-notifications
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI Sound Effects. Der Herausgeber nennt als Ursprung die öffentlichen Instrumentenaufnahmen https://github.com/sgossner/VCSL und https://vis.versilstudios.com/vsco-community.html und stellt die Auswahl unter CC0.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Navigate: Gain 0.21, Pitch 1.00.
+
+Decline.wav
+Dateipfad: SFX/UI/Decline.wav
+Originaldatei: Decline.wav
+Titel/Sound: UI Decline or Back
+Verwendung: Pause fortsetzen
+Urheber: David Mckee (ViRiX)
+Originalquelle: https://opengameart.org/content/ui-decline-or-back
+Lizenz: Creative Commons Attribution 3.0 Unported (CC BY 3.0)
+Lizenztext: https://creativecommons.org/licenses/by/3.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Some of the sounds in this project were created by David Mckee (ViRiX) soundcloud.com/virix
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI Decline or Back, vom Urheber ausdrücklich als Pendant zu UI-Accept or Forward veröffentlicht.
+Öffentliches GitHub-Repository (Rohdatei): Ja, unter CC BY 3.0 mit vollständiger Namensnennung, Quell- und Lizenzlink sowie Änderungen.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Continue: Gain 0.37, Pitch 1.00.
+
+Ding - confirm.wav
+Dateipfad: SFX/UI/Ding - confirm.wav
+Originaldatei: Ding.ogg
+Titel/Sound: Ding – kurzer heller Menüton
+Verwendung: Menübestätigung und Menüschließen
+Urheber: Robin Lamb (Auswahl/Bearbeitung), Versilian Studios VCSL und VSCO 2 CE (Aufnahmen)
+Originalquelle: https://opengameart.org/content/ui-sound-effects-button-clicks-user-feedback-notifications
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI Sound Effects. Der Herausgeber nennt als Ursprung die öffentlichen Instrumentenaufnahmen https://github.com/sgossner/VCSL und https://vis.versilstudios.com/vsco-community.html und stellt die Auswahl unter CC0.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: OGG als PCM-WAV dekodiert, auf 0,16 s gekürzt und ausgeblendet. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Confirm: Gain 0.27, Pitch 1.00.
+
+ding_deep.ogg
+Dateipfad: SFX/UI/ding_deep.ogg
+Originaldatei: ding_deep.ogg
+Titel/Sound: Ding Deep, tiefer Glockenton
+Verwendung: Goblin- und Cyclops-Levelaufstieg
+Urheber: Robin Lamb (Auswahl/Bearbeitung), Versilian Studios VCSL und VSCO 2 CE (Aufnahmen)
+Originalquelle: https://opengameart.org/content/ui-sound-effects-button-clicks-user-feedback-notifications
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI Sound Effects. Der Herausgeber nennt als Ursprung die öffentlichen Instrumentenaufnahmen https://github.com/sgossner/VCSL und https://vis.versilstudios.com/vsco-community.html und stellt die Auswahl unter CC0.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: EnemyLevel: Gain 0.45, Pitch 0.86.
+
+dum.ogg
+Dateipfad: SFX/UI/dum.ogg
+Originaldatei: dum.ogg
+Titel/Sound: Dum, dezenter tiefer Fehlerton
+Verwendung: Fehlgeschlagener Kauf oder Levelversuch
+Urheber: Robin Lamb (Auswahl/Bearbeitung), Versilian Studios VCSL und VSCO 2 CE (Aufnahmen)
+Originalquelle: https://opengameart.org/content/ui-sound-effects-button-clicks-user-feedback-notifications
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: UI Sound Effects. Der Herausgeber nennt als Ursprung die öffentlichen Instrumentenaufnahmen https://github.com/sgossner/VCSL und https://vis.versilstudios.com/vsco-community.html und stellt die Auswahl unter CC0.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Rejected: Gain 0.49, Pitch 1.00.
+
+item_coins_01.ogg
+Dateipfad: SFX/UI/item_coins_01.ogg
+Originaldatei: item_coins_01.ogg
+Titel/Sound: Item Coins 01, Münzton
+Verwendung: Erfolgreicher Kauf
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Purchase: Gain 0.43, Pitch 1.00.
+
+item_gem_04.ogg
+Dateipfad: SFX/World/item_gem_04.ogg
+Originaldatei: item_gem_04.ogg
+Titel/Sound: Item Gem 04, kristalliner Ton
+Verwendung: Brunneninteraktion
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Well: Gain 0.59, Pitch 1.00.
+
+qubodup-DoorOpen05.ogg
+Dateipfad: SFX/World/qubodup-DoorOpen05.ogg
+Originaldatei: qubodup-DoorOpen05.ogg
+Titel/Sound: Door Open 05, kurze Türinteraktion
+Verwendung: Shop öffnen
+Urheber: qubodup
+Originalquelle: https://opengameart.org/content/door-open-door-close-set
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: qubodup
+Herkunft / Bedingungen: Door Open, Door Close Set. Aufnahmen von Türen verschiedener Materialien.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: ShopOpen: Gain 0.47, Pitch 1.00.
+
+qubodup-DoorOpen07.ogg
+Dateipfad: SFX/World/qubodup-DoorOpen07.ogg
+Originaldatei: qubodup-DoorOpen07.ogg
+Titel/Sound: Door Open 07, schwerere Türöffnung
+Verwendung: Tower – Tür beim angenommenen Arena-Übergang
+Urheber: qubodup
+Originalquelle: https://opengameart.org/content/door-open-door-close-set
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: qubodup
+Herkunft / Bedingungen: Door Open, Door Close Set. Aufnahmen von Türen verschiedener Materialien.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: TowerDoor: Gain 0.68, Pitch 0.83.
+
+spell_02.ogg
+Dateipfad: SFX/World/spell_02.ogg
+Originaldatei: spell_02.ogg
+Titel/Sound: Spell 02, magischer Aktivierungsimpuls
+Verwendung: Spieler – einmalige Aktivierung des Rings der Macht
+Urheber: rubberduck
+Originalquelle: https://opengameart.org/content/80-cc0-rpg-sfx
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: 80 CC0 RPG SFX, vom Urheber erstellte Fantasy- und Foley-Klänge.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: Originaldatei unverändert. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Ring: Gain 0.69, Pitch 1.00.
+
+swallow-01.wav
+Dateipfad: SFX/World/swallow-01.wav
+Originaldatei: swallow-01.flac
+Titel/Sound: Schlucken nach Getränk aus Flasche
+Verwendung: Spieler – tatsächlich getrunkener Heiltrank
+Urheber: qubodup
+Originalquelle: https://opengameart.org/content/liquid-bottle-drink-set
+Lizenz: CC0 1.0 Universal
+Lizenztext: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+Prüfdatum: 2026-11-19
+Download: 2026-11-19
+Pflicht-Credit: Keine Namensnennung erforderlich.
+Gewünschter Credit: Keiner angegeben.
+Herkunft / Bedingungen: Liquid Bottle Drink Set. Der Urheber beschreibt eine eigene Getränkeaufnahme.
+Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
+Bearbeitung: FLAC verlustfrei in PCM-WAV dekodiert, Pegel angepasst. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Potion: Gain 0.67, Pitch 1.00.

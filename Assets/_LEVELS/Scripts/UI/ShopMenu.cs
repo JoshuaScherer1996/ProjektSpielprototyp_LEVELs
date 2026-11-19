@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Core;
 using Levels.Player;
 using UnityEngine;
@@ -58,7 +59,7 @@ namespace Levels.UI
             shieldButton.onClick.AddListener(BuyShield);
             ringButton.onClick.AddListener(BuyRing);
             potionButton.onClick.AddListener(BuyPotion);
-            closeButton.onClick.AddListener(Close);
+            closeButton.onClick.AddListener(ConfirmClose);
         }
 
         private void OnDisable()
@@ -70,7 +71,7 @@ namespace Levels.UI
             shieldButton.onClick.RemoveListener(BuyShield);
             ringButton.onClick.RemoveListener(BuyRing);
             potionButton.onClick.RemoveListener(BuyPotion);
-            closeButton.onClick.RemoveListener(Close);
+            closeButton.onClick.RemoveListener(ConfirmClose);
         }
 
         private void Update()
@@ -109,7 +110,14 @@ namespace Levels.UI
             feedback.text = "";
             Refresh();
             SelectFirstAvailable();
+            GameAudio.Play(Cue.ShopOpen);
             return true;
+        }
+
+        private void ConfirmClose()
+        {
+            if (IsOpen) GameAudio.Play(Cue.Confirm);
+            Close();
         }
 
         public void Close()
@@ -172,6 +180,7 @@ namespace Levels.UI
             if (!GameFlow.IsGameplayActive || !IsOpen || Time.frameCount <= openedFrame || Time.frameCount == lastPurchaseFrame) return;
             lastPurchaseFrame = Time.frameCount;
             ShopPurchaseResult result = transactions.TryPurchase(offer, health);
+            if (result != ShopPurchaseResult.Success) GameAudio.Play(Cue.Rejected);
             feedback.text = result == ShopPurchaseResult.Success ? offer switch
             {
                 ShopOffer.Healing => "LP vollständig wiederhergestellt.",

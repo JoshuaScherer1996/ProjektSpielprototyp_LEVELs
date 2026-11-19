@@ -1,0 +1,38 @@
+Lokaler Musikimport für LEVEL's
+
+Lade die Originalpakete von den offiziellen Seiten und entpacke sie außerhalb
+des Unity-Projekts.
+
+Erik Tyrson / Vanir Software – RPG Music Pack Volume 1
+https://vanir-software.itch.io/rpg-music-pack-volume-1
+
+cattus – A Heroic Journey
+https://cattusvn.itch.io/a-heroic-journey-free-orchestra-rpg-music-pack
+
+Lege diese acht Dateien mit ihren exakten Namen direkt in
+Assets/_LEVELS/Audio/Resources/ ab. Unity erstellt beim Import die .meta-Dateien.
+
+Main Menu.ogg — Hauptmenü
+Town.ogg — Village
+Battle.ogg — Plateau
+Ancient Dungeon.ogg — Tower
+Monstrosity.ogg — SpiderArena nach der Intro-Sequenz
+7. Emotional Theme (Sentimental Wishes).wav — Game Over
+Victory (Intro).ogg — Sieg, Intro
+Victory (Loop).ogg — Sieg, anschließende Schleife
+
+Unity lädt vorhandene Tracks aus diesem Ordner. Ein Checkout ohne die lokalen
+Dateien bleibt spielbar. Soundeffekte, UI-Audio und Mixer sind im Repository.
+Baue Windows- und WebGL-Releases mit den lokal importierten Dateien.
+
+Vanir veröffentlicht die Musik unter CC BY 4.0. Der Anbieter bittet um den
+Credit „Music by Erik Tyrson“ im Spiel oder auf der Store-Seite und schließt
+die separate Weitergabe als Musikpaket oder Soundtrack-Asset in seinen
+Begleitbedingungen aus. https://creativecommons.org/licenses/by/4.0/
+
+Cattus erlaubt kostenlose kommerzielle und nichtkommerzielle Nutzung im Spiel.
+Die separate Weitergabe als Musik-Asset ist laut beiliegendem Lizenztext
+ausgeschlossen. Der gewünschte Credit lautet „Music by cattus“.
+
+Dieses Repository hält die acht Musikdateien und ihre .meta-Dateien lokal.
+Die vollständigen Credits und die Lizenztexte liegen in diesem Ordner.

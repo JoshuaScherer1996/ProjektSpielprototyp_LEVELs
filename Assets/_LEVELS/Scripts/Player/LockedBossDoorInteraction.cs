@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Scenes;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -71,7 +72,11 @@ namespace Levels.Player
         private bool Activate()
         {
             if (transitionService != null)
-                return transitionService.TryTransition(destinationScene, destinationSpawn, player);
+            {
+                if (!transitionService.TryTransition(destinationScene, destinationSpawn, player)) return false;
+                GameAudio.Play(Cue.TowerDoor);
+                return true;
+            }
             ShowMessage();
             return true;
         }

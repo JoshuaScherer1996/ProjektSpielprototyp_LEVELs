@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Core;
 using TMPro;
 using UnityEngine;
@@ -39,12 +40,15 @@ namespace Levels.UI
             endGameButton.onClick.RemoveListener(EndGame);
         }
 
-        private void BackToMainMenu() => GameFlow.Instance?.BackToMainMenu();
+        private void BackToMainMenu()
+        {
+            if (GameFlow.Instance != null && GameFlow.Instance.BackToMainMenu()) GameAudio.Play(Cue.Confirm);
+        }
 
         private void EndGame()
         {
 #if UNITY_STANDALONE_WIN && !UNITY_EDITOR
-            if (GameFlow.State == RunState.Victory) Application.Quit();
+            if (GameFlow.State == RunState.Victory) GameAudio.ConfirmAndQuit();
 #endif
         }
     }

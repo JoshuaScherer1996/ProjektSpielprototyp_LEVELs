@@ -1,3 +1,4 @@
+using Levels.Audio;
 using System;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace Levels.Enemies
         [SerializeField] private ParticleSystem deathSmoke;
 
         private EnemyAI enemyAI;
+        private EnemyProgression progression;
 
         public int CurrentHealth { get; private set; }
         public int BaseMaxHealth => maxHealth;
@@ -26,6 +28,7 @@ namespace Levels.Enemies
             CurrentHealth = maxHealth;
             MaxHealth = maxHealth;
             enemyAI = GetComponent<EnemyAI>();
+            progression = GetComponent<EnemyProgression>();
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
         }
 
@@ -48,6 +51,14 @@ namespace Levels.Enemies
             int appliedDamage = Mathf.Min(DamageLimit?.Invoke(amount) ?? amount, CurrentHealth);
             if (appliedDamage <= 0) return false;
             CurrentHealth -= appliedDamage;
+            if (progression != null)
+            {
+                bool cyclops = progression.Type == Levels.Core.EnemyType.Cyclops;
+                Cue sound = CurrentHealth == 0
+                    ? (cyclops ? Cue.CyclopsDeath : Cue.GoblinDeath)
+                    : (cyclops ? Cue.CyclopsPain : Cue.GoblinPain);
+                GameAudio.PlayAt(sound, transform.position);
+            }
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
             DamageApplied?.Invoke(appliedDamage);
             if (CurrentHealth == 0)

@@ -1,0 +1,61 @@
+===============================================================================
+[RPG Music Pack Vol 1, 14 JRPG Tracks]
+Music Asset Pack by Erik Tyrson
+===============================================================================
+
+Thank you for downloading this RPG Music Pack! I hope these tracks bring your
+game world to life.
+
+Below you will find the licensing terms, and instructions
+on how to give proper credit.
+
+
+-------------------------------------------------------------------------------
+1. LICENSE & TERMS OF USE
+-------------------------------------------------------------------------------
+This music pack is released under the Creative Commons Attribution 4.0
+International License (CC BY 4.0).
+
+What you CAN do:
+✔ FREE & COMMERCIAL USE: You can use these tracks in any game, project, or media,
+  including commercial games that you sell for profit.
+✔ MODIFICATION: You can loop, fade, remix, or edit the tracks to fit your
+  game's specific technical needs.
+
+What you CANNOT do:
+✘ NO RESELLING/REDISTRIBUTION: You cannot resell, repackage, or redistribute
+  these audio files as a standalone music pack, soundtrack, or on streaming
+  platforms (like Spotify/Apple Music), even if edited.
+
+-------------------------------------------------------------------------------
+2. HOW TO CREDIT THE ARTIST (Required)
+-------------------------------------------------------------------------------
+Per the CC BY 4.0 license, you must provide attribution in your game's credits
+(and/or your itch.io/Steam store page description).
+
+Please use the following format for credits:
+"Music by Erik Tyrson"
+
+Example:
+"Music by Erik Tyrson"
+
+-------------------------------------------------------------------------------
+3. TECHNICAL NOTES FOR DEVELOPERS
+-------------------------------------------------------------------------------
+* .OGG files are recommended for engines like RPG Maker, Unity, and Godot as
+  they are compressed for better performance and support seamless loop points.
+* .WAV files are uncompressed 24-bit/44.1kHz masters, best suited for video
+  trailers or further audio editing.
+
+
+-------------------------------------------------------------------------------
+4. CONTACT & SUPPORT
+-------------------------------------------------------------------------------
+If you use this pack in your game, I would love to see it! Feel free to send
+me a link to your project.
+
+* Email: bigflerffyburr@gmail.com
+
+===============================================================================
+Copyright © 2026 Erik Tyrson. All rights reserved to the audio content
+outside of the permissions granted by the CC BY 4.0 license.

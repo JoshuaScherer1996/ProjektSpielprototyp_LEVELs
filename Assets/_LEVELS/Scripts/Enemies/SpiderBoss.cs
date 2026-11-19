@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Levels.Audio;
 using Levels.Core;
 using Levels.Player;
 using Levels.Scenes;
@@ -16,6 +17,7 @@ namespace Levels.Enemies
         [SerializeField] private PlayerHealth player;
         [SerializeField] private EnemyHealth boss;
         [SerializeField] private Collider2D hurtbox;
+        [SerializeField] private Collider2D bodyCollider;
         [SerializeField] private Transform visuals;
         [SerializeField] private Camera arenaCamera;
         [SerializeField] private GameObject entranceSeal;
@@ -109,6 +111,7 @@ namespace Levels.Enemies
             public SpriteRenderer Visual;
             public Vector2 Direction;
             public float DistanceLeft;
+            public int FlightAudio;
         }
 
         private sealed class Web
@@ -134,6 +137,9 @@ namespace Levels.Enemies
         private float shakeTime;
         private float shakeStrength;
         private Vector3 patrolCenter;
+        private int attackAudio;
+        private float scuttleDistance;
+        private bool touchingWeb;
 
         public EncounterState State { get; private set; }
         private int Phase2Threshold => (int)(boss.MaxHealth * 2L / 3);
@@ -161,6 +167,7 @@ namespace Levels.Enemies
             movement.SetScriptedInput(Vector2.zero);
             playerAttack.enabled = false;
             SetTangible(false);
+            SetGrounded(false);
             visuals.gameObject.SetActive(false);
             healthBar.SetActive(false);
         }
@@ -198,11 +205,16 @@ namespace Levels.Enemies
                 yield return null;
             }
             ResetVisuals();
+            SetGrounded(true);
             Shake(.27f, .18f);
+            GameAudio.Play(Cue.SpiderLand);
+            GameAudio.Play(Cue.SpiderIntroRumble);
             yield return WaitInFight(.28f);
+            GameAudio.Play(Cue.SpiderIntro);
             healthBar.SetActive(true);
             ReleaseControls();
             State = EncounterState.Phase1;
+            GameAudio.BeginBossFight();
             yield return Hunt();
         }
 
@@ -229,6 +241,7 @@ namespace Levels.Enemies
                         Marker(groundMarker, BossPosition, meleeRadius, Amber);
                         yield return WaitInFight(meleeWarning);
                         groundMarker.color = Red;
+                        GameAudio.PlayAt(Cue.SpiderMelee, BossPosition);
                         HitCircle(BossPosition, meleeRadius, meleeDamage, 0f);
                         yield return WaitInFight(.16f);
                         groundMarker.enabled = false;
@@ -244,8 +257,10 @@ namespace Levels.Enemies
                 }
 
                 Vector3 position = boss.transform.position;
+                float previousX = position.x;
                 position.x = Mathf.MoveTowards(position.x, destination, patrolSpeed * Time.deltaTime);
                 boss.transform.position = position;
+                GameAudio.SpiderStride(ref scuttleDistance, Mathf.Abs(position.x - previousX), position);
                 if (position.x == destination) destination = destination == right ? left : right;
                 yield return null;
             }
@@ -261,6 +276,7 @@ namespace Levels.Enemies
 
         private void BossHit(int amount)
         {
+            if (boss.CurrentHealth > 0) GameAudio.PlayAt(Cue.SpiderPain, BossPosition);
             if (State == EncounterState.Phase1)
             {
                 phase1Hits++;
@@ -287,6 +303,8 @@ namespace Levels.Enemies
             float waveEdge = Mathf.Lerp(arenaBounds.yMin, arenaBounds.yMax, 1f / 3f);
             if (toPhase2) ShowWave(waveEdge, Amber);
             Vector3 cameraStart = cameraCenter;
+            GameAudio.Play(Cue.SpiderPhase);
+            GameAudio.Play(Cue.SpiderRumble);
             for (float time = 0; time < transitionSeconds; time += Time.deltaTime)
             {
                 float intensity = .07f + .09f * (time / transitionSeconds);
@@ -303,6 +321,7 @@ namespace Levels.Enemies
             {
                 shield.enabled = true;
                 ClearWebs();
+                GameAudio.Play(Cue.WebWave);
                 yield return SweepWebWave(waveEdge);
                 if (!GameFlow.IsGameplayActive) yield break;
                 for (int row = 0; row < 2; row++)
@@ -358,22 +377,30 @@ namespace Levels.Enemies
             {
                 vulnerable = false;
                 SetTangible(false);
+                SetGrounded(false);
                 float riseSeconds = Mathf.Min(.22f, shadowTrackingSeconds);
                 float takeoffHeight = HeightAboveView();
+                GameAudio.Play(Cue.SpiderRise);
                 for (float time = 0; time < shadowTrackingSeconds; time += Time.deltaTime)
                 {
                     if (time < riseSeconds) visuals.localPosition = Vector3.up * (takeoffHeight * time / riseSeconds);
-                    else if (visuals.gameObject.activeSelf) visuals.gameObject.SetActive(false);
+                    else if (visuals.gameObject.activeSelf)
+                    {
+                        visuals.gameObject.SetActive(false);
+                        attackAudio = GameAudio.StartLoop(Cue.SpiderCeiling, transform);
+                    }
                     Marker(groundMarker, ValidLanding(PlayerPosition), landingRadius, Shadow);
                     yield return null;
                 }
 
+                StopAttackAudio();
                 visuals.gameObject.SetActive(false);
                 Vector2 target = ValidLanding(PlayerPosition);
                 Marker(groundMarker, target, landingRadius, Amber);
                 float fallSeconds = Mathf.Min(.18f, shadowLockedSeconds * .45f);
                 yield return WaitInFight(shadowLockedSeconds - fallSeconds);
                 boss.transform.position = target;
+                GameAudio.Play(Cue.SpiderFall);
                 float fallHeight = HeightAboveView();
                 visuals.localPosition = Vector3.up * fallHeight;
                 visuals.gameObject.SetActive(true);
@@ -387,8 +414,10 @@ namespace Levels.Enemies
                 visuals.localPosition = Vector3.zero;
                 groundMarker.color = Red;
                 Shake(.24f, .17f);
+                GameAudio.Play(Cue.SpiderLand);
                 HitCircle(target, landingRadius, landingDamage, landingKnockback);
                 if (!GameFlow.IsGameplayActive) yield break;
+                SetGrounded(true);
                 yield return Stun(phase2Stun);
                 yield return Spin(spinSeconds, false);
             }
@@ -400,9 +429,11 @@ namespace Levels.Enemies
             while (true)
             {
                 SetTangible(false);
+                SetGrounded(false);
                 Vector2 start = BossPosition;
                 Vector2 target = ChooseLanding(start);
                 float duration = jumpSeconds / (Enraged ? enrageSpeed : 1f);
+                GameAudio.Play(Cue.SpiderQuickLeap);
                 for (float time = 0; time < duration; time += Time.deltaTime)
                 {
                     float progress = time / duration;
@@ -415,7 +446,9 @@ namespace Levels.Enemies
 
                 boss.transform.position = target;
                 ResetVisuals();
+                SetGrounded(true);
                 Shake(.13f, .075f);
+                GameAudio.Play(Cue.SpiderQuickLand);
                 ++landings;
                 if (landings >= landingsBeforeStun)
                 {
@@ -451,6 +484,7 @@ namespace Levels.Enemies
             yield return WaitInFight(spinWarning);
             HideFan();
             if (withFan) FireFan(aim, reach);
+            attackAudio = GameAudio.StartLoop(Cue.SpiderSpin, transform);
             groundMarker.color = Red;
             bool contacted = false;
             for (float time = 0; time < duration; time += Time.deltaTime)
@@ -460,7 +494,7 @@ namespace Levels.Enemies
                 {
                     contacted = true;
                     HurtPlayer(spinDamage, spinKnockback, position);
-                    if (!GameFlow.IsGameplayActive) yield break;
+                    if (!GameFlow.IsGameplayActive) { StopAttackAudio(); yield break; }
                 }
                 yield return null;
             }
@@ -516,7 +550,8 @@ namespace Levels.Enemies
 
         private void FireFan(Vector2 aim, float distance)
         {
-            for (int i = 0; i < 3; i++) ShootWeb(FanDirection(aim, i), distance);
+            GameAudio.PlayAt(Cue.WebVolley, BossPosition);
+            for (int i = 0; i < 3; i++) ShootWeb(FanDirection(aim, i), distance, false);
         }
 
         private float DistanceToWall(Vector2 start, Vector2 direction)
@@ -528,10 +563,11 @@ namespace Levels.Enemies
             return Mathf.Min(x, y);
         }
 
-        private void ShootWeb(Vector2 direction, float distance)
+        private void ShootWeb(Vector2 direction, float distance, bool playSpit = true)
         {
             if (projectiles.Count >= maxProjectiles)
             {
+                GameAudio.StopLoop(projectiles[0].FlightAudio);
                 Destroy(projectiles[0].Visual.gameObject);
                 projectiles.RemoveAt(0);
             }
@@ -539,7 +575,14 @@ namespace Levels.Enemies
             render.transform.position = BossPosition;
             SizeSprite(render, Vector2.one * (projectileRadius * 2f));
             render.gameObject.SetActive(true);
-            projectiles.Add(new Projectile { Visual = render, Direction = direction, DistanceLeft = distance });
+            if (playSpit) GameAudio.PlayAt(Cue.WebSpit, BossPosition);
+            projectiles.Add(new Projectile
+            {
+                Visual = render,
+                Direction = direction,
+                DistanceLeft = distance,
+                FlightAudio = GameAudio.StartLoop(Cue.WebFlight, render.transform)
+            });
         }
 
         private void MoveProjectiles()
@@ -560,8 +603,10 @@ namespace Levels.Enemies
                 if (hitsPlayer || hitsWall || shot.DistanceLeft <= 0f)
                 {
                     Vector2 impact = hitsPlayer ? start + shot.Direction * projectileHit[0].distance : end;
+                    GameAudio.StopLoop(shot.FlightAudio);
                     Destroy(shot.Visual.gameObject);
                     projectiles.RemoveAt(i);
+                    GameAudio.PlayAt(Cue.WebImpact, impact);
                     if (hitsPlayer) HurtPlayer(projectileDamage, 0f, start);
                     if (!GameFlow.IsGameplayActive) return;
                     if ((!hitsWall || hitsPlayer) && arenaBounds.Contains(impact)) AddWeb(impact);
@@ -591,6 +636,8 @@ namespace Levels.Enemies
 
         private void UpdateWebs()
         {
+            bool wasTouchingWeb = touchingWeb;
+            touchingWeb = false;
             for (int i = webs.Count - 1; i >= 0; i--)
             {
                 Web web = webs[i];
@@ -602,8 +649,14 @@ namespace Levels.Enemies
                 }
                 bool inside = Touches(web.Visual.transform.position, webRadius);
                 bool entered = inside && !web.Occupied;
+                touchingWeb |= inside;
                 web.Occupied = inside;
                 if (!entered) continue;
+                if (!wasTouchingWeb)
+                {
+                    GameAudio.Play(Cue.WebStep);
+                    wasTouchingWeb = true;
+                }
                 movement.ApplySlow(webSpeedMultiplier, webSlowSeconds);
                 if (Time.time < nextWebDamage) continue;
                 nextWebDamage = Time.time + webSharedImmunity;
@@ -683,6 +736,11 @@ namespace Levels.Enemies
 
         private void SetTangible(bool enabled) => hurtbox.enabled = enabled;
 
+        private void SetGrounded(bool grounded)
+        {
+            if (bodyCollider != null) bodyCollider.enabled = grounded;
+        }
+
         private void Shake(float duration, float strength)
         {
             shakeTime = duration;
@@ -702,8 +760,15 @@ namespace Levels.Enemies
             }
         }
 
+        private void StopAttackAudio()
+        {
+            GameAudio.StopLoop(attackAudio);
+            attackAudio = 0;
+        }
+
         private void ResetVisuals()
         {
+            StopAttackAudio();
             if (groundMarker != null) groundMarker.enabled = false;
             if (waveMarker != null) waveMarker.enabled = false;
             if (shield != null) shield.enabled = false;
@@ -729,6 +794,8 @@ namespace Levels.Enemies
             State = EncounterState.Defeated;
             StopEncounter();
             GameFlow.Instance.BossDefeated();
+            GameAudio.EndCombatAudio();
+            GameAudio.Play(Cue.SpiderDeath);
             sequence = StartCoroutine(ShowVictory());
         }
 
@@ -761,7 +828,11 @@ namespace Levels.Enemies
 
         private void ClearProjectiles()
         {
-            foreach (Projectile shot in projectiles) Destroy(shot.Visual.gameObject);
+            foreach (Projectile shot in projectiles)
+            {
+                GameAudio.StopLoop(shot.FlightAudio);
+                Destroy(shot.Visual.gameObject);
+            }
             projectiles.Clear();
         }
 
@@ -769,6 +840,7 @@ namespace Levels.Enemies
         {
             foreach (Web web in webs) Destroy(web.Visual.gameObject);
             webs.Clear();
+            touchingWeb = false;
         }
 
         private void StopEncounter()
@@ -779,6 +851,7 @@ namespace Levels.Enemies
             ClearWebs();
             if (healthBar != null) healthBar.SetActive(false);
             if (hurtbox != null) SetTangible(false);
+            SetGrounded(false);
             if (visuals != null) ResetVisuals();
             if (movement != null) movement.ClearMovementEffects();
             ReleaseControls();

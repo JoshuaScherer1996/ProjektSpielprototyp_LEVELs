@@ -1,0 +1,581 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac5769d01b3edd945a833e1ab954e6ff, type: 3}
+  m_Name: LevelsAudio
+  m_EditorClassIdentifier: Assembly-CSharp::Levels.Audio.AudioLibrary
+  mixer: {fileID: 24100000, guid: c89c1a34f7441bd4abe1c1e0e9811948, type: 2}
+  musicGain: 0.17875
+  sfxGain: 0.8
+  pausedMusicGain: 0.25
+  musicFade: 0.22
+  voiceCount: 14
+  enemyStepVoices: 2
+  playerStride: 1.28
+  goblinStride: 0.62
+  cyclopsStride: 1.22
+  spiderStride: 1.1
+  cues:
+  - cue: 0
+    clips:
+    - {fileID: 8300000, guid: cca80bf615d2024479c7c6dea20e6988, type: 3}
+    bus: 1
+    gain: 0.21
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0.06
+    audibleDistance: 0
+    priority: 3
+    maxVoices: 1
+  - cue: 1
+    clips:
+    - {fileID: 8300000, guid: b18c34c1c85f263479f6a9d203cfc8a5, type: 3}
+    bus: 1
+    gain: 0.27
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0.055
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 2
+    clips:
+    - {fileID: 8300000, guid: f67eafbb75f63424eb9bd55e0eeba176, type: 3}
+    bus: 1
+    gain: 0.38
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 3
+    clips:
+    - {fileID: 8300000, guid: bb1d9af3398e10a49a57f0a82925a70b, type: 3}
+    bus: 1
+    gain: 0.37
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 4
+    clips:
+    - {fileID: 8300000, guid: ced18e0882ce1164ca4b76a989cf838e, type: 3}
+    bus: 0
+    gain: 0.47
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 4
+    maxVoices: 1
+  - cue: 5
+    clips:
+    - {fileID: 8300000, guid: b6bb4a2c16ca0b148afc69d86ca156fa, type: 3}
+    bus: 1
+    gain: 0.43
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 6
+    clips:
+    - {fileID: 8300000, guid: 70d058174cb3c444399f46e8bf5f527f, type: 3}
+    bus: 1
+    gain: 0.49
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 7
+    clips:
+    - {fileID: 8300000, guid: e49f957d92bd1b94dbf5c24d3e5a0136, type: 3}
+    bus: 0
+    gain: 0.59
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 8
+    clips:
+    - {fileID: 8300000, guid: 5c774fc1c9a41da4d8ebef07db1ae60f, type: 3}
+    bus: 1
+    gain: 0.68
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 7
+    maxVoices: 1
+  - cue: 9
+    clips:
+    - {fileID: 8300000, guid: 1bcf6c689d2ae5e48a95ebf3a19d07b3, type: 3}
+    bus: 1
+    gain: 0.45
+    pitch: 0.86
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 7
+    maxVoices: 1
+  - cue: 10
+    clips:
+    - {fileID: 8300000, guid: 0866c046191d003459022f2a7e5f06b0, type: 3}
+    - {fileID: 8300000, guid: 097cd79f5374d6a48ab8925211eb4cc9, type: 3}
+    bus: 0
+    gain: 0.35
+    pitch: 1
+    pitchVariation: 0.06
+    cooldown: 0.13
+    audibleDistance: 0
+    priority: 2
+    maxVoices: 1
+  - cue: 11
+    clips:
+    - {fileID: 8300000, guid: 2e9446248a15d874b8efcff44010ac4e, type: 3}
+    - {fileID: 8300000, guid: 6ce9ab04cfbb3594480e1f6b637e3e03, type: 3}
+    bus: 0
+    gain: 0.43
+    pitch: 1
+    pitchVariation: 0.055
+    cooldown: 0.13
+    audibleDistance: 0
+    priority: 2
+    maxVoices: 2
+  - cue: 12
+    clips:
+    - {fileID: 8300000, guid: 1e4e86803d11d9a40942b0a1ee1281af, type: 3}
+    - {fileID: 8300000, guid: 5f48548f21fc3f14bb1e6bfca9bdf083, type: 3}
+    bus: 0
+    gain: 0.27
+    pitch: 1
+    pitchVariation: 0.06
+    cooldown: 0.13
+    audibleDistance: 0
+    priority: 2
+    maxVoices: 2
+  - cue: 13
+    clips:
+    - {fileID: 8300000, guid: 2e9446248a15d874b8efcff44010ac4e, type: 3}
+    - {fileID: 8300000, guid: 6ce9ab04cfbb3594480e1f6b637e3e03, type: 3}
+    bus: 0
+    gain: 0.24
+    pitch: 1.24
+    pitchVariation: 0.075
+    cooldown: 0.09
+    audibleDistance: 10
+    priority: 1
+    maxVoices: 2
+  - cue: 14
+    clips:
+    - {fileID: 8300000, guid: 2e9446248a15d874b8efcff44010ac4e, type: 3}
+    - {fileID: 8300000, guid: 6ce9ab04cfbb3594480e1f6b637e3e03, type: 3}
+    bus: 0
+    gain: 0.37
+    pitch: 0.6
+    pitchVariation: 0.045
+    cooldown: 0.12
+    audibleDistance: 11
+    priority: 2
+    maxVoices: 2
+  - cue: 15
+    clips:
+    - {fileID: 8300000, guid: 082afa325ea0d7748bbea6093eab961b, type: 3}
+    bus: 0
+    gain: 0.39
+    pitch: 1
+    pitchVariation: 0.045
+    cooldown: 0.05
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 16
+    clips:
+    - {fileID: 8300000, guid: de116ffa80a8fc04e96c70ef70760a7c, type: 3}
+    bus: 0
+    gain: 0.64
+    pitch: 1
+    pitchVariation: 0.05
+    cooldown: 0.13
+    audibleDistance: 0
+    priority: 8
+    maxVoices: 2
+  - cue: 17
+    clips:
+    - {fileID: 8300000, guid: 9118596a2f3506944a80feae5af0d566, type: 3}
+    bus: 2
+    gain: 0.7
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 10
+    maxVoices: 1
+  - cue: 18
+    clips:
+    - {fileID: 8300000, guid: dfe132f9d5db41549b682edf1a02ba0a, type: 3}
+    bus: 0
+    gain: 0.67
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 19
+    clips:
+    - {fileID: 8300000, guid: 8bb7699455be8634098fb26a6e0dec71, type: 3}
+    bus: 0
+    gain: 0.5
+    pitch: 1
+    pitchVariation: 0.035
+    cooldown: 0.1
+    audibleDistance: 0
+    priority: 8
+    maxVoices: 2
+  - cue: 20
+    clips:
+    - {fileID: 8300000, guid: 4a0d005af0891974c9700c6f934ebfb8, type: 3}
+    bus: 0
+    gain: 0.6
+    pitch: 0.9
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 9
+    maxVoices: 1
+  - cue: 21
+    clips:
+    - {fileID: 8300000, guid: 7aa2313355db69f46a35e003d3021aa8, type: 3}
+    bus: 1
+    gain: 0.69
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 8
+    maxVoices: 1
+  - cue: 22
+    clips:
+    - {fileID: 8300000, guid: b550479b949550a4ea7f7fd43ea895b1, type: 3}
+    bus: 0
+    gain: 0.39
+    pitch: 1.08
+    pitchVariation: 0.09
+    cooldown: 0.09
+    audibleDistance: 16
+    priority: 5
+    maxVoices: 2
+  - cue: 23
+    clips:
+    - {fileID: 8300000, guid: 419ea44befdc1f14ea84006d3fbc1702, type: 3}
+    bus: 0
+    gain: 0.34
+    pitch: 1.08
+    pitchVariation: 0.065
+    cooldown: 0.08
+    audibleDistance: 16
+    priority: 5
+    maxVoices: 2
+  - cue: 24
+    clips:
+    - {fileID: 8300000, guid: a2af9333c90bb6a4884e469cce350d90, type: 3}
+    bus: 0
+    gain: 0.5
+    pitch: 1.32
+    pitchVariation: 0.06
+    cooldown: 0.1
+    audibleDistance: 18
+    priority: 6
+    maxVoices: 2
+  - cue: 25
+    clips:
+    - {fileID: 8300000, guid: 6af0aceb6a9ce6642b057163a6510b93, type: 3}
+    bus: 0
+    gain: 0.39
+    pitch: 0.9
+    pitchVariation: 0.055
+    cooldown: 0.1
+    audibleDistance: 16
+    priority: 5
+    maxVoices: 2
+  - cue: 26
+    clips:
+    - {fileID: 8300000, guid: 15cced1a91d9d9c48a8537faeedce4ad, type: 3}
+    bus: 0
+    gain: 0.6
+    pitch: 0.83
+    pitchVariation: 0.045
+    cooldown: 0.09
+    audibleDistance: 16
+    priority: 6
+    maxVoices: 2
+  - cue: 27
+    clips:
+    - {fileID: 8300000, guid: 4abb6a9a04b80fd4a9cb6e07316410b6, type: 3}
+    bus: 0
+    gain: 0.62
+    pitch: 0.88
+    pitchVariation: 0.045
+    cooldown: 0.12
+    audibleDistance: 18
+    priority: 7
+    maxVoices: 2
+  - cue: 28
+    clips:
+    - {fileID: 8300000, guid: fdb726ff8d6176e4ba3d83a458e53fd6, type: 3}
+    bus: 3
+    gain: 0.68
+    pitch: 0.83
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 8
+    maxVoices: 1
+  - cue: 29
+    clips:
+    - {fileID: 8300000, guid: 0c29336fe440f814ba2c012af40d50ba, type: 3}
+    bus: 0
+    gain: 0.58
+    pitch: 0.81
+    pitchVariation: 0
+    cooldown: 0.1
+    audibleDistance: 0
+    priority: 8
+    maxVoices: 1
+  - cue: 30
+    clips:
+    - {fileID: 8300000, guid: b671be5efca54164da428c4259ae2471, type: 3}
+    bus: 0
+    gain: 0.46
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 31
+    clips:
+    - {fileID: 8300000, guid: 9eaf05d387357e744b677697f7cf1b72, type: 3}
+    bus: 0
+    gain: 0.43
+    pitch: 1
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 32
+    clips:
+    - {fileID: 8300000, guid: 62441eb8f456ad54f86f5248394f15e9, type: 3}
+    bus: 0
+    gain: 0.47
+    pitch: 0.94
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 7
+    maxVoices: 1
+  - cue: 33
+    clips:
+    - {fileID: 8300000, guid: 062f66f5aef03d84a857ef005a56117d, type: 3}
+    bus: 0
+    gain: 0.21
+    pitch: 1.06
+    pitchVariation: 0.07
+    cooldown: 0.11
+    audibleDistance: 14
+    priority: 2
+    maxVoices: 1
+  - cue: 34
+    clips:
+    - {fileID: 8300000, guid: ef40f76ea9ba5fc42a0340a2f1844421, type: 3}
+    bus: 0
+    gain: 0.46
+    pitch: 0.93
+    pitchVariation: 0.075
+    cooldown: 0.12
+    audibleDistance: 18
+    priority: 6
+    maxVoices: 1
+  - cue: 35
+    clips:
+    - {fileID: 8300000, guid: f95e63499fbca0441a14bdd17186f5f0, type: 3}
+    bus: 0
+    gain: 0.38
+    pitch: 1.12
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 18
+    priority: 5
+    maxVoices: 1
+  - cue: 36
+    clips:
+    - {fileID: 8300000, guid: ab490bf58c6de2145808a5f0da2179c7, type: 3}
+    bus: 0
+    gain: 0.43
+    pitch: 1
+    pitchVariation: 0.045
+    cooldown: 0
+    audibleDistance: 21
+    priority: 5
+    maxVoices: 1
+  - cue: 37
+    clips:
+    - {fileID: 8300000, guid: cd3cf68c097ef8340bfe9b4873621f62, type: 3}
+    bus: 0
+    gain: 0.52
+    pitch: 1.15
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 23
+    priority: 6
+    maxVoices: 1
+  - cue: 38
+    clips:
+    - {fileID: 8300000, guid: ad3318d144f591345bf6d63a489bbe5b, type: 3}
+    bus: 0
+    gain: 0.19
+    pitch: 1.11
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 2
+    maxVoices: 1
+  - cue: 39
+    clips:
+    - {fileID: 8300000, guid: cfba45b0595fe3441a57efc244f49bb7, type: 3}
+    bus: 0
+    gain: 0.33
+    pitch: 1
+    pitchVariation: 0.095
+    cooldown: 0
+    audibleDistance: 16
+    priority: 5
+    maxVoices: 3
+  - cue: 40
+    clips:
+    - {fileID: 8300000, guid: f7e3eafad6a9f9d439467d92827b0db9, type: 3}
+    bus: 0
+    gain: 0.3
+    pitch: 0.95
+    pitchVariation: 0.04
+    cooldown: 0.16
+    audibleDistance: 0
+    priority: 4
+    maxVoices: 1
+  - cue: 41
+    clips:
+    - {fileID: 8300000, guid: e9bb35f4e8b9f294cba7a529c8e7429d, type: 3}
+    bus: 0
+    gain: 0.56
+    pitch: 1.27
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 8
+    maxVoices: 1
+  - cue: 42
+    clips:
+    - {fileID: 8300000, guid: fcfbf1b0718336541bdf2c280641e777, type: 3}
+    bus: 0
+    gain: 0.66
+    pitch: 0.75
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 7
+    maxVoices: 1
+  - cue: 43
+    clips:
+    - {fileID: 8300000, guid: 20396d391de857544a7097c42ee8cf4b, type: 3}
+    bus: 0
+    gain: 0.45
+    pitch: 1.12
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 44
+    clips:
+    - {fileID: 8300000, guid: 4364c8bbf470b184c9aaaad59c1b783e, type: 3}
+    bus: 0
+    gain: 0.54
+    pitch: 1.05
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 45
+    clips:
+    - {fileID: 8300000, guid: c257cba357bccd24db1db14f8478c275, type: 3}
+    bus: 0
+    gain: 0.46
+    pitch: 0.77
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 46
+    clips:
+    - {fileID: 8300000, guid: da3a5660158c8464797d49e886802a8c, type: 3}
+    bus: 0
+    gain: 0.32
+    pitch: 0.87
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 6
+    maxVoices: 1
+  - cue: 47
+    clips:
+    - {fileID: 8300000, guid: 8faa8adbeba431744a5c40fee1a60fc9, type: 3}
+    bus: 0
+    gain: 0.41
+    pitch: 1.25
+    pitchVariation: 0.07
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 48
+    clips:
+    - {fileID: 8300000, guid: 4a05c8a173c279c4084fd7307e8dbf42, type: 3}
+    bus: 0
+    gain: 0.42
+    pitch: 1
+    pitchVariation: 0.055
+    cooldown: 0
+    audibleDistance: 0
+    priority: 5
+    maxVoices: 1
+  - cue: 49
+    clips:
+    - {fileID: 8300000, guid: 52710c9f9250cb44f9c118a07a756f1b, type: 3}
+    bus: 2
+    gain: 0.68
+    pitch: 0.92
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 10
+    maxVoices: 1

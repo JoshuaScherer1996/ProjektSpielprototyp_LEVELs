@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Core;
 using UnityEngine;
 
@@ -19,15 +20,14 @@ namespace Levels.UI
         }
         private void OnEnable() { playButton.onClick.AddListener(Play); exitButton.onClick.AddListener(Exit); }
         private void OnDisable() { playButton.onClick.RemoveListener(Play); exitButton.onClick.RemoveListener(Exit); }
-        public void Play() { if (GameFlow.Instance != null) GameFlow.Instance.StartNewRun(); }
+        public void Play()
+        {
+            if (GameFlow.Instance != null && GameFlow.Instance.StartNewRun()) GameAudio.Play(Cue.Confirm);
+        }
         public void Exit()
         {
             if (GameFlow.State != RunState.MainMenu) return;
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#elif !UNITY_WEBGL
-            Application.Quit();
-#endif
+            GameAudio.ConfirmAndQuit();
         }
     }
 }

@@ -112,3 +112,20 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+/Assets/_LEVELS/Audio/Resources/Main Menu.ogg
+/Assets/_LEVELS/Audio/Resources/Main Menu.ogg.meta
+/Assets/_LEVELS/Audio/Resources/Town.ogg
+/Assets/_LEVELS/Audio/Resources/Town.ogg.meta
+/Assets/_LEVELS/Audio/Resources/Battle.ogg
+/Assets/_LEVELS/Audio/Resources/Battle.ogg.meta
+/Assets/_LEVELS/Audio/Resources/Ancient Dungeon.ogg
+/Assets/_LEVELS/Audio/Resources/Ancient Dungeon.ogg.meta
+/Assets/_LEVELS/Audio/Resources/Monstrosity.ogg
+/Assets/_LEVELS/Audio/Resources/Monstrosity.ogg.meta
+/Assets/_LEVELS/Audio/Resources/7. Emotional Theme (Sentimental Wishes).wav
+/Assets/_LEVELS/Audio/Resources/7. Emotional Theme (Sentimental Wishes).wav.meta
+/Assets/_LEVELS/Audio/Resources/Victory (Intro).ogg
+/Assets/_LEVELS/Audio/Resources/Victory (Intro).ogg.meta
+/Assets/_LEVELS/Audio/Resources/Victory (Loop).ogg
+/Assets/_LEVELS/Audio/Resources/Victory (Loop).ogg.meta

@@ -1,3 +1,4 @@
+using Levels.Audio;
 using System;
 using UnityEngine;
 
@@ -223,6 +224,8 @@ namespace Levels.Core
             }
             try { Changed?.Invoke(); }
             finally { purchasingShop = false; }
+            GameAudio.Play(Cue.Purchase);
+            if (offer == ShopOffer.PowerRing) GameAudio.Play(Cue.Ring);
             return ShopPurchaseResult.Success;
         }
 
@@ -242,6 +245,7 @@ namespace Levels.Core
             PotionCount--;
             PlayerHealth += Mathf.Min(healing, PlayerMaxHealth - PlayerHealth);
             Changed?.Invoke();
+            GameAudio.Play(Cue.Potion);
             return true;
         }
 
@@ -260,6 +264,7 @@ namespace Levels.Core
             else EnemyLevel++;
             try { Changed?.Invoke(); }
             finally { purchasingLevel = false; }
+            GameAudio.Play(type.HasValue ? Cue.EnemyLevel : Cue.PlayerLevel);
             return true;
         }
 

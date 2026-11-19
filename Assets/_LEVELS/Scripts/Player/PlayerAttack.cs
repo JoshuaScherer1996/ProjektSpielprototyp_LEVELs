@@ -1,3 +1,4 @@
+using Levels.Audio;
 using System.Collections;
 using System.Collections.Generic;
 using Levels.Core;
@@ -111,6 +112,7 @@ namespace Levels.Player
 
             UpdateFacing();
             nextAttackTime = Time.time + cooldownSeconds;
+            GameAudio.Play(Cue.Sword);
             if (slashRenderer != null)
             {
                 if (slashRoutine != null) StopCoroutine(slashRoutine);
@@ -122,6 +124,7 @@ namespace Levels.Player
             Vector2 size = new Vector2(hitbox.size.x * Mathf.Abs(scale.x),
                 hitbox.size.y * Mathf.Abs(scale.y));
             Vector2 center = hitbox.transform.TransformPoint(hitbox.offset);
+            Physics2D.SyncTransforms();
             Collider2D[] overlaps = Physics2D.OverlapBoxAll(center, size, hitbox.transform.eulerAngles.z);
 
             hitThisAttack.Clear();

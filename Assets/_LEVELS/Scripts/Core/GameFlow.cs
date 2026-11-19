@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Enemies;
 using Levels.Player;
 using Levels.Scenes;
@@ -72,6 +73,7 @@ namespace Levels.Core
                 ai.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
             PlayerInputReader.ConsumeInteractForCurrentFrame();
             Time.timeScale = 0f;
+            GameAudio.Play(Cue.Pause);
             return true;
         }
 
@@ -142,6 +144,8 @@ namespace Levels.Core
         {
             if (State != RunState.Playing) return;
             State = RunState.GameOver; // Synchronous gate precedes all death/health observers.
+            GameAudio.EndCombatAudio();
+            GameAudio.Play(Cue.PlayerDeath);
             Time.timeScale = 1f;
             StopGameplay();
             if (gameOverUI != null) gameOverUI.Show();

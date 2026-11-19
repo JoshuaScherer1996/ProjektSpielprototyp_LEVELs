@@ -97,6 +97,12 @@ namespace Levels.Scenes
 
         private IEnumerator BeginLoad(PlayerMovement sourcePlayer)
         {
+            if (loadingScreen.IsWaitingForAudio)
+            {
+                while (isTransitioning && loadingScreen.IsWaitingForAudio) yield return null;
+                if (!isTransitioning) yield break;
+                loadingScreen.Reveal();
+            }
             // Render the source scene's black overlay before beginning the async load.
             yield return null;
             if (!isTransitioning) yield break;

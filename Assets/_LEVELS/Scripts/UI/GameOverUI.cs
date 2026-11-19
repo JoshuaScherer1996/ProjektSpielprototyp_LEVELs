@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Core;
 using UnityEngine;
 
@@ -13,7 +14,14 @@ namespace Levels.UI
         private void OnEnable() { retryButton.onClick.AddListener(Retry); mainMenuButton.onClick.AddListener(BackToMainMenu); }
         private void OnDisable() { retryButton.onClick.RemoveListener(Retry); mainMenuButton.onClick.RemoveListener(BackToMainMenu); }
         public void Show() => panel.SetActive(true);
-        public void Retry() { if (GameFlow.Instance != null) GameFlow.Instance.StartNewRun(); }
-        public void BackToMainMenu() { if (GameFlow.Instance != null) GameFlow.Instance.BackToMainMenu(); }
+        public void Retry()
+        {
+            if (GameFlow.Instance != null && GameFlow.Instance.StartNewRun()) GameAudio.Play(Cue.Confirm);
+        }
+
+        public void BackToMainMenu()
+        {
+            if (GameFlow.Instance != null && GameFlow.Instance.BackToMainMenu()) GameAudio.Play(Cue.Confirm);
+        }
     }
 }

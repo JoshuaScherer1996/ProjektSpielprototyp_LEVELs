@@ -1,3 +1,4 @@
+using Levels.Audio;
 using Levels.Player;
 using Levels.Scenes;
 using Levels.UI;
@@ -69,13 +70,17 @@ namespace Levels.Core
         {
             if (GameFlow.State != RunState.Paused || SceneTransitionService.IsTransitioning) return;
             menu.Hide();
-            flow.Resume();
+            if (flow.Resume()) GameAudio.Play(Cue.Continue);
             handledFrame = Time.frameCount;
         }
 
         public void BackToMainMenu()
         {
-            if (GameFlow.State == RunState.Paused && flow.BackToMainMenu()) menu.Hide();
+            if (GameFlow.State == RunState.Paused && flow.BackToMainMenu())
+            {
+                GameAudio.Play(Cue.Confirm);
+                menu.Hide();
+            }
         }
 
         private void OnDisable()

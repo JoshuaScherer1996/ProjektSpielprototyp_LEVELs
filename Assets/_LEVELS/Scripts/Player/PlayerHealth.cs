@@ -1,3 +1,4 @@
+using Levels.Audio;
 using System;
 using Levels.Core;
 using UnityEngine;
@@ -88,12 +89,14 @@ namespace Levels.Player
             {
                 invulnerableUntil = Time.time + Mathf.Max(shieldHitProtection, invulnerabilitySeconds);
                 session.ConsumeShieldCharge();
+                GameAudio.Play(session.ShieldCharges == 0 ? Cue.ShieldBreak : Cue.Shield);
                 return true;
             }
             invulnerableUntil = Time.time + Mathf.Max(0f, invulnerabilitySeconds);
             int appliedDamage = Mathf.Min(amount, CurrentHealth);
             CurrentHealth -= appliedDamage;
             if (CurrentHealth == 0) GameFlow.Instance?.PlayerDied();
+            else GameAudio.Play(Cue.PlayerPain);
             GameSession.Instance?.UpdatePlayerHealth(CurrentHealth, MaxHealth);
             HealthChanged?.Invoke(CurrentHealth, MaxHealth);
             DamageApplied?.Invoke(appliedDamage);
