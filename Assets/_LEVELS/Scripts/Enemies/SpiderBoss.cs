@@ -5,13 +5,14 @@ using Levels.Core;
 using Levels.Player;
 using Levels.Scenes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Levels.Enemies
 {
     [DisallowMultipleComponent]
     public sealed class SpiderBoss : MonoBehaviour
     {
-        public enum EncounterState { Intro, Phase1, TransitionToPhase2, Phase2, TransitionToPhase3, Phase3, Defeated }
+        public enum EncounterState { Intro, Phase1, TransitionToPhase2, Phase2, TransitionToPhase3, Phase3, Defeated, Phase1WebWave }
 
         [Header("Arena")]
         [SerializeField] private PlayerHealth player;
@@ -40,7 +41,8 @@ namespace Levels.Enemies
         [SerializeField, Min(0f)] private float victoryDelay = 1.1f;
 
         [Header("Phase 1")]
-        [SerializeField, Min(1)] private int hitsForPhase2 = 15;
+        [FormerlySerializedAs("hitsForPhase2")]
+        [SerializeField, Min(1)] private int hitsForPhase1Wave = 15;
         [SerializeField, Min(.1f)] private float patrolHalfWidth = 5.9f;
         [SerializeField, Min(.1f)] private float patrolLegSeconds = 3f;
         [SerializeField, Min(.1f)] private float shotInterval = 2f;
@@ -280,28 +282,30 @@ namespace Levels.Enemies
             if (State == EncounterState.Phase1)
             {
                 phase1Hits++;
-                if (phase1Hits >= hitsForPhase2 || boss.CurrentHealth <= Phase2Threshold)
-                    BeginTransition(true);
+                if (boss.CurrentHealth <= Phase2Threshold)
+                    BeginSequence(EncounterState.TransitionToPhase2);
+                else if (phase1Hits == hitsForPhase1Wave)
+                    BeginSequence(EncounterState.Phase1WebWave);
             }
             else if (State == EncounterState.Phase2 && boss.CurrentHealth <= Phase3Threshold)
-                BeginTransition(false);
+                BeginSequence(EncounterState.TransitionToPhase3);
         }
 
-        private void BeginTransition(bool toPhase2)
+        private void BeginSequence(EncounterState nextState)
         {
             vulnerable = false;
-            State = toPhase2 ? EncounterState.TransitionToPhase2 : EncounterState.TransitionToPhase3;
+            State = nextState;
             StopCoroutine(sequence);
             ResetVisuals();
             ClearProjectiles();
-            sequence = StartCoroutine(Transition(toPhase2));
+            sequence = StartCoroutine(Transition(nextState != EncounterState.TransitionToPhase3));
         }
 
-        private IEnumerator Transition(bool toPhase2)
+        private IEnumerator Transition(bool withWebWave)
         {
             shield.enabled = true;
             float waveEdge = Mathf.Lerp(arenaBounds.yMin, arenaBounds.yMax, 1f / 3f);
-            if (toPhase2) ShowWave(waveEdge, Amber);
+            if (withWebWave) ShowWave(waveEdge, Amber);
             Vector3 cameraStart = cameraCenter;
             GameAudio.Play(Cue.SpiderPhase);
             GameAudio.Play(Cue.SpiderRumble);
@@ -317,7 +321,7 @@ namespace Levels.Enemies
 
             while (GameFlow.State == RunState.Paused) yield return null;
             ResetVisuals();
-            if (toPhase2)
+            if (withWebWave)
             {
                 shield.enabled = true;
                 ClearWebs();
@@ -339,8 +343,16 @@ namespace Levels.Enemies
                 ClearWebs();
                 movement.ClearSlow();
                 ResetVisuals();
-                State = EncounterState.Phase2;
-                yield return LeapAndSpin();
+                if (boss.CurrentHealth <= Phase2Threshold)
+                {
+                    State = EncounterState.Phase2;
+                    yield return LeapAndSpin();
+                }
+                else
+                {
+                    State = EncounterState.Phase1;
+                    yield return Hunt();
+                }
             }
             else
             {

@@ -69,7 +69,6 @@ namespace Levels.Editor
             // Persist the new independent tuning values in the existing progression asset.
             EditorUtility.SetDirty(AssetDatabase.LoadAssetAtPath<ProgressionSettings>(Root + "Resources/LevelsProgression.asset"));
             ConfigureMenu();
-            ConfigureHUD();
             ConfigureSpawner();
             AssetDatabase.SaveAssets();
             Debug.Log("M11: Goblin GUID preserved; editable Cyclops, three level purchases and two spawn categories configured.");
@@ -124,19 +123,6 @@ namespace Levels.Editor
             card.Find("Details").GetComponent<UnityEngine.UI.Text>().text =
                 "Player Lv 1   Goblin Lv 1   Cyclops Lv 1\nAvailable EXP: 0\n\nPlayer upgrade: 20 EXP\nGoblin upgrade: 20 EXP\nCyclops upgrade: 20 EXP";
             Set(root.GetComponent<LevelingMenu>(), "cyclopsButton", cyclops);
-        });
-
-        private static void ConfigureHUD() => Edit(Root + "Prefabs/UI/PlayerHUD.prefab", root =>
-        {
-            var hud = new SerializedObject(root.GetComponent<PlayerHealthHUD>());
-            var text = (UnityEngine.UI.Text)hud.FindProperty("levelText").objectReferenceValue;
-            text.text = "Player Lv 1  |  Goblin Lv 1  |  Cyclops Lv 1";
-            text.resizeTextForBestFit = true;
-            text.resizeTextMinSize = 12;
-            text.resizeTextMaxSize = text.fontSize;
-            // The label stretches to its existing panel; widen that panel rather than adding to stretch width.
-            var panel = text.transform.parent.GetComponent<RectTransform>();
-            panel.sizeDelta = new Vector2(600, panel.sizeDelta.y);
         });
 
         private static void ConfigureSpawner()

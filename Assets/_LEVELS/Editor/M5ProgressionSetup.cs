@@ -34,25 +34,6 @@ namespace Levels.Editor
 
             EditPrefab("Characters/Player", root => Ensure<PlayerProgression>(root));
             EditPrefab("Characters/Enemy_Goblin", root => Ensure<EnemyProgression>(root));
-            EditPrefab("UI/PlayerHUD", root =>
-            {
-                Transform healthPanel = root.transform.Find("HealthPanel");
-                UnityEngine.UI.Text gold = root.GetComponentsInChildren<UnityEngine.UI.Text>(true)
-                    .First(t => t.name == "GoldLabel");
-                UnityEngine.UI.Text levels = root.GetComponentsInChildren<UnityEngine.UI.Text>(true)
-                    .FirstOrDefault(t => t.name == "LevelLabel");
-                if (levels == null)
-                {
-                    GameObject clone = UnityEngine.Object.Instantiate(gold.gameObject, gold.transform.parent);
-                    clone.name = "LevelLabel";
-                    levels = clone.GetComponent<UnityEngine.UI.Text>();
-                }
-                levels.text = "Player Lv 1  |  Enemies Lv 1";
-                levels.fontSize = 20;
-                levels.rectTransform.anchoredPosition = gold.rectTransform.anchoredPosition + new Vector2(0, -30);
-                healthPanel.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 146);
-                Set(root.GetComponent<PlayerHealthHUD>(), "levelText", levels);
-            });
 
             string menuPath = Root + "Prefabs/UI/LevelingMenu.prefab";
             if (AssetDatabase.LoadAssetAtPath<GameObject>(menuPath) == null) CreateMenu(menuPath);

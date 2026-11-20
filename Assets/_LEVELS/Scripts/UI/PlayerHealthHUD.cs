@@ -1,7 +1,7 @@
 using Levels.Core;
 using Levels.Player;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Levels.UI
 {
@@ -10,74 +10,60 @@ namespace Levels.UI
     public sealed class PlayerHealthHUD : MonoBehaviour
     {
         [SerializeField] private PlayerHealth playerHealth;
-        [SerializeField] private UnityEngine.UI.Text healthText;
-        [SerializeField] private UnityEngine.UI.Text experienceText;
-        [SerializeField] private UnityEngine.UI.Text goldText;
-        [SerializeField] private UnityEngine.UI.Text levelText;
-        [SerializeField] private Text shieldText;
-        [SerializeField] private GameObject potionDisplay;
-        [SerializeField] private Text potionCountText;
-        [SerializeField] private Text potionHintText;
-        [SerializeField] private CanvasGroup potionStyle;
-        [SerializeField] private Color ringHealthColor = new(1f, .28f, .28f);
+        [SerializeField] private RectTransform healthFill;
+        [SerializeField] private TMP_Text healthText;
+        [SerializeField] private TMP_Text levelText;
+        [SerializeField] private TMP_Text experienceText;
+        [SerializeField] private TMP_Text goldText;
+        [SerializeField] private GameObject shieldBadge;
+        [SerializeField] private TMP_Text shieldText;
+        [SerializeField] private TMP_Text potionCountText;
+        [SerializeField] private TMP_Text potionHintText;
+        [SerializeField] private CanvasGroup potionIcon;
 
         private GameSession session;
-        private Color normalHealthColor;
-
-        private void Awake()
-        {
-            if (healthText != null) normalHealthColor = healthText.color;
-        }
 
         private void OnEnable()
         {
             session = GameSession.Instance;
-            if (session == null || playerHealth == null || healthText == null ||
-                experienceText == null || goldText == null)
+            if (session == null || playerHealth == null || healthFill == null || healthText == null ||
+                levelText == null || experienceText == null || goldText == null || shieldBadge == null || shieldText == null ||
+                potionCountText == null || potionHintText == null || potionIcon == null)
             {
-                Debug.LogError("PlayerHealthHUD requires a GameSession, PlayerHealth and three Text references.", this);
+                Debug.LogError("PlayerHealthHUD requires a GameSession, PlayerHealth and all HUD references.", this);
+                session = null;
                 return;
             }
 
-            session.Changed += UpdateText;
-            UpdateText();
+            session.Changed += Refresh;
+            Refresh();
         }
 
         private void OnDisable()
         {
-            if (session != null) session.Changed -= UpdateText;
+            if (session != null) session.Changed -= Refresh;
             session = null;
         }
 
-        private void UpdateText()
+        private void Refresh()
         {
-            healthText.text = $"HP: {session.PlayerHealth}/{session.PlayerMaxHealth}";
-            healthText.color = session.HasPowerRing ? ringHealthColor : normalHealthColor;
-            if (shieldText != null)
-            {
-                shieldText.gameObject.SetActive(session.ShieldCharges > 0);
-                shieldText.text = $"Schild {session.ShieldCharges}/{GameSession.MaxShieldCharges}";
-            }
-            if (potionDisplay != null)
-            {
-                potionCountText.text = $"Health Potion ×{session.PotionCount}";
-                potionHintText.text = session.HasPowerRing ? "Q / X · Durch Ring gesperrt" : "Q / X · Benutzen";
-                potionStyle.alpha = session.HasPowerRing ? .65f : 1f;
-                UpdatePotionVisibility();
-            }
-            experienceText.text = $"EXP: {session.CurrentExperience}";
-            goldText.text = $"Gold: {session.CurrentGold}";
-            if (levelText != null)
-                levelText.text = $"Player Lv {session.PlayerLevel}  |  Goblin Lv {session.GoblinLevel}  |  Cyclops Lv {session.CyclopsLevel}";
-        }
+            // Read one session snapshot so both numbers and the fill reflect the same health update.
+            int health = session.PlayerHealth;
+            int maximum = session.PlayerMaxHealth > 0 ? session.PlayerMaxHealth : playerHealth.MaxHealth;
+            healthFill.anchorMax = new Vector2((float)health / maximum, 1f);
+            healthText.text = $"HP {health}/{maximum}";
+            levelText.text = $"LV {session.PlayerLevel}";
+            experienceText.text = $"EXP {session.CurrentExperience}";
+            goldText.text = session.CurrentGold.ToString();
 
-        private void LateUpdate() => UpdatePotionVisibility();
+            int shieldCharges = session.ShieldCharges;
+            shieldBadge.SetActive(shieldCharges > 0);
+            shieldText.text = $"Schild {shieldCharges}/{GameSession.MaxShieldCharges}";
 
-        private void UpdatePotionVisibility()
-        {
-            if (potionDisplay == null || session == null) return;
-            bool visible = GameFlow.IsGameplayActive && session.PotionCount > 0;
-            if (potionDisplay.activeSelf != visible) potionDisplay.SetActive(visible);
+            int potions = session.PotionCount;
+            potionCountText.text = $"×{potions}";
+            potionIcon.alpha = potions > 0 && !session.HasPowerRing ? 1f : .5f;
+            potionHintText.text = session.HasPowerRing ? "Q / X · Gesperrt" : "Q / X · Benutzen";
         }
     }
 }

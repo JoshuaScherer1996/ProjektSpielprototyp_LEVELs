@@ -36209,6 +36209,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2826528571246866788, guid: c99b912c90866d442940b2864dc11601, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -114
+      objectReference: {fileID: 0}
     - target: {fileID: 7995292367958107869, guid: c99b912c90866d442940b2864dc11601, type: 3}
       propertyPath: playerHealth
       value: 

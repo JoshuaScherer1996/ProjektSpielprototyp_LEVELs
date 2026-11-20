@@ -120,3 +120,9 @@ Ninja Adventure, Pixel-Boy and AAA
   a tall cylindrical shaft, curved footing and molding, arrow slits and an arched entrance.
   The earlier StoneTower crop is retained in WorldPolish.png and has been retired
   from the entrance. Its source remains the official Update #6 image credited above.
+
+Phase 3, M6 — SamuraiGreenPortrait.png
+  Face and hat cropped from Down0 in the existing SamuraiGreen.png atlas.
+  Original art: Ninja Adventure by Pixel-Boy and AAA, CC0 1.0 (see above).
+  The HUD and station signs use Unity UI shapes and the existing
+  TextMesh Pro Liberation Sans font (Assets/TextMesh Pro/Fonts/LiberationSans - OFL.txt).
