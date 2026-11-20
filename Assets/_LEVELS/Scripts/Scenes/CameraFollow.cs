@@ -9,6 +9,7 @@ namespace Levels.Scenes
         [SerializeField] private Transform target;
         [SerializeField] private Vector2 offset;
         [SerializeField, Min(0f)] private float fixedFrameWidth;
+        [SerializeField] private Rect sceneryBounds;
 
         private float cameraZ;
         private Camera sceneCamera;
@@ -36,8 +37,21 @@ namespace Levels.Scenes
                 return;
             }
             if (target == null) return;
-            Vector3 position = target.position;
-            transform.position = new Vector3(position.x + offset.x, position.y + offset.y, cameraZ);
+
+            Vector2 position = (Vector2)target.position + offset;
+            if (sceneryBounds.width > 0f && sceneryBounds.height > 0f)
+            {
+                float halfHeight = sceneCamera.orthographicSize;
+                position.x = ClampView(position.x, sceneryBounds.xMin, sceneryBounds.xMax, halfHeight * sceneCamera.aspect);
+                position.y = ClampView(position.y, sceneryBounds.yMin, sceneryBounds.yMax, halfHeight);
+            }
+
+            transform.position = new Vector3(position.x, position.y, cameraZ);
         }
+
+        private static float ClampView(float position, float minimum, float maximum, float halfView) =>
+            halfView * 2f < maximum - minimum
+                ? Mathf.Clamp(position, minimum + halfView, maximum - halfView)
+                : (minimum + maximum) * .5f;
     }
 }

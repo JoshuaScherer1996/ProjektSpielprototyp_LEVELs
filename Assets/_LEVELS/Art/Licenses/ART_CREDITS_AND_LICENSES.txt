@@ -1,0 +1,122 @@
+LEVEL's – Art credits and licenses
+Phase 3, M4 + M5
+Sources reviewed and graphics downloaded on 2026-11-20.
+
+Ninja Adventure – Asset Pack
+Artists: Pixel-Boy and AAA
+Official download: https://pixel-boy.itch.io/ninja-adventure-asset-pack
+Graphics obtained from the artists' official Godot 4 example linked on the pack page:
+https://github.com/pixel-boy/NinjaAdventure/tree/6ac78232d5aedcc85ce5f27d060ea92366f7c24a
+Source revision: 6ac78232d5aedcc85ce5f27d060ea92366f7c24a (2024-04-19)
+License: Creative Commons Zero 1.0 Universal (CC0 1.0)
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+The official pack page marks the content as made without generative AI.
+The artists appreciate attribution and a link to the itch.io page. Attribution is optional under CC0.
+CC0 permits copying, adaptation and public redistribution of the covered graphics, including in the public GitHub repository.
+
+Files and usage
+  content/character/samurai_green/samurai_green.png
+    Player body. Selected 16 × 16 idle, walk and sword poses used in all four gameplay scenes.
+  content/weapon/big_sword/in_hand.png
+    Player sword. Original 7 × 12 sprite combined in the player atlas.
+  content/map/tileset_floor.png
+    Village and Plateau grass, dirt and gravel accents, plus the Village well water.
+  content/map/tileset_interior_floor.png
+    Tower slabs and inlays, and SpiderArena flagstones.
+  content/map/tileset_wall_simple.png
+    Village well rim and Tower and SpiderArena walls and grates.
+  content/map/tileset_village_abandoned.png
+    Buildings, gate, foliage and props in Village and Plateau, and stonework and props in Tower and SpiderArena.
+  content/map/tileset_animated.png
+    One flower frame for Village.
+
+Technical changes
+  The graphics were cropped and combined into SamuraiGreen.png and NinjaAdventureWorld.png,
+  sliced with aligned sprite pivots, and imported with point filtering at 16 pixels per unit.
+  Some scenery instances are flipped or tinted in Unity. The well uses pixels from the original water tile,
+  tinted and composited into the opening of the original rim.
+  The original Godot example tree has no separate license file. The license notice is on the pack page.
+
+Pixelated Goblin
+Artist: markoxx2
+Official download: https://opengameart.org/content/pixelated-goblin
+Original archive: Goblin.zip (served as Goblin_1.zip)
+License: Creative Commons Zero 1.0 Universal (CC0 1.0)
+License: https://creativecommons.org/publicdomain/zero/1.0/
+Legal code: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+The creator describes making the sprites for their own project in the original 2019 submission.
+The page contains no formal generative-AI disclosure.
+CC0 permits copying, adaptation and public redistribution of the covered graphics, including in the public GitHub repository.
+Credit to markoxx2 is included here. The source does not request a specific attribution line.
+
+Files and usage
+  Goblin_Idle.png
+  Goblin_Walk_Backwards.png
+  Goblin_Walk_Forward.png
+  Goblin_Walk_Left.png
+  Goblin_Walk_Right.png
+    Goblin in Plateau. The down-facing idle uses the original idle sequence.
+    Up, left and right idle use standing poses selected from the original walk sheets.
+    The front/back poses were matched to the visible sprite orientation in the source PNGs.
+
+Technical changes
+  The five sheets were sliced into 16 × 32 or 32 × 32 frames and combined into Goblin.png.
+  Feet pivots were aligned and the presentation is scaled in Unity. No source-pixel palette replacement.
+  The original ZIP contains only the five graphics. The license notice is on the download page.
+
+M4 + M5 Polish Hotfix — 2026-11-20
+
+Ninja Adventure, Pixel-Boy and AAA, CC0 1.0
+  content/weapon/big_sword/sprite.png from the official demo revision above.
+    The full 7 × 16 sword replaces the gripless in_hand crop on the Player.
+    The hotfix uses a grip pivot, directional carry pose and visual swing.
+  content/map/tileset_interior_floor.png from the same official demo.
+    Two flagstone crops were recolored in gray for the continuous Tower road.
+  Backgrounds/Tilesets/TilesetTowers.png as shown in the authors' official Update #6:
+    https://pixel-boy.itch.io/ninja-adventure-asset-pack/devlog/763041/update-6-boss-spell-icons-towers
+    One stone-tower crop from the authors' 4× image was reduced by integer sampling
+    and its solid preview background made transparent. Used at the Plateau entrance.
+  Existing tree sprites were reused for the Village forest. The Samurai left and right
+  clips were reassigned to the correctly facing source columns.
+
+16x16 Puny World Tileset, Shade
+  Author's release and license: https://opengameart.org/content/16x16-puny-world-tileset
+  File: punyworld-overworld-tileset.png (served as punyworld-overworld-tileset_0.png)
+  License: Creative Commons Zero 1.0 Universal
+  https://creativecommons.org/publicdomain/zero/1.0/
+  Eight elevation edge and corner cells were cropped. The solid grass background
+  was removed and the rock palette subdued to match the Plateau.
+  The selected crops are packed with the Ninja Adventure additions in WorldPolish.png.
+  Public redistribution of the assets and adaptations is allowed under CC0.
+  Credit to Shade is included here.
+
+Cyclops visual adaptation
+  Shade, Puny Characters, Orc-Soldier-Cyan.png from Puny-Characters (Orcs Included).
+  https://opengameart.org/content/puny-characters
+  Night Blade, Animated Walk-Cycle Monsters + Hijabi from Eman Quest, eye-rock.png.
+  https://opengameart.org/content/animated-walk-cycle-monsters-hijabi-from-eman-quest
+  Both author releases use Creative Commons Zero 1.0 Universal.
+  https://creativecommons.org/publicdomain/zero/1.0/
+  Original cardinal idle and walk poses from Orc-Soldier-Cyan were cropped.
+  The existing creature eye pixels were reduced from the 4× source and composited
+  into the helmet in each visible direction. Green skin was recolored.
+  The original CC0 Ninja Adventure club from content/weapon/club/sprite.png in the
+  official demo was composited at the existing hands. The result is Cyclops.png.
+  Credit to Shade, Night Blade, Pixel-Boy and AAA is included here. The source art
+  and these adaptations can be redistributed publicly under CC0.
+
+M4 + M5 Final Polish — Plateau round tower
+
+Ninja Adventure, Pixel-Boy and AAA
+  https://pixel-boy.itch.io/ninja-adventure-asset-pack
+  Creative Commons Zero 1.0 Universal (CC0 1.0)
+  https://creativecommons.org/publicdomain/zero/1.0/
+  Official source revision: https://github.com/pixel-boy/NinjaAdventure/tree/6ac78232d5aedcc85ce5f27d060ea92366f7c24a
+  content/map/tileset_interior_floor.png — masonry strips and cornice.
+  content/map/tileset_village_abandoned.png — stone arch for the doorway and slits.
+  Five source rectangles were copied into Environments/PlateauRoundTower.png.
+  The Plateau scene repeats, offsets, scales and tints these sprites to form
+  a tall cylindrical shaft, curved footing and molding, arrow slits and an arched entrance.
+  The earlier StoneTower crop is retained in WorldPolish.png and has been retired
+  from the entrance. Its source remains the official Update #6 image credited above.
