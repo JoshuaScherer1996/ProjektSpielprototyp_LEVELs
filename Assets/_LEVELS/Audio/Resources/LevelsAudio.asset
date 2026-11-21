@@ -579,3 +579,14 @@ MonoBehaviour:
     audibleDistance: 0
     priority: 10
     maxVoices: 1
+  - cue: 50
+    clips:
+    - {fileID: 8300000, guid: b18c34c1c85f263479f6a9d203cfc8a5, type: 3}
+    bus: 0
+    gain: 0.55
+    pitch: 0.92
+    pitchVariation: 0
+    cooldown: 0
+    audibleDistance: 0
+    priority: 4
+    maxVoices: 1

@@ -95,6 +95,12 @@ namespace Levels.UI
             if (EventSystem.current.currentSelectedGameObject != target) EventSystem.current.SetSelectedGameObject(target);
         }
 
+        public void Select(UnityEngine.UI.Button button)
+        {
+            firstButton = button;
+            SelectFirst();
+        }
+
         private void SelectFirst()
         {
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(firstButton.gameObject);

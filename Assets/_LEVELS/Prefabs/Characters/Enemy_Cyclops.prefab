@@ -2760,6 +2760,11 @@ MonoBehaviour:
   knockbackSpeed: 4
   knockbackDuration: 0.16
   body: {fileID: 5654768509039218851}
+  wanderRadius: 1.5
+  wanderWait: {x: 1, y: 3}
+  wanderBlockingLayers:
+    serializedVersion: 2
+    m_Bits: 1793
 --- !u!114 &5046718633677793540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2828,8 +2833,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Levels.UI.DamageFeedback
   numberPrefab: {fileID: 1325149764459924020, guid: 8e2c6f8bbb53eae41ae0029fc2ed0082, type: 3}
   offset: {x: 0, y: 1.35, z: 0}
-  enemyDamageColor: {r: 1, g: 0.79, b: 0.16, a: 1}
-  playerDamageColor: {r: 1, g: 0.28, b: 0.12, a: 1}
+  enemyDamageColor: {r: 1, g: 0.85490197, b: 0, a: 1}
+  playerDamageColor: {r: 1, g: 0.1882353, b: 0.1882353, a: 1}
   horizontalSpread: 0.28
 --- !u!210 &6786557616023171916
 SortingGroup:

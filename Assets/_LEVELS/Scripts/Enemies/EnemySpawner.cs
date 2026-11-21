@@ -125,6 +125,7 @@ namespace Levels.Enemies
                 // Assign scene ownership explicitly, including when several scenes are loaded additively.
                 EnemySpawnIdentity enemy = Instantiate(entry.prefab, position, Quaternion.identity);
                 SceneManager.MoveGameObjectToScene(enemy.gameObject, gameObject.scene);
+                if (enemy.TryGetComponent(out EnemyAI ai)) ai.SetWanderArea(spawnArea);
                 Physics2D.SyncTransforms();
                 Spawned?.Invoke(enemy);
                 return;

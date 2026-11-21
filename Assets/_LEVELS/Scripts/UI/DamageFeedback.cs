@@ -11,8 +11,8 @@ namespace Levels.UI
     {
         [SerializeField] private FloatingDamageNumber numberPrefab;
         [SerializeField] private Vector3 offset = new Vector3(0f, .95f, 0f);
-        [SerializeField] private Color enemyDamageColor = new Color(1f, .79f, .16f);
-        [SerializeField] private Color playerDamageColor = new Color(1f, .28f, .12f);
+        [SerializeField] private Color enemyDamageColor = new Color32(255, 218, 0, 255);
+        [SerializeField] private Color playerDamageColor = new Color32(255, 48, 48, 255);
         [SerializeField, Min(0f)] private float horizontalSpread = .28f;
 
         private EnemyHealth enemy;

@@ -861,7 +861,7 @@ Ding - confirm.wav
 Dateipfad: SFX/UI/Ding - confirm.wav
 Originaldatei: Ding.ogg
 Titel/Sound: Ding – kurzer heller Menüton
-Verwendung: Menübestätigung und Menüschließen
+Verwendung: Menübestätigung, Menüschließen und Critical-Health-Warnung
 Urheber: Robin Lamb (Auswahl/Bearbeitung), Versilian Studios VCSL und VSCO 2 CE (Aufnahmen)
 Originalquelle: https://opengameart.org/content/ui-sound-effects-button-clicks-user-feedback-notifications
 Lizenz: CC0 1.0 Universal
@@ -872,7 +872,7 @@ Pflicht-Credit: Keine Namensnennung erforderlich.
 Gewünschter Credit: Keiner angegeben.
 Herkunft / Bedingungen: UI Sound Effects. Der Herausgeber nennt als Ursprung die öffentlichen Instrumentenaufnahmen https://github.com/sgossner/VCSL und https://vis.versilstudios.com/vsco-community.html und stellt die Auswahl unter CC0.
 Öffentliches GitHub-Repository (Rohdatei): Ja, die Quelle veröffentlicht die Datei unter CC0 1.0.
-Bearbeitung: OGG als PCM-WAV dekodiert, auf 0,16 s gekürzt und ausgeblendet. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Confirm: Gain 0.27, Pitch 1.00.
+Bearbeitung: OGG als PCM-WAV dekodiert, auf 0,16 s gekürzt und ausgeblendet. Mono-Import für SFX. Laufzeitpegel und Pitch je Cue: Confirm: Gain 0.27, Pitch 1.00 | CriticalHealth: Gain 0.55, Pitch 0.92.
 
 ding_deep.ogg
 Dateipfad: SFX/UI/ding_deep.ogg

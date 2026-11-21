@@ -12,7 +12,7 @@ namespace Levels.Audio
         GoblinPain, GoblinClaw, GoblinDeath, CyclopsPain, CyclopsClub, CyclopsDeath, TowerDoor,
         SpiderLand, SpiderIntroRumble, SpiderRumble, SpiderIntro, SpiderScuttle, SpiderPain, SpiderMelee,
         WebSpit, WebVolley, WebFlight, WebImpact, WebStep, SpiderPhase, WebWave, SpiderRise,
-        SpiderCeiling, SpiderFall, SpiderSpin, SpiderQuickLeap, SpiderQuickLand, SpiderDeath
+        SpiderCeiling, SpiderFall, SpiderSpin, SpiderQuickLeap, SpiderQuickLand, SpiderDeath, CriticalHealth
     }
 
     public enum SoundBus { World, UI, Ending, Door }

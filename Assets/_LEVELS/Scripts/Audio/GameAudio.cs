@@ -141,6 +141,12 @@ namespace Levels.Audio
 
         public static void StopLoop(int handle) => instance?.sfx?.StopLoop(handle);
 
+        public static bool TryPlayCriticalHealthWarning() =>
+            instance != null && instance.sfx != null &&
+            instance.PlayCue(Cue.CriticalHealth, 0f, false, null) != 0;
+
+        public static void StopCriticalHealthWarning() => instance?.sfx?.StopCue(Cue.CriticalHealth);
+
         public static void ConfirmAndQuit()
         {
             if (instance == null || instance.sfx == null) { Quit(); return; }
